@@ -1,46 +1,34 @@
- <DIV id="NewsTop">
-    <DIV id="NewsTop_tit"><P class="topTit">关注焦点</P>
+<div class="content-box">
+<header>
+	<h3>最新发布</h3>
+</header>
+<section>
+  	<#if latestArticles?? >
+  		<dl>
+		   <#list latestArticles as a>
+	           <dt>
+	           	${a.releaseDate!""} <a href="Article/${a.id?c}.html" 	title="${a.title}" target="_blank">${a.title!""}</a>  
+	           </dt>
+	           
+           </#list>
+        </dl> 
+     </#if>	
+</section>
+</div>
 
-      <P class="topC0">浏览最多</P>
-      <P class="topC0">评论最多</P>
-    </DIV>
-    <DIV id=NewsTop_cnt><SPAN title="Don't delete me"></SPAN>
-<!-- for -->
-       <SPAN>
-       	   <#if mostVisitArticles?? >
-	       <#list mostVisitArticles as a>
-	       		<A href="/Article/${a.id?c}.html" target="_blank">${a.title}</A><br/>
-	       </#list>
-	       </#if>
-       </SPAN>
-       <SPAN>
-	       <#if mostCommentArticles?? >
-	       <#list mostCommentArticles as a>
-	       		<A href="/Article/${a.id?c}.html" target="_blank">${a.title}</A><br/>
-	       </#list>
-	       </#if>
-       </SPAN>
-<!-- end -->
-
-		</DIV>
-            <SCRIPT>
-				var Tags=document.getElementById('NewsTop_tit').getElementsByTagName('p'); 
-				var TagsCnt=document.getElementById('NewsTop_cnt').getElementsByTagName('span'); 
-				var len=Tags.length; 
-				var flag=1;//修改默认值
-				for(i=1;i<len;i++){
-					Tags[i].value = i;
-					Tags[i].onmouseover=function(){changeNav(this.value)}; 
-					TagsCnt[i].className='undis';					
-				}
-				Tags[flag].className='topC1';
-				TagsCnt[flag].className='dis';
-				function changeNav(v){	
-					Tags[flag].className='topC0';
-					TagsCnt[flag].className='undis';
-					flag=v;	
-					Tags[v].className='topC1';
-					TagsCnt[v].className='dis';
-				}
-			</SCRIPT>
-  </DIV>
+<div class="content-box">
+<header>
+	<h3>最多浏览</h3>
+</header>
+<section>
+<#if mostVisitArticles?? >
+  	<dl>
+		 <#list mostVisitArticles as a>
+	           <dt>
+	           	［${a.channel.name!""}］<a href="Article/${a.id?c}.html" 	title="${a.title}" target="_blank">${a.title!""}</a>
+	           </dt>
+           </#list>
+     </dl>
+     </#if> 
+</section>
+</div>
