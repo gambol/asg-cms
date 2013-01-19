@@ -1,22 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/template/biemian/css/foot.css" rel="stylesheet" type="text/css" />
-<title>版权说明</title>
-</head>
-
-<body>
-<div id="foot" align="center">
-  <div id="content">
-  <br/>
-  <span>捷nbsp;&nbsp;&copy;${(C.copyright)!"www.biemian.com"} &nbsp;&nbsp;
-  邮箱:${(C.email)!""}&nbsp;
-  <a href="http://www.miibeian.gov.cn" target="_blank">${(C.recordCode)!""}</a>
-  <script src="http://s87.cnzz.com/stat.php?id=1766140&web_id=1766140" language="JavaScript" charset="gb2312"></script>&nbsp;&nbsp;
-  </span>
-  </div>
-</div>
-</body>
-</html>
+	<!-- Page footer -->
+	<footer id="bottom">
+		<div class="wrapper">
+		
+			<p>Copyright &copy;
+				{(C.copyright)!"www.biemian.com"} &nbsp;&nbsp; 邮箱:${(C.email)!""}&nbsp;
+  				<a href="http://www.miibeian.gov.cn" target="_blank">${(C.recordCode)!""}</a>
+			 </p>
+			<p>本站资源全部由网友提供，版权归其作者所有，如无意之中侵犯了您的版权，请来信告知，本站将立即删除.
+				提示：为防止低俗内容出现，用户发表的评论需本站审核后才能正常显示 
+			</p>
+		</div>
+	</footer>
+	<a href="#" id="totop">^ scroll to top</a>
 

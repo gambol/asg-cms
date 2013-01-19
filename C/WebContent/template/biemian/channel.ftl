@@ -2,42 +2,81 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>${entity.name!""}-${(C.name)!"biemian"}</title>
+<title>${entity.title!""}-${(C.fullName)!"biemian"}</title>
+<meta name="description" content='${C.description!""}'/>
+<meta name="keywords" content='${C.keywords!""}'/>
+
+<link href="/template/biemian/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/template/biemian/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/template/biemian/css/Search.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="/template/biemian/js/setHeight.js" type="text/javascript"></script>
+<link href="/template/biemian/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/template/biemian/css/tagChange.css" rel="stylesheet" type="text/css" />
+<script src="/template/biemian/js/common.js" language="javascript" type="text/javascript"></script>
+<script src="/template/biemian/js/flashImg.js" language="javascript" type="text/javascript"></script>
+<script src="/template/biemian/js/google.js" language="javascript" type="text/javascript"></script>
+
+<link rel="stylesheet" href="/template/biemian/css/style.css" type="text/css" />
+<script type="text/javascript" SRC="/template/biemian/j/jquery-1.4.2.min.js"></script>
+<!-- Could be loaded remotely from Google CDN : <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+<script type="text/javascript" SRC="/template/biemian/j/jquery.ui.core.min.js"></script>
+<script type="text/javascript" SRC="/template/biemian/j/jquery.ui.widget.min.js"></script>
+<script type="text/javascript" SRC="/template/biemian/j/jquery.ui.tabs.min.js"></script>
+<!-- jQuery tooltips -->
+<script type="text/javascript" SRC="/template/biemian/j/jquery.tipTip.min.js"></script>
+<!-- Superfish navigation -->
+<script type="text/javascript" SRC="/template/biemian/j/jquery.superfish.min.js"></script>
+<script type="text/javascript" SRC="/template/biemian/j/jquery.supersubs.min.js"></script>
+<!-- jQuery form validation -->
+<script type="text/javascript" SRC="/template/biemian/j/jquery.validate_pack.js"></script>
+<!-- jQuery popup box -->
+<script type="text/javascript" SRC="/template/biemian/j/jquery.nyroModal.pack.js"></script>
+<!-- jQuery graph plugins -->
+<!--[if IE]><script type="text/javascript" src="/template/biemian/j/flot/excanvas.min.js"></script><![endif]-->
+<script type="text/javascript" SRC="/template/biemian/j/flot/jquery.flot.min.js"></script>
+
 <script language="javascript">
 function pageQuery(page) {
 	   //location.href = "/channel?id=${entity.id}&title=${title!""}&page="+page;
 	location.href = "/Channel/${entity.id!}_"+page+".html";
 }
 </script>
-</head>
-<body>
-<div id="container">
-	<#include "/head.html" parse=false encoding="UTF-8">
-<div id="main">
-    <div id="left" class="left">
-            <#include "/left.html" parse=false encoding="UTF-8">
-    </div><!--left end-->
 
-    <div id="main1" class="main1">
-         <div id="ShowNews">
-        <div id="Pos">&nbsp;<a href="/">首页</a><img src="/template/biemian/images/pos.gif" border=0 />
-        <a href="/${entity.id?c}.html">${entity.name!""}</a>&nbsp;
-        <#if title??&&title!=''>[关键字:<font class="red_normal">${title}</font>]</#if>
+</head>
+       
+<body>
+<!-- Header -->
+	<header id="top">
+		<div class="wrapper">
+			<div id="title"><img SRC="img/logo.png" alt="Administry" /><!--<span>Administry</span> demo--></div>
+			<!-- Top navigation -->
+			<div id="topnav">
+			</div>
+			<#include "/head.html" parse=false encoding="UTF-8">
+	</header>
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1> <a href="/">首页</a> -> <a href="/${entity.id?c}.html">${entity.name!""}</a>&nbsp; <#if title??&&title!=''>[关键字:<font class="red_normal">${title}</font>]</#if></h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
 		</div>
-				<div id="News">
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+					<div class="column width6 first">
                     <ul>
                     <#list pageView.records as article>
-                     <li><img src="/template/biemian/images/arrow_01.gif"/> 
+                     <li>
                      <a href="/Article/${article.id?c}.html" title="${article.title}" target="_blank">${(article.title)!""}</a>
                      <span>[${(article.releaseDate)!""}]</span></li>
                      </#list>
                     </ul>
-                 </div>
-           
-                 <table width="590" align="center" >
+                    
+                    	 <table  align="center" >
                     <tr>
                     <td align="center">页次&nbsp;<font class="red_normal">${pageView.currentpage}/${(pageView.totalpage)?c}</font>
                     &nbsp;&nbsp;每页&nbsp;<font class="red_normal">${pageView.maxresult}</font>&nbsp;条&nbsp;&nbsp;共&nbsp;
@@ -61,15 +100,27 @@ function pageQuery(page) {
                     </td>
                     </tr>
                    </table>
+                 </div>
+           
+                
 				
-        </div>	<!--ShowNews end-->
-     </div><!--main1 end-->
+       		
+				<div class="clear">&nbsp;</div>
 
-</div><!--main end-->
-<div id="copyright">
-    <#include "/foot.html" parse=false encoding="UTF-8">
-</div>
-  
-</div><!--container end-->
+				<!-- End of Left column/section -->
+				
+				<!-- Right column/section -->
+				<aside class="column width2">
+					<#include "tagChange.ftl" encoding="UTF-8">
+				</aside>
+				<!-- End of Right column/section -->
+				
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+	
+
+  <#include "/foot.html" parse=false encoding="UTF-8">
 </body>
 </html>
