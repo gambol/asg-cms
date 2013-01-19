@@ -1,0 +1,1 @@
+<a href="http://www.biemian.org" target="_blank" title="最新版本">${(C.version)!"www.biemian.org"}</a>
