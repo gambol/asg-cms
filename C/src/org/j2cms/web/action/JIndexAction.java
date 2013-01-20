@@ -7,6 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.ExceptionMapping;
@@ -23,8 +26,11 @@ import org.j2cms.service.ChannelService;
 import org.j2cms.service.FlashService;
 import org.j2cms.utils.Struts2Utils;
 
+import org.j2cms.utils.CreateHtml;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.j2cms.utils.CreateHtml;
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -38,7 +44,7 @@ import freemarker.template.TemplateException;
 @ExceptionMappings({
 @ExceptionMapping(exception = "java.lang.Exception", result = "errorPage", params = {"message", "操作数据库失败！"})
 })
-public class JIndexAction extends ActionSupport {
+public class JIndexAction extends ActionSupport{
 	private static final long serialVersionUID = -3333066726557269678L;
 	@Resource
 	private ChannelService channelService;
@@ -135,8 +141,9 @@ public class JIndexAction extends ActionSupport {
 		orderbyRankid.put("rankid", "asc");//正序
 		orderbyVisitTotal.put("visitTotal", "desc");
 		orderbyCommentCount.put("commentCount", "desc");
+		
 		try {
-			flashs=flashService.getScrollData(0, 5,"o.checkState=?1",new Object[]{CheckState.pass}, orderby).getResultlist();
+			//flashs=flashService.getScrollData(0, 5,"o.checkState=?1",new Object[]{CheckState.pass}, orderby).getResultlist();
 			channelsDisplay=channelService.getScrollData(-1,-1, "o.father=?1 and o.display=true",new Object[]{new Channel(1)},orderbyRankid).getResultlist();
 			latestArticles=articleService.getScrollData(0, 8,"o.checkState=?1",new Object[]{CheckState.pass},orderby).getResultlist();
 			mostVisitArticles=articleService.getScrollData(0, 10,"o.checkState=?1",new Object[]{CheckState.pass},orderbyVisitTotal).getResultlist();
@@ -184,7 +191,7 @@ public class JIndexAction extends ActionSupport {
 	}
 	
 	@Actions({
-		@Action(value="/manage/config/makeIndexHtml")
+		@Action(value="/manage/config/ind")
 	})
 	public String makeHtml(){
 		List<Flash> flashs= new ArrayList<Flash>();
@@ -202,6 +209,8 @@ public class JIndexAction extends ActionSupport {
 		orderbyRankid.put("rankid", "asc");//正序
 		orderbyVisitTotal.put("visitTotal", "desc");
 		orderbyCommentCount.put("commentCount", "desc");
+		
+
 		try {
 			flashs=flashService.getScrollData(0, 5,"o.checkState=?1",new Object[]{CheckState.pass}, orderby).getResultlist();
 			channelsDisplay=channelService.getScrollData(-1,-1, "o.father=?1 and o.display=true",new Object[]{new Channel(1)},orderbyRankid).getResultlist();
@@ -248,6 +257,85 @@ public class JIndexAction extends ActionSupport {
 		
 	}
 	
+	
+	public String makeHtmlFromContext(ServletContext context){
+		List<Flash> flashs= new ArrayList<Flash>();
+		List<Channel> channelsDisplay = new ArrayList<Channel>();	
+		List<Channel> channelInIndexs= new ArrayList<Channel>();
+		List<Article> latestArticles = new ArrayList<Article>();
+		List<Article> mostVisitArticles=new ArrayList<Article>();  //visit
+		List<Article> mostCommentArticles=new ArrayList<Article>();  //commentCount
+		
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> orderbyRankid = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> orderbyVisitTotal = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> orderbyCommentCount = new LinkedHashMap<String, String>();
+		orderby.put("id", "desc");
+		orderbyRankid.put("rankid", "asc");//正序
+		orderbyVisitTotal.put("visitTotal", "desc");
+		orderbyCommentCount.put("commentCount", "desc");
+		
+		try {
+			ApplicationContext cxt = WebApplicationContextUtils.getWebApplicationContext(context);
+	//		ApplicationContext cxt = getWebA
+			if (flashService == null) {
+				flashService = (FlashService)cxt.getBean("flashServiceImpl");
+			}
+			if (articleService == null) {
+				articleService = (ArticleService)cxt.getBean("articleServiceImpl");
+			}
+			if (channelService == null) {
+				channelService = (ChannelService)cxt.getBean("channelServiceImpl");
+			}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		try {
+			flashs=flashService.getScrollData(0, 5,"o.checkState=?1",new Object[]{CheckState.pass}, orderby).getResultlist();
+			channelsDisplay=channelService.getScrollData(-1,-1, "o.father=?1 and o.display=true",new Object[]{new Channel(1)},orderbyRankid).getResultlist();
+			latestArticles=articleService.getScrollData(0, 8,"o.checkState=?1",new Object[]{CheckState.pass},orderby).getResultlist();
+			mostVisitArticles=articleService.getScrollData(0, 10,"o.checkState=?1",new Object[]{CheckState.pass},orderbyVisitTotal).getResultlist();
+			mostCommentArticles=articleService.getScrollData(0, 10,"o.checkState=?1",new Object[]{CheckState.pass},orderbyCommentCount).getResultlist();
+			channelInIndexs=channelService.getScrollData(0,100, "o.displayInIndex=true",null,orderbyRankid).getResultlist();	
+
+			List<Map<?,?>> channelArticleMaps = new ArrayList<Map<?,?>>();
+			for(Channel channel:channelInIndexs) 
+			{
+				Map <String,ArrayList<Article>> channelArticleMap = new HashMap<String,ArrayList<Article>>();
+				ArrayList<Article> channelArticle = new ArrayList<Article>();
+				channelArticle=(ArrayList<Article>)articleService.getScrollData(0, 5, "o.channel=?1 and o.checkState=?2", new Object[]{channel,CheckState.pass},orderby).getResultlist();
+				channelArticleMap.put(channel.getName(), channelArticle);
+				channelArticleMaps.add(channelArticleMap);				
+			}
+			
+			Map <String,Object>map  = new HashMap<String,Object>();
+			map.put("flashs", flashs);
+			map.put("channelsDisplay", channelsDisplay);
+			map.put("channelInIndexs", channelInIndexs);
+			map.put("latestArticles", latestArticles);
+			map.put("mostVisitArticles", mostVisitArticles);
+			map.put("mostCommentArticles", mostCommentArticles);
+			map.put("channelArticleMaps", channelArticleMaps);
+			String [] ftls={"head.ftl","foot.ftl","left.ftl"};
+			String [] htmlNames={"head.html","foot.html","left.html"};
+			String relaPath="";
+			try {
+				CreateHtml createHtml = new CreateHtml(context);
+				createHtml.multiFtlCreateHtml(ftls,htmlNames,map,relaPath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (TemplateException e) {
+				e.printStackTrace();
+			}	
+			context.setAttribute("message","已生成/index.html");
+			return "succ";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}
+		
+	}
+	
 	@Action(value="/manage",results={@Result(name = "success",type="freemarker",location = "manage/login.ftl")})
 	public String manage(){
 		return SUCCESS;
@@ -257,7 +345,4 @@ public class JIndexAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-
-	
-	
 }
