@@ -42,6 +42,7 @@ public class Struts2Utils {
 	{
 		return ServletActionContext.getServletContext().getAttribute(name);
 	}
+	
 	public static void setContextAttribute(String name,Object object)
 	{
 		ServletActionContext.getServletContext().setAttribute(name,object);

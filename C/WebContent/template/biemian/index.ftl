@@ -44,7 +44,7 @@
 			<!-- Top navigation -->
 			<div id="topnav">
 			</div>
-			<#include "/head.html" parse=false encoding="UTF-8">
+			<#include "/head.html"  encoding="UTF-8">
 	</header>
 	<!-- End of Header -->
 	<!-- Page title -->
@@ -86,7 +86,7 @@
 							           	<td class="ta-right">[${article.releaseDate!""}]</td>
 							           </tr> 
 						           </#list> 
-						           </#if>
+				`		           </#if>
 						     	</tbody>
 						     </table>
 						 	</#list>
@@ -117,6 +117,6 @@
 	<!-- End of Page content -->
 	
 
-  <#include "/foot.html" parse=false encoding="UTF-8">
+  <#include "/foot.html"  encoding="UTF-8">
 </body>
 </html>

@@ -25,7 +25,7 @@ import org.j2cms.utils.Struts2Utils;
 import org.j2cms.utils.WebUtil;
 import org.j2cms.web.action.EntityAction;
 
-import com.j2cms.utils.CreateHtml;
+import org.j2cms.utils.CreateHtml;
 
 
 import freemarker.template.TemplateException;
@@ -244,6 +244,8 @@ public class ChannelAction extends EntityAction<Channel> {
 			orderby.put("id", "desc");
 			Integer intid=0;
 			int i=0;
+		
+			
 			try {
 				for (i=0; i < strid.length; i++) {
 					intid = Integer.parseInt(strid[i]);
@@ -267,6 +269,17 @@ public class ChannelAction extends EntityAction<Channel> {
 		String htmlName = id+".html";
 		map.put("entity", entity);
 
+		List<Article> latestArticles = new ArrayList<Article>();
+		List<Article> mostVisitArticles=new ArrayList<Article>();  //visit
+		LinkedHashMap<String, String> orderbyId = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> orderbyVisitTotal = new LinkedHashMap<String, String>();
+		orderbyId.put("id", "desc");
+		orderbyVisitTotal.put("visitTotal", "desc");
+		latestArticles=articleService.getScrollData(0, 8,"o.checkState=?1",new Object[]{CheckState.pass},orderbyId).getResultlist();
+		mostVisitArticles=articleService.getScrollData(0, 10,"o.checkState=?1",new Object[]{CheckState.pass},orderbyVisitTotal).getResultlist();
+		map.put("latestArticles", latestArticles);
+		map.put("mostVisitArticles", mostVisitArticles);
+		
 		if(entity.getSingle()!=null&&entity.getSingle()==true){
 			try {
 				creatHtml.init(singleFTL, htmlName, map, relaPath);//生成静态HTML

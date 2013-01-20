@@ -69,7 +69,7 @@ public class ConfigAction extends ActionSupport {
 		Config c =(Config)Struts2Utils.getContextAttribute("C");
 		try {
 			String p =c.getConfigStr();
-			Struts2Utils.setAttribute("url", "http://www.j2cms.com/getLatestVersion?"+p); 
+			//Struts2Utils.setAttribute("url", "http://www.j2cms.com/getLatestVersion?"+p); 
 			return "urlRedirect";
 		} catch (Exception e) {
 			return "urlRedirect";
