@@ -19,12 +19,13 @@ import org.j2cms.model.QueryResult;
 import org.j2cms.model.article.Article;
 import org.j2cms.model.channel.Channel;
 import org.j2cms.model.group.Group;
+import org.j2cms.service.ArticleService;
 import org.j2cms.service.ChannelService;
 import org.j2cms.service.GroupService;
 import org.j2cms.utils.Struts2Utils;
 import org.j2cms.web.action.EntityAction;
 
-import com.j2cms.utils.CreateHtml;
+import org.j2cms.utils.CreateHtml;
 
 
 import freemarker.template.TemplateException;
@@ -50,6 +51,10 @@ public class ArticleAction  extends EntityAction<Article>{
 	private ChannelService channelService;
 	@Resource
 	private GroupService groupService;
+	
+	@Resource
+	private ArticleService articleService;
+	
 	private Article selector= new Article();
 	private String sortType="id";//排序类型
 	private String sortord="desc";
@@ -230,6 +235,17 @@ public class ArticleAction  extends EntityAction<Article>{
 		String ftl = "article.html";
 		String relaPath = "Article/";
 		int count=0;
+		List<Article> latestArticles = new ArrayList<Article>();
+		List<Article> mostVisitArticles=new ArrayList<Article>();  //visit
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> orderbyVisitTotal = new LinkedHashMap<String, String>();
+		orderby.put("id", "desc");
+		orderbyVisitTotal.put("visitTotal", "desc");
+		latestArticles=articleService.getScrollData(0, 8,"o.checkState=?1",new Object[]{CheckState.pass},orderby).getResultlist();
+		mostVisitArticles=articleService.getScrollData(0, 10,"o.checkState=?1",new Object[]{CheckState.pass},orderbyVisitTotal).getResultlist();
+		map.put("latestArticles", latestArticles);
+		map.put("mostVisitArticles", mostVisitArticles);
+		
 		try {
 			for (Integer id:ids)
 			{

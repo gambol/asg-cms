@@ -70,6 +70,7 @@ public class UserAction extends EntityAction<User> {
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
+	
 	private User setEntityToUser(User user)
 	{
 		user.setGroup(entity.getGroup());

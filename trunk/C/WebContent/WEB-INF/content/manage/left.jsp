@@ -267,7 +267,7 @@ H1 a {
 			<li><a href="/manage/config/edit" target="main">基本设置</a></li>
 			<li><a href="/manage/config/flash/list" target="main">首页FLASH</a></li>
 			<!--  <li><a href="/manage/log/list" target="main">日志管理</a></li> -->
-			<li><a href="/manage/config/makeIndexHtml" target="main">生成首页</a></li>
+			<li><a href="/manage/config/ind" target="main">生成首页</a></li>
 		</ul>
 		</div>
 
