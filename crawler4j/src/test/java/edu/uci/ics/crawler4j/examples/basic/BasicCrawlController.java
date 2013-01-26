@@ -29,24 +29,17 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 public class BasicCrawlController {
 
 	public static void main(String[] args) throws Exception {
-		if (args.length != 2) {
-			System.out.println("Needed parameters: ");
-			System.out.println("\t rootFolder (it will contain intermediate crawl data)");
-			System.out.println("\t numberOfCralwers (number of concurrent threads)");
-			return;
-		}
-
 		/*
 		 * crawlStorageFolder is a folder where intermediate crawl data is
 		 * stored.
 		 */
-		String crawlStorageFolder = args[0];
+		String crawlStorageFolder = "/tmp/12341";
 
 		/*
 		 * numberOfCrawlers shows the number of concurrent threads that should
 		 * be initiated for crawling.
 		 */
-		int numberOfCrawlers = Integer.parseInt(args[1]);
+		int numberOfCrawlers = 3;
 
 		CrawlConfig config = new CrawlConfig();
 
@@ -56,7 +49,7 @@ public class BasicCrawlController {
 		 * Be polite: Make sure that we don't send more than 1 request per
 		 * second (1000 milliseconds between requests).
 		 */
-		config.setPolitenessDelay(1000);
+		//config.setPolitenessDelay(1);
 
 		/*
 		 * You can set the maximum crawl depth here. The default value is -1 for
@@ -68,7 +61,7 @@ public class BasicCrawlController {
 		 * You can set the maximum number of pages to crawl. The default value
 		 * is -1 for unlimited number of pages
 		 */
-		config.setMaxPagesToFetch(1000);
+		config.setMaxPagesToFetch(100);
 
 		/*
 		 * Do you need to set a proxy? If so, you can use:
@@ -93,6 +86,7 @@ public class BasicCrawlController {
 		 */
 		PageFetcher pageFetcher = new PageFetcher(config);
 		RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
+		robotstxtConfig.setEnabled(false);
 		RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
 		CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
@@ -102,9 +96,9 @@ public class BasicCrawlController {
 		 * which are found in these pages
 		 */
 
-		controller.addSeed("http://www.ics.uci.edu/");
-		controller.addSeed("http://www.ics.uci.edu/~lopes/");
-		controller.addSeed("http://www.ics.uci.edu/~welling/");
+		controller.addSeed("http://www.yaolan.com/");
+		//controller.addSeed("http://www.ics.uci.edu/~lopes/");
+		//controller.addSeed("http://www.ics.uci.edu/~welling/");
 
 		/*
 		 * Start the crawl. This is a blocking operation, meaning that your code
