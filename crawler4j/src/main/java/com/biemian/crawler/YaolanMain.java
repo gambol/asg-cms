@@ -19,7 +19,7 @@ public class YaolanMain {
 		 * numberOfCrawlers shows the number of concurrent threads that should
 		 * be initiated for crawling.
 		 */
-		int numberOfCrawlers = 3;
+		int numberOfCrawlers = 5;
 
 		CrawlConfig config = new CrawlConfig();
 
@@ -35,13 +35,13 @@ public class YaolanMain {
 		 * You can set the maximum crawl depth here. The default value is -1 for
 		 * unlimited depth
 		 */
-		config.setMaxDepthOfCrawling(2);
+		config.setMaxDepthOfCrawling(4);
 
 		/*
 		 * You can set the maximum number of pages to crawl. The default value
 		 * is -1 for unlimited number of pages
 		 */
-		config.setMaxPagesToFetch(100);
+		config.setMaxPagesToFetch(10000);
 
 		/*
 		 * Do you need to set a proxy? If so, you can use:

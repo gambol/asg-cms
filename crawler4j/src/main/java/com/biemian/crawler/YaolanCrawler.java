@@ -8,6 +8,11 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.biemian.contentParser.ContentParser;
+import com.biemian.contentParser.ParserWorker;
+import com.biemian.redis.RedisHandler;
+import com.biemian.utils.HTTPGet;
+
 /**
  * @author zhenbao.zhou
  */
@@ -24,11 +29,12 @@ public class YaolanCrawler extends WebCrawler {
 			return false;
 		}
 		
-		if (!href.startsWith("http://yaolan.com/")) {
+		if (href.indexOf("yaolan.com") < 0) {
 			return false;
 		}
 		
-		return  true;
+		return true;
+		//return RedisHandler.getInstance().isThisUrlHandled(url.getURL()); 
 	}
 
 	/**
@@ -36,32 +42,22 @@ public class YaolanCrawler extends WebCrawler {
 	 * by your program.
 	 */
 	@Override
-	public void visit(Page page) {
+	public void visit(Page page)  {
 		int docid = page.getWebURL().getDocid();
 		String url = page.getWebURL().getURL();
-		String domain = page.getWebURL().getDomain();
-		String path = page.getWebURL().getPath();
-		String subDomain = page.getWebURL().getSubDomain();
-		String parentUrl = page.getWebURL().getParentUrl();
 
-		System.out.println("Docid: " + docid);
 		System.out.println("URL: " + url);
-		System.out.println("Domain: '" + domain + "'");
-		System.out.println("Sub-domain: '" + subDomain + "'");
-		System.out.println("Path: '" + path + "'");
-		System.out.println("Parent page: " + parentUrl);
 
+		try {
 		if (page.getParseData() instanceof HtmlParseData) {
 			HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-			String text = htmlParseData.getText();
-			String html = htmlParseData.getHtml();
-			List<WebURL> links = htmlParseData.getOutgoingUrls();
-
-			System.out.println("Text length: " + text.length());
-			System.out.println("Html length: " + html.length());
-			System.out.println("Number of outgoing links: " + links.size());
+			ParserWorker pw = new ParserWorker();
+			ContentParser cp = pw.getParserFactory(url, htmlParseData.getHtml());
+			pw.parse(cp);
 		}
 
+		} catch (Exception e) {
+		}
 		System.out.println("=============");
 	}
 }

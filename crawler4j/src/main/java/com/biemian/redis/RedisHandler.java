@@ -2,6 +2,8 @@ package com.biemian.redis;
 
 import org.apache.log4j.Logger;
 
+import com.biemian.utils.TextUtils;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -35,7 +37,8 @@ public class RedisHandler {
 
 	public static RedisHandler getInstance() {
 		if (instance == null) {
-			return new RedisHandler();
+			instance = new RedisHandler();
+			return instance;
 		}
 
 		return instance;
@@ -57,6 +60,25 @@ public class RedisHandler {
 		//jedis.set(key, "1");
 		//jedis.setex(key, 30, "days");
 		jedis.setex(key, EXPIRE_TIME, "1");
+	}
+	
+	/**
+	 * redis 与 url之间的东西
+	 * @param url
+	 * @return
+	 */
+	public boolean isThisUrlHandled(String url) {
+		if (url == null) {
+			return false;
+		}
+		
+		String md5 = TextUtils.md5(url);
+		if (hasKey(md5)) {
+			return false;
+		} else {
+			setKey(md5);
+		}
+		return true;
 	}
 	
 	public static void main(String[] args) throws Exception{

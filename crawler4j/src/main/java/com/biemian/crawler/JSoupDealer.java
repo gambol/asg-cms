@@ -5,11 +5,15 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.safety.Cleaner;
+import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 public class JSoupDealer {
 	Document doc;
-	
+	String htmlData;
+	Cleaner cl = new Cleaner(Whitelist.simpleText());
+	boolean inited = false;
 	
 	/**
 	 * 方便进行调试的一个方法
@@ -18,27 +22,45 @@ public class JSoupDealer {
 	 */
 	public JSoupDealer(String content, String url) {
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).get();		
+			inited = true;
 		} catch (IOException e) {
 			
 		}
 	}
 	
 	public JSoupDealer(String content) {
-		doc = Jsoup.parse(content);
+		htmlData = content;
+	}
+	
+	public void init() {
+	//	doc = Jsoup.parse(Jsoup.clean(htmlData, Whitelist.simpleText()));
+		doc = Jsoup.parse(htmlData);
+		inited = true;
 	}
 	
 	public String getHtml(String query) {
+		if (!inited){
+			init();
+		}
+		
 		Elements e = doc.select(query);
 		return e.html();
 	}
 	
 	public String getText(String query) {
+		if (!inited){
+			init();
+		}
 		Elements e = doc.select(query);
 		return e.text();
 	}
 	
 	public Elements getElements(String query) {
+		if (!inited){
+			init();
+		}
+		
 		return doc.select(query);
 	}
 	
