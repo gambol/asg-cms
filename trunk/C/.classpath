@@ -15,9 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/asm-3.3.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/asm-commons-3.3.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/asm-tree-3.3.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aspectj.weaver-1.6.12.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aspectjrt-1.6.12.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
@@ -59,7 +56,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/proxool-cglib.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-aop-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-asm-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-aspects-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-beans-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-context-3.1.1.RELEASE.jar"/>
@@ -80,5 +76,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xwork-core-2.3.4.1.jar"/>
 	<classpathentry kind="lib" path="/home/zhenbao.zhou/workspace/fuck/WebContent/WEB-INF/lib/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-9.0-801.jdbc4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -40,28 +40,21 @@
 <!-- Header -->
 	<header id="top">
 		<div class="wrapper">
-			<div id="title"><img SRC="img/logo.png" alt="Administry" /><!--<span>Administry</span> demo--></div>
-			<!-- Top navigation -->
+			<div id="title"><img SRC="img/logo.png" alt="Administry" /></div>
 			<div id="topnav">
 			</div>
 			<#include "/head.html"  encoding="UTF-8">
 	</header>
-	<!-- End of Header -->
-	<!-- Page title -->
+
 	<div id="pagetitle">
 		<div class="wrapper">
-			<h1>first page</h1>
-			<!-- Quick search box -->
+			<h1>首页</h1>
 			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
 		</div>
 	</div>
-	<!-- End of Page title -->
-	
-	<!-- Page content -->
+
 	<div id="page">
-		<!-- Wrapper -->
 		<div class="wrapper">
-				<!-- Left column/section -->
 				<section class="column width6 first">
 					<#if channelArticleMaps??>
 						<#list channelArticleMaps as channelArticleMap>
@@ -81,7 +74,7 @@
 						       	   <#list articles as article>
 							           <tr>
 							           	<td> 
-							           		<a href="Article/${article.id?c}.html" title='${article.title!""}' target="_blank">${article.title!""}</a>
+							           		<a href="Article/${article.id?c}.html" title='${article.title!""}' target="_blank"><#if article.title?length gt 20>${article.title[0..20]}<#else>${article.title!""}</#if></a>
 							           	</td>
 							           	<td class="ta-right">[${article.releaseDate!""}]</td>
 							           </tr> 

@@ -5,6 +5,8 @@
    <persistence-unit name="j2cmsSSH" transaction-type="RESOURCE_LOCAL">
    	  <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <properties>
+      
+
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/> 
          <property name="hibernate.connection.driver_class" value="org.gjt.mm.mysql.Driver"/>		
 		 <property name="hibernate.connection.username" value="gambol"/>
@@ -13,11 +15,25 @@
          <property name="hibernate.hbm2ddl.auto" value="update"/>
 	     <property name="hibernate.show_sql" value="true"/>
 	     <property name="hibernate.format_sql" value="true"/> 
-
+ 
+<!-- 
+          <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> 
+         <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>		
+		 <property name="hibernate.connection.username" value="zhenbao.zhou"/>
+		 <property name="hibernate.connection.password" value=""/>
+		 <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/j2cms"/>
+         <property name="hibernate.hbm2ddl.auto" value="update"/>
+	     <property name="hibernate.show_sql" value="true"/>
+	     <property name="hibernate.format_sql" value="true"/> 
+-->	     
+	     
 	     <property name="hibernate.cache.region_prefix" value="org.j2cms"/>
 	     <property name="hibernate.cache.use_query_cache" value="true"/>
 	     <property name="hibernate.cache.use_second_level_cache" value="true"/>
 	     <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+
+ 
+
 
       </properties>
    </persistence-unit>

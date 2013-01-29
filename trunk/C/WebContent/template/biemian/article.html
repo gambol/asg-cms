@@ -50,7 +50,7 @@
 	<!-- Page title -->
 	<div id="pagetitle">
 		<div class="wrapper">
-			<h1> 	<a href='/${entity.channel.id!"1"}.html'>${(entity.channel.name)!""}</a> --> ${entity.title!""}</h1>
+			<h1> 	<a href='/${entity.channel.id!"1"}.html'>${(entity.channel.name)!""}</a> --> 正文</h1>
 			<!-- Quick search box -->
 			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
 		</div>
@@ -64,8 +64,8 @@
 				<!-- Left column/section -->
 				<section class="column width6 first">
                 <h3>${(entity.title)!""}</h3>
-                <span class="subtitle">发布时间：${(entity.releaseDate)!""}&nbsp;&nbsp;&nbsp;&nbsp;来源：${(entity.origin)!""}&nbsp;&nbsp;&nbsp;&nbsp;作者：${(entity.author)!""}&nbsp;&nbsp;&nbsp;&nbsp;点击量：${(entity.visitTotal)?c}</span>
-                <div>${(entity.content)!""}</div>
+                <div class="subtitle">发布时间：${(entity.releaseDate)!""}&nbsp;&nbsp;&nbsp;&nbsp;来源：${(entity.origin)!""}&nbsp;&nbsp;&nbsp;&nbsp;作者：${(entity.author)!""}&nbsp;&nbsp;&nbsp;&nbsp;点击量：${(entity.visitTotal)?c}</div>
+                <div class="main">${(entity.content)!""}</div>
 				</section>
 				<div class="clear">&nbsp;</div>
 

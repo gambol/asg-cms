@@ -28,8 +28,9 @@
 	<bean id="SpringContextUtil" class="org.j2cms.utils.SpringContextUtil"/>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />	
-	
+	<!-- 
 	<bean id="cacheManager"  class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cache-manager-ref="ehcache" />
 
 	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="classpath:ehcache.xml" />
+	 -->
 </beans>
