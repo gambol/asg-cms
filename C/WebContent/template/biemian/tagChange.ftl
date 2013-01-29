@@ -7,7 +7,7 @@
   		<dl>
 		   <#list latestArticles as a>
 	           <dt>
-	           	${a.releaseDate!""} <a href="Article/${a.id?c}.html" 	title="${a.title}" target="_blank">${a.title!""}</a>  
+	           	[<#if a.releaseDate?length gt 10>${a.releaseDate[0..10]}<#else>${a.releaseDate!""}</#if>]<a href="Article/${a.id?c}.html" 	title="${a.title}" target="_blank"><#if a.title?length gt 10>${a.title[0..10]}<#else>${a.title!""}</#if></a>  
 	           </dt>
 	           
            </#list>
@@ -25,7 +25,7 @@
   	<dl>
 		 <#list mostVisitArticles as a>
 	           <dt>
-	           	［${a.channel.name!""}］<a href="Article/${a.id?c}.html" 	title="${a.title}" target="_blank">${a.title!""}</a>
+	           	［${a.channel.name!""}]<a href="Article/${a.id?c}.html" 	title="${a.title}" target="_blank"><#if a.title?length gt 10>${a.title[0..10]}<#else>${a.title!""}</#if></a>
 	           </dt>
            </#list>
      </dl>

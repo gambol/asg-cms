@@ -30,7 +30,8 @@ public class Channel implements Serializable {
 	private Integer id; // id
 	@Column(length = 20)
 	private String name; // 栏目名
-	@Lob
+	
+	@Column(columnDefinition="TEXT")
 	private String info; // 栏目说明/内容
 	@Column(name = "rank_id")
 	private Integer rankid = 0; // 排序id

@@ -47,6 +47,7 @@ time, mark, audio, video {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    font: "宋体";
 }
 
 body {
@@ -1024,8 +1025,12 @@ a:focus>.sf-sub-indicator,a:hover>.sf-sub-indicator,a:active>.sf-sub-indicator,l
 #page .subtitle {
 	text-transform:uppercase;
 	color:#93BB3A;
-	font-size:9px;
+	font-size:12px;
 	font-family: Tahoma, Arial, sans-serif;
+	border-bottom: 1px solid #CCCCCC;
+    padding: 10px 0;
+    position: relative;
+    text-align: center;
 }
 
 /* Footers
@@ -2335,4 +2340,22 @@ div#nyroModalFull div#nyroModalWrapper div#nyroModalContent a.nyroModalNext {
 }
 div#nyroModalFull div#nyroModalWrapper div#nyroModalContent a.nyroModalNext:hover {
 	background-image: url(../img/nyro/next.gif);
+}
+
+.width6 h3 {
+	color: #000000;
+    font-family: "微软雅黑","黑体";
+    font-size: 22px;
+    font-weight: normal;
+    height: 35px;
+    line-height: 35px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.width6 .main {
+	font-size: 14px;
+    line-height: 23px;
+ 	font: "宋体";
+ 	padding:23px 19px 0;
 }
