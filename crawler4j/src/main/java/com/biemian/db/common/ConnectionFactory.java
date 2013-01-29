@@ -29,7 +29,7 @@ public class ConnectionFactory {
     private static final String KEY_DB_PASSWORD = "KEY_DB_PASSWORD";
     private static final String DEFAULT_DB_PASSWORD = "121212";
     private static final String KEY_DB_USE_POOL = "KEY_DB_USE_POOL";
-    private static final String DEFAULT_DB_USE_POOL = "false";
+    private static final String DEFAULT_DB_USE_POOL = "yes";
     private static final String DEFAULT_POOL_NAME = "jdbc/biemian";
     private static Log log = LogFactory.getLog(ConnectionFactory.class);
     private static final String KEY_POOL_NAME = "KEY_POOL_NAME";
@@ -104,8 +104,6 @@ public class ConnectionFactory {
 
 
         try {
-
-
             ConfigUtils.saveProp(prop,
                     PathConst.DB_CONFIG_PATH);
         } catch (IOException e) {

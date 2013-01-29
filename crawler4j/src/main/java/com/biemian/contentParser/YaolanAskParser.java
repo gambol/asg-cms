@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.StringUtils;
 
+import com.biemian.db.dao.ArticleDao;
+import com.biemian.db.domain.Article;
 import com.biemian.utils.TextUtils;
 
 public class YaolanAskParser extends ContentParser {
@@ -48,6 +50,11 @@ public class YaolanAskParser extends ContentParser {
 
 	protected void parseContent() {
 		content = jsd.getText(contentQuery);
+	}
+	
+	public void store() {
+		int channelId = 11;
+		ArticleDao.insert(title, content, "", publishTime, channelId);
 	}
 
 	@Override

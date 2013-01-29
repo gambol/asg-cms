@@ -1,6 +1,9 @@
 package com.biemian.contentParser;
 
+import org.apache.log4j.Logger;
+
 public class ParserWorker {
+	private final static Logger logger = Logger.getLogger(ParserWorker.class);
 	
 	// 将来写个牛逼的函数把这个垃圾替代掉
 	public ContentParser getParserFactory(String url, String content) {
@@ -17,22 +20,22 @@ public class ParserWorker {
 			return yzp;
 		
 		return null;
-
 	}
 	
 	public <T extends ContentParser> boolean parse(final T parser) {
 		if (parser == null) {
-			System.out.println("parser is null");
+		//	System.out.println("parser is null");
 			return false;
 		}
 		
 		if (parser.shouldUseThisParser()) {
 			parser.doParse();
-			System.out.println(parser.toString());
-			return parser.parseOk();
+			if (parser.parseOk()) {
+				logger.info("store it, url:" + parser.getUrl());
+				parser.store();
+			}
 		}
 		
-		System.out.println(parser.toString());
 		return false;
 	}
 	

@@ -9,6 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
+import com.biemian.db.dao.ArticleDao;
+import com.biemian.utils.DateUtils;
 import com.biemian.utils.HTTPGet;
 import com.biemian.utils.IOUtil;
 import com.biemian.utils.TextUtils;
@@ -94,6 +96,12 @@ public class YaolanZhishiParser extends ContentParser {
 		}
 	}
 
+	public void store() {
+		int channelId = 1;
+		ArticleDao.insert(title, content, "", DateUtils.getNowtimeStr(), channelId);
+	}
+	
+	
 	public static void main(String[] args) {
 
 		List<String> htmlList = IOUtil

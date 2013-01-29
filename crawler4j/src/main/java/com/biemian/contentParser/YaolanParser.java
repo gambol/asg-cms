@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.biemian.db.dao.ArticleDao;
 import com.biemian.utils.TextUtils;
 
 public class YaolanParser extends ContentParser {
@@ -112,8 +113,14 @@ public class YaolanParser extends ContentParser {
 		parseContent();
 		parseTitle();
 		parsePublishTime();
+		parseSummary();
 	}
 
+	public void store() {
+		int channelId = 10;
+		ArticleDao.insert(title, content, summary, publishTime, channelId);
+	}
+	
 	public static void main(String[] args) {
 		String html = "";
 		// YaolanParser ylp = new YaolanParser(html,

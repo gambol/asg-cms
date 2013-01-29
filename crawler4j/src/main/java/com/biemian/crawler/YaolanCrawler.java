@@ -46,7 +46,7 @@ public class YaolanCrawler extends WebCrawler {
 		int docid = page.getWebURL().getDocid();
 		String url = page.getWebURL().getURL();
 
-		System.out.println("URL: " + url);
+	//	System.out.println("URL: " + url);
 
 		try {
 		if (page.getParseData() instanceof HtmlParseData) {
@@ -58,6 +58,6 @@ public class YaolanCrawler extends WebCrawler {
 
 		} catch (Exception e) {
 		}
-		System.out.println("=============");
+//		System.out.println("=============");
 	}
 }

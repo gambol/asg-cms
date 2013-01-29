@@ -54,6 +54,11 @@ public abstract class ContentParser {
 		return true;
 	}
 	
+
+	public void store() {
+		
+	}
+	
 	/**
 	 * 测试时使用的一个方法
 	 * @param htmlData

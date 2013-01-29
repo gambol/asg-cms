@@ -175,6 +175,7 @@ public class DBTool {
                 callBack.callback(rs);//回调
             }
         } catch (Exception e) {
+        	e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         } finally {
             closeAll(conn, pstmt, rs);

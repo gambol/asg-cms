@@ -19,7 +19,7 @@ public class YaolanMain {
 		 * numberOfCrawlers shows the number of concurrent threads that should
 		 * be initiated for crawling.
 		 */
-		int numberOfCrawlers = 5;
+		int numberOfCrawlers = 15;
 
 		CrawlConfig config = new CrawlConfig();
 
@@ -41,7 +41,7 @@ public class YaolanMain {
 		 * You can set the maximum number of pages to crawl. The default value
 		 * is -1 for unlimited number of pages
 		 */
-		config.setMaxPagesToFetch(10000);
+		config.setMaxPagesToFetch(-1);
 
 		/*
 		 * Do you need to set a proxy? If so, you can use:
@@ -78,7 +78,10 @@ public class YaolanMain {
 		 * which are found in these pages
 		 */
 
-		controller.addSeed("http://www.yaolan.com/");
+		//controller.addSeed("http://www.yaolan.com/");
+	//	controller.addSeed("http://www.yaolan.com/edu/201301071731320.shtml");
+	//	controller.addSeed("http://ask.yaolan.com/");
+		controller.addSeed("http://www.yaolan.com/zhishi/preconception/");
 		// controller.addSeed("http://www.ics.uci.edu/~lopes/");
 		// controller.addSeed("http://www.ics.uci.edu/~welling/");
 
