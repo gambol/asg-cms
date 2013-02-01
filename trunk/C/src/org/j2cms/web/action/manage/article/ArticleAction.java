@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.ExceptionMappings;
@@ -42,6 +43,7 @@ import freemarker.template.TemplateException;
 		@Result(name = "succ", type = "freemarker", location = "/WEB-INF/content/util/succ.ftl"),
 		@Result(name = "error", type = "freemarker", location = "/WEB-INF/content/util/error.ftl"),
 		@Result(name = "errorPage", type = "freemarker", location = "/WEB-INF/content/util/errorPage.ftl"),
+		@Result(name = "ok", type = "freemarker", location = "/template/biemian/article.html"),
 		@Result(name = "urlRedirect", type = "freemarker", location = "/WEB-INF/content/util/urlRedirect.ftl") })
 @ExceptionMappings({ @ExceptionMapping(exception = "java.sql.SQLException", result = "error", params = {
 		"message", "操作数据库失败！" }) })
@@ -112,21 +114,43 @@ public class ArticleAction extends EntityAction<Article> {
 
 	@Actions({ @Action("/article") })
 	public String execute() throws Exception {// o.father.id=1 改成这样简单
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Article> latestArticles = new ArrayList<Article>();
+		List<Article> mostVisitArticles = new ArrayList<Article>(); // visit
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> orderbyVisitTotal = new LinkedHashMap<String, String>();
+		orderby.put("id", "desc");
+		orderbyVisitTotal.put("visitTotal", "desc");
+
+		try {
+			latestArticles = articleService.getScrollData(0, 15,
+					"o.checkState=?1", new Object[] { CheckState.pass },
+					orderby).getResultlist();
+			mostVisitArticles = articleService.getScrollData(0, 15,
+					"o.checkState=?1", new Object[] { CheckState.pass },
+					orderbyVisitTotal).getResultlist();
+			map.put("latestArticles", latestArticles);
+			map.put("mostVisitArticles", mostVisitArticles);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		if (entity != null && entity.getCheckState() == CheckState.pass) {
 			entity.setVisitTotal(entity.getVisitTotal() + 1);// 点击数加1
 			try {
-				Map<String, Object> map = new HashMap<String, Object>();
+				
 				map.put("entity", entity);
-				new CreateHtml().init("article.html", id + ".html", map,
-						"Article/");
+				//new CreateHtml().init("article.html", id + ".html", map,
+					//	"Article/");
+				new CreateHtml().output("article.html", map, ServletActionContext.getResponse().getWriter());
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (TemplateException e) {
 				e.printStackTrace();
 			}// 生成静态HTML
 			Struts2Utils.setAttribute("url", "/Article/" + id + ".html");
-			return "urlRedirect";
+			//return "urlRedirect";
+			return "ok";
 		} else {
 			Struts2Utils.setAttribute("message", "该信息不存在或未通过审核！");
 			return "errorPage";

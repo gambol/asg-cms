@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.ExceptionMapping;
@@ -39,6 +40,7 @@ import freemarker.template.TemplateException;
 		@Result(name = "succ", type = "freemarker", location = "/WEB-INF/content/util/succ.ftl"),
 		@Result(name = "error", type = "freemarker", location = "/WEB-INF/content/util/error.ftl"),
 		@Result(name = "errorPage", type = "freemarker", location = "/WEB-INF/content/util/errorPage.ftl"),
+		@Result(name = "ok", type = "freemarker", location = "/template/biemian/channel.ftl"),
 		@Result(name = "urlRedirect", type = "freemarker", location = "/WEB-INF/content/util/urlRedirect.ftl") })
 @ExceptionMappings({ @ExceptionMapping(exception = "java.sql.SQLException", result = "error", params = {
 		"message", "操作数据库失败！" }) })
@@ -137,8 +139,7 @@ public class ChannelAction extends EntityAction<Channel> {
 				* pageView.getMaxresult();
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
 		orderby.put("rankid", "asc");
-		System.out.println("-------------------------------------");
-		System.out.println(id);
+
 
 		if (single != null && !"all".equals(single) && !"".equals(single)) {
 			if (params.size() > 0)
@@ -183,6 +184,21 @@ public class ChannelAction extends EntityAction<Channel> {
 		String htmlName = id + ".html";
 		map.put("entity", channel);
 		map.put("title", title);
+		
+		List<Article> latestArticles = new ArrayList<Article>();
+		List<Article> mostVisitArticles = new ArrayList<Article>(); // visit
+		LinkedHashMap<String, String> orderbyId = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> orderbyVisitTotal = new LinkedHashMap<String, String>();
+		orderbyId.put("id", "desc");
+		orderbyVisitTotal.put("visitTotal", "desc");
+		
+		latestArticles = articleService.getScrollData(0, 15, "o.checkState=?1",
+				new Object[] { CheckState.pass }, orderbyId).getResultlist();
+		mostVisitArticles = articleService.getScrollData(0, 15,
+				"o.checkState=?1", new Object[] { CheckState.pass },
+				orderbyVisitTotal).getResultlist();
+		map.put("latestArticles", latestArticles);
+		map.put("mostVisitArticles", mostVisitArticles);
 
 		try {
 			channel.setVisitTotal(channel.getVisitTotal() + 1);// 点击量加1
@@ -190,8 +206,9 @@ public class ChannelAction extends EntityAction<Channel> {
 			return "errorPage";
 		}
 		if (channel.getCheckState() == CheckState.pass) {
+			
 			if (channel.getSingle() != null && channel.getSingle() == true) {
-
+				// 	暂时不支持
 				try {
 					new CreateHtml().init(singleFTL, htmlName, map, relaPath);// 生成静态HTML
 				} catch (IOException e) {
@@ -234,10 +251,13 @@ public class ChannelAction extends EntityAction<Channel> {
 					Struts2Utils.setAttribute("searchPageView", pageView);
 					return "search";
 				} else {
+					map.put("pageView", pageView);
 					try {
-						map.put("pageView", pageView);
-						new CreateHtml().init(channelFTL, htmlName, map,
-								relaPath);// 生成静态HTML
+						
+						//new CreateHtml().init(channelFTL, htmlName, map,
+						// relaPath);// 生成静态HTML
+						new CreateHtml().output("channel.ftl", map, ServletActionContext.getResponse().getWriter());
+						
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (TemplateException e) {
@@ -245,7 +265,9 @@ public class ChannelAction extends EntityAction<Channel> {
 					}
 				}
 			}
-			Struts2Utils.setAttribute("url", "/" + relaPath + htmlName);
+			//Struts2Utils.setAttribute("url", "/" + relaPath + htmlName);
+			//Struts2Utils.setAttribute("pageView", pageView);
+			//Struts2Utils.setMapAttribute(map);
 			return "urlRedirect";
 		} else {
 			return "errorPage";
@@ -331,9 +353,9 @@ public class ChannelAction extends EntityAction<Channel> {
 			articleService = (ArticleService) cxt.getBean("articleServiceImpl");
 		}
 		
-		latestArticles = articleService.getScrollData(0, 8, "o.checkState=?1",
+		latestArticles = articleService.getScrollData(0, 15, "o.checkState=?1",
 				new Object[] { CheckState.pass }, orderbyId).getResultlist();
-		mostVisitArticles = articleService.getScrollData(0, 10,
+		mostVisitArticles = articleService.getScrollData(0, 15,
 				"o.checkState=?1", new Object[] { CheckState.pass },
 				orderbyVisitTotal).getResultlist();
 		map.put("latestArticles", latestArticles);

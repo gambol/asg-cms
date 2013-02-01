@@ -1,5 +1,7 @@
 package org.j2cms.utils;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,6 +31,13 @@ public class Struts2Utils {
 	public static String[] getParameterValues(String name){
 		return getRequest().getParameterValues(name);
 	}
+	
+	public static void setMapAttribute(Map map){
+		for (Object key : map.keySet()) {
+			setAttribute(key.toString(), map.get(key));
+		}
+	}
+	
 	public static void setAttribute(String name,Object o)
 	{
 		ServletActionContext.getRequest().setAttribute(name, o);

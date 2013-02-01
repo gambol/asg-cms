@@ -22,8 +22,8 @@ public class HTMLGenerator implements Runnable{
 //		System.out.println("hehe html");
 		try {
 			new JIndexAction().makeHtmlFromContext(context);
-			new ChannelAction().allChannelToHTML(context);
-			new ArticleAction().dealNewArticle(context);
+			//new ChannelAction().allChannelToHTML(context);
+			//new ArticleAction().dealNewArticle(context);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

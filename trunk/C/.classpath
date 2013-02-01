@@ -75,7 +75,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-spring-plugin-2.3.4.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xwork-core-2.3.4.1.jar"/>
-	<classpathentry kind="lib" path="/home/zhenbao.zhou/workspace/fuck/WebContent/WEB-INF/lib/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-9.0-801.jdbc4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

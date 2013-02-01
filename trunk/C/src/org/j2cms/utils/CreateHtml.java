@@ -83,6 +83,26 @@ public class CreateHtml {
 		}
 		return 1;
 	}
+	
+	public void output(String ftl, Map<String, Object> map, Writer out)
+			throws IOException, TemplateException {
+		map.put("C", this.config);
+
+		this.cfg.setServletContextForTemplateLoading(context, "/");
+		this.cfg.setEncoding(Locale.getDefault(), "utf-8");
+		Template template = this.cfg.getTemplate(this.templateurl + ftl);
+		template.setEncoding("utf-8");
+		try {
+			template.process(map, out);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+
+	}
 
 	public void init(String ftl, String htmlName, Map<String, Object> map,
 			String relaPath) throws IOException, TemplateException {

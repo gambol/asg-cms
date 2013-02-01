@@ -40,7 +40,7 @@
 <!-- Header -->
 	<header id="top">
 		<div class="wrapper">
-			<div id="title"><img SRC="img/logo.png" alt="Administry" /></div>
+			<div id="title"><img SRC="img/logo.png" alt="biemian" /></div>
 			<div id="topnav">
 			</div>
 			<#include "/head.html"  encoding="UTF-8">
@@ -74,7 +74,7 @@
 						       	   <#list articles as article>
 							           <tr>
 							           	<td> 
-							           		<a href="Article/${article.id?c}.html" title='${article.title!""}' target="_blank"><#if article.title?length gt 20>${article.title[0..20]}<#else>${article.title!""}</#if></a>
+							           		<a href="article?id=${article.id?c}" title='${article.title!""}' target="_blank"><#if article.title?length gt 20>${article.title[0..20]}<#else>${article.title!""}</#if></a>
 							           	</td>
 							           	<td class="ta-right">[${article.releaseDate!""}]</td>
 							           </tr> 
