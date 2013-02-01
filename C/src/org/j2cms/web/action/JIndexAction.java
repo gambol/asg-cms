@@ -143,13 +143,13 @@ public class JIndexAction extends ActionSupport {
 					"o.father=?1 and o.display=true",
 					new Object[] { new Channel(1) }, orderbyRankid)
 					.getResultlist();
-			latestArticles = articleService.getScrollData(0, 8,
+			latestArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderby).getResultlist();
-			mostVisitArticles = articleService.getScrollData(0, 10,
+			mostVisitArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyVisitTotal).getResultlist();
-			mostCommentArticles = articleService.getScrollData(0, 10,
+			mostCommentArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyCommentCount).getResultlist();
 			channelInIndexs = channelService.getScrollData(0, -1,
@@ -169,7 +169,7 @@ public class JIndexAction extends ActionSupport {
 				Map<String, ArrayList<Article>> channelArticleMap = new HashMap<String, ArrayList<Article>>();
 				ArrayList<Article> channelArticle = new ArrayList<Article>();
 				channelArticle = (ArrayList<Article>) articleService
-						.getScrollData(0, 5,
+						.getScrollData(0, 20,
 								"o.channel=?1 and o.checkState=?2",
 								new Object[] { channel, CheckState.pass },
 								orderby).getResultlist();
@@ -254,13 +254,13 @@ public class JIndexAction extends ActionSupport {
 					"o.father=?1 and o.display=true",
 					new Object[] { new Channel(1) }, orderbyRankid)
 					.getResultlist();
-			latestArticles = articleService.getScrollData(0, 8,
+			latestArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderby).getResultlist();
-			mostVisitArticles = articleService.getScrollData(0, 10,
+			mostVisitArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyVisitTotal).getResultlist();
-			mostCommentArticles = articleService.getScrollData(0, 10,
+			mostCommentArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyCommentCount).getResultlist();
 			channelInIndexs = channelService.getScrollData(0, 100,
@@ -272,7 +272,7 @@ public class JIndexAction extends ActionSupport {
 				Map<String, ArrayList<Article>> channelArticleMap = new HashMap<String, ArrayList<Article>>();
 				ArrayList<Article> channelArticle = new ArrayList<Article>();
 				channelArticle = (ArrayList<Article>) articleService
-						.getScrollData(0, 5,
+						.getScrollData(0, 20,
 								"o.channel=?1 and o.checkState=?2",
 								new Object[] { channel, CheckState.pass },
 								orderby).getResultlist();

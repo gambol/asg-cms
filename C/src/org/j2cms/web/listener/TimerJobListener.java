@@ -16,7 +16,7 @@ public class TimerJobListener implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent context) {
 		// testService.scheduleWithFixedDelay(new TestTimer(), 1, 10,  TimeUnit.SECONDS);
-		// indexHtml.scheduleWithFixedDelay(new HTMLGenerator(context.getServletContext()), 0, 300,  TimeUnit.MINUTES);
+		 indexHtml.scheduleWithFixedDelay(new HTMLGenerator(context.getServletContext()), 1, 4000,  TimeUnit.SECONDS);
 	}
 	
 	public void contextDestroyed(ServletContextEvent context) {

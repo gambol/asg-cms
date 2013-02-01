@@ -35,8 +35,8 @@
 
 <script language="javascript">
 function pageQuery(page) {
-	   //location.href = "/channel?id=${entity.id}&title=${title!""}&page="+page;
-	location.href = "/Channel/${entity.id!}_"+page+".html";
+	 location.href = "/channel?id=${entity.id}&title=${title!""}&page="+page;
+	//location.href = "/Channel/${entity.id!}_"+page+".html";
 }
 </script>
 
@@ -46,7 +46,7 @@ function pageQuery(page) {
 <!-- Header -->
 	<header id="top">
 		<div class="wrapper">
-			<div id="title"><img SRC="img/logo.png" alt="Administry" /><!--<span>Administry</span> demo--></div>
+			<div id="title"><img SRC="img/logo.png" alt="biemian" /></div>
 			<!-- Top navigation -->
 			<div id="topnav">
 			</div>
@@ -56,7 +56,7 @@ function pageQuery(page) {
 	<!-- Page title -->
 	<div id="pagetitle">
 		<div class="wrapper">
-			<h1> <a href="/">首页</a> -> <a href="/${entity.id?c}.html">${entity.name!""}</a>&nbsp; <#if title??&&title!=''>[关键字:<font class="red_normal">${title}</font>]</#if></h1>
+			<h1> <a href="/">首页</a> -> <a href="channel?id=${entity.id?c}">${entity.name!""}</a>&nbsp; <#if title??&&title!=''>[关键字:<font class="red_normal">${title}</font>]</#if></h1>
 			<!-- Quick search box -->
 			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
 		</div>
@@ -71,7 +71,7 @@ function pageQuery(page) {
                     <ul>
                     <#list pageView.records as article>
                      <li>
-                     <a href="/Article/${article.id?c}.html" title="${article.title}" target="_blank">${(article.title)!""}</a>
+                     <a href="article?id=${article.id?c}" title="${article.title}" target="_blank">${(article.title)!""}</a>
                      <span>[${(article.releaseDate)!""}]</span></li>
                      </#list>
                     </ul>
@@ -82,6 +82,7 @@ function pageQuery(page) {
                     &nbsp;&nbsp;每页&nbsp;<font class="red_normal">${pageView.maxresult}</font>&nbsp;条&nbsp;&nbsp;共&nbsp;
                     <font class="red_normal">${(pageView.totalrecord)?c}</font>&nbsp;条</td>
                     <td align="center">
+                    <!--
                    <#if (pageView.currentpage>1)>
                    	<a  href='#' onClick='pageQuery(1)' >最前页</a>
                     <a  href='#' onClick="pageQuery(${pageView.currentpage-1})"  >上一页</a>
@@ -95,6 +96,22 @@ function pageQuery(page) {
                   </#if>
                   <#if pageView.currentpage==pageView.totalpage>
     			              下一页&nbsp;最后页
+       			  </#if>
+                    -->
+                    
+                   <#if (pageView.currentpage>1)>
+                   	<a  href='/channel?id=${entity.id?c}&title=${title!}&page=1' target="_blank">最前页</a>
+                    <a  href='/channel?id=${entity.id?c}&title=${title!}&page=${pageView.currentpage-1}'  target="_blank">上一页</a>
+                   </#if>
+                  <#if (pageView.currentpage==1)>
+                   		 最前页&nbsp;上一页
+                  </#if>
+                  <#if (pageView.currentpage < pageView.totalpage)>
+                  	 	<a  href='/channel?id=${entity.id?c}&title=${title!}&page=${pageView.currentpage+1}' target="_blank">下一页</a>
+                   		<a  href='/channel?id=${entity.id?c}&title=${title!}&page=${pageView.totalpage?c}' target="_blank">最后页</a>
+                  </#if>
+                  <#if pageView.currentpage==pageView.totalpage>
+    			           下一页&nbsp;最后页
        			  </#if>
                     
                     </td>
