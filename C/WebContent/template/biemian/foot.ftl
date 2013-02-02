@@ -13,3 +13,7 @@
 	</footer>
 	<a href="#" id="totop">^ scroll to top</a>
 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa9c1da96c630e3e5449335d09ad7d502' type='text/javascript'%3E%3C/script%3E"));
+</script>

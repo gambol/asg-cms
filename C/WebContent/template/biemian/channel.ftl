@@ -6,32 +6,8 @@
 <meta name="description" content='${C.description!""}'/>
 <meta name="keywords" content='${C.keywords!""}'/>
 
-<link href="/template/biemian/css/base.css" rel="stylesheet" type="text/css" />
-<link href="/template/biemian/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/template/biemian/css/index.css" rel="stylesheet" type="text/css" />
-<link href="/template/biemian/css/tagChange.css" rel="stylesheet" type="text/css" />
-<script src="/template/biemian/js/common.js" language="javascript" type="text/javascript"></script>
-<script src="/template/biemian/js/flashImg.js" language="javascript" type="text/javascript"></script>
-<script src="/template/biemian/js/google.js" language="javascript" type="text/javascript"></script>
-
 <link rel="stylesheet" href="/template/biemian/css/style.css" type="text/css" />
-<script type="text/javascript" SRC="/template/biemian/j/jquery-1.4.2.min.js"></script>
-<!-- Could be loaded remotely from Google CDN : <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
-<script type="text/javascript" SRC="/template/biemian/j/jquery.ui.core.min.js"></script>
-<script type="text/javascript" SRC="/template/biemian/j/jquery.ui.widget.min.js"></script>
-<script type="text/javascript" SRC="/template/biemian/j/jquery.ui.tabs.min.js"></script>
-<!-- jQuery tooltips -->
-<script type="text/javascript" SRC="/template/biemian/j/jquery.tipTip.min.js"></script>
-<!-- Superfish navigation -->
-<script type="text/javascript" SRC="/template/biemian/j/jquery.superfish.min.js"></script>
-<script type="text/javascript" SRC="/template/biemian/j/jquery.supersubs.min.js"></script>
-<!-- jQuery form validation -->
-<script type="text/javascript" SRC="/template/biemian/j/jquery.validate_pack.js"></script>
-<!-- jQuery popup box -->
-<script type="text/javascript" SRC="/template/biemian/j/jquery.nyroModal.pack.js"></script>
-<!-- jQuery graph plugins -->
-<!--[if IE]><script type="text/javascript" src="/template/biemian/j/flot/excanvas.min.js"></script><![endif]-->
-<script type="text/javascript" SRC="/template/biemian/j/flot/jquery.flot.min.js"></script>
+
 
 <script language="javascript">
 function pageQuery(page) {
@@ -46,7 +22,7 @@ function pageQuery(page) {
 <!-- Header -->
 	<header id="top">
 		<div class="wrapper">
-			<div id="title"><img SRC="img/logo.png" alt="biemian" /></div>
+			<div id="title"><img SRC="/template/biemian/images/logo.png" alt="biemian" /></div>
 			<!-- Top navigation -->
 			<div id="topnav">
 			</div>
@@ -72,7 +48,7 @@ function pageQuery(page) {
                     <#list pageView.records as article>
                      <li>
                      <a href="article?id=${article.id?c}" title="${article.title}" target="_blank">${(article.title)!""}</a>
-                     <span>[${(article.releaseDate)!""}]</span></li>
+                     <span>[${article.sysDate?string("yyyy-MM-dd HH:mm:ss")}]</span></li>
                      </#list>
                     </ul>
                     
