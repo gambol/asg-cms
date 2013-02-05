@@ -11,4 +11,11 @@ public class DateUtils {
 
 		return str;
 	}
+	
+	public static String getTimeStr(Date d){
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd- HH:mm:ss");
+		return dateFormat.format(d);
+	}
+	
 }

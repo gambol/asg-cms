@@ -45,7 +45,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>edu.uci.ics.crawler4j.examples.basic.BasicCrawlController</mainClass>
+							<mainClass>com.biemian.crawler.YaolanMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

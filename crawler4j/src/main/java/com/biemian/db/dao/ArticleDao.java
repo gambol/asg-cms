@@ -20,8 +20,8 @@ public class ArticleDao {
 		Article ar = new Article();
 		ar.setTitle(title);
 		ar.setContent(content);
-		if (publishTime != null && publishTime.length() > 10) {
-			publishTime = publishTime.substring(0, 9);
+		if (publishTime != null && publishTime.length() > 25) {
+			publishTime = publishTime.substring(0, 24);
 		}
 		
 		ar.setReleaseDate(publishTime);

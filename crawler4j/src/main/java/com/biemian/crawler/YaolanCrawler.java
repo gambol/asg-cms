@@ -18,23 +18,26 @@ import com.biemian.utils.HTTPGet;
  */
 public class YaolanCrawler extends WebCrawler {
 
-	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|bmp|gif|jpe?g" + "|png|tiff?|mid|mp2|mp3|mp4"
-			+ "|wav|avi|mov|mpeg|ram|m4v|pdf" + "|rm|smil|wmv|swf|wma|zip|rar|gz))$");
+	private final static Pattern FILTERS = Pattern
+			.compile(".*(\\.(css|js|bmp|gif|jpe?g"
+					+ "|png|tiff?|mid|mp2|mp3|mp4"
+					+ "|wav|avi|mov|mpeg|ram|m4v|pdf"
+					+ "|rm|smil|wmv|swf|wma|zip|rar|gz))$");
 
 	@Override
 	public boolean shouldVisit(WebURL url) {
 		String href = url.getURL().toLowerCase();
-				
+
 		if (FILTERS.matcher(href).matches()) {
 			return false;
 		}
-		
+
 		if (href.indexOf("yaolan.com") < 0) {
 			return false;
 		}
-		
+
 		return true;
-		//return RedisHandler.getInstance().isThisUrlHandled(url.getURL()); 
+		//return RedisHandler.getInstance().isThisUrlHandled(url.getURL());
 	}
 
 	/**
@@ -42,22 +45,24 @@ public class YaolanCrawler extends WebCrawler {
 	 * by your program.
 	 */
 	@Override
-	public void visit(Page page)  {
+	public void visit(Page page) {
 		int docid = page.getWebURL().getDocid();
 		String url = page.getWebURL().getURL();
 
-	//	System.out.println("URL: " + url);
+		// System.out.println("URL: " + url);
 
 		try {
-		if (page.getParseData() instanceof HtmlParseData) {
-			HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-			ParserWorker pw = new ParserWorker();
-			ContentParser cp = pw.getParserFactory(url, htmlParseData.getHtml());
-			pw.parse(cp);
-		}
+			if (page.getParseData() instanceof HtmlParseData) {
+				HtmlParseData htmlParseData = (HtmlParseData) page
+						.getParseData();
+				ParserWorker pw = new ParserWorker();
+				ContentParser cp = pw.getParserFactory(url,
+						htmlParseData.getHtml());
+				pw.parse(cp);
+			}
 
 		} catch (Exception e) {
 		}
-//		System.out.println("=============");
+		// System.out.println("=============");
 	}
 }

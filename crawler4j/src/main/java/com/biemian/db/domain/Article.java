@@ -28,7 +28,7 @@ public class Article implements Serializable {
 	@DBColumnName(value="content")
 	private String content; // 文章内容
 	@DBColumnName(value="sys_date")
-	private Date sysDate = new Date(); //（系统日期）
+	private Date sysDate = new Date();; //（系统日期）
 	@DBColumnName(value="release_date")
 	private String releaseDate; // 发表日期（可以人为设置）
 	@DBColumnName(value="check_date")

@@ -15,7 +15,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /** 
- *  use the more niubi's jsoup
+ * useless right now
+ *  use  jsoup which is more niubi
  *  xpath is fucking
  */
 @Deprecated

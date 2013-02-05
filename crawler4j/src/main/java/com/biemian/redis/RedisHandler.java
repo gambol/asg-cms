@@ -62,6 +62,10 @@ public class RedisHandler {
 		jedis.setex(key, EXPIRE_TIME, "1");
 	}
 	
+	public void removeKey(String key) {
+		jedis.del(key);
+	}
+	
 	/**
 	 * redis 与 url之间的东西
 	 * @param url
