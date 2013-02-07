@@ -24,7 +24,7 @@ function pageQuery(page) {
 		<div class="wrapper">
 			<div id="title"><img SRC="/template/biemian/images/logo.png" alt="biemian" /></div>
 			<!-- Top navigation -->
-			<div id="topnav">
+			<div id="topnav">  欢迎来到PapaSky,爸爸的天空
 			</div>
 			<#include "/head.html" parse=false encoding="UTF-8">
 	</header>
