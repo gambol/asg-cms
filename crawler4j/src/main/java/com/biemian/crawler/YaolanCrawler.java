@@ -36,8 +36,12 @@ public class YaolanCrawler extends WebCrawler {
 			return false;
 		}
 
-		return true;
-		//return RedisHandler.getInstance().isThisUrlHandled(url.getURL());
+		RedisHandler rh = new RedisHandler();
+		//return true;
+		boolean re = rh.isThisUrlHandled(url.getURL());
+		
+		rh.destory();
+		return re;
 	}
 
 	/**

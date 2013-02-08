@@ -19,31 +19,20 @@ public class RedisHandler {
 	
 	private static RedisHandler instance;
 
-	private static JedisPool pool;
-	private static Jedis jedis;
+	private Jedis jedis;
 	
-	private String host = "localhost";
-	private int port = 6379;
+	private static String host = "localhost";
+	private static int port = 6379;
+	private static JedisPool pool = new JedisPool(new JedisPoolConfig(), host, port);
 	
-	private int EXPIRE_TIME = 30 * 86400;  // 最长时间 30天
+	private static int EXPIRE_TIME = 30 * 86400;  // 最长时间 30天
 
-	private RedisHandler() {
-		pool = new JedisPool(new JedisPoolConfig(), host, port);
-
+	public RedisHandler() {
 		jedis = pool.getResource();
 		//jedis.auth("password");
 
 	};
-
-	public static RedisHandler getInstance() {
-		if (instance == null) {
-			instance = new RedisHandler();
-			return instance;
-		}
-
-		return instance;
-	}
-
+	
 	/** 
 	 * 判断一个key已经存在
 	 * @param key
@@ -85,13 +74,21 @@ public class RedisHandler {
 		return true;
 	}
 	
+	public void destory() {
+		pool.returnResource(jedis);
+	}
+	
 	public static void main(String[] args) throws Exception{
 		String key = "3";
-		RedisHandler.getInstance().setKey(key);
+
+		/*
+		for(int i = 0; i < 200000; i++) {
+			RedisHandler.getInstance().setKey(i + "");
+		}
+		*/
 		
-		System.out.println(RedisHandler.getInstance().hasKey(key));
-		
-		Thread.sleep(3000);
-		System.out.println(RedisHandler.getInstance().hasKey(key));
+		RedisHandler rh = new RedisHandler();
+		System.out.println(rh.hasKey("1245"));
+		rh.destory();
 	}
 }
