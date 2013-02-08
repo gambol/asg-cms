@@ -12,7 +12,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class YaolanMain {
 
-	private final static String FOLDER  = "/home/zhenbao/"
+	private final static String FOLDER  = "/home/zhenbao.zhou/"
 				+ ".crawler" + File.separator + "yaolan";
 	private final static int CRAWLER_NUM = 30;
 	private final static int DEPTH = 3;
