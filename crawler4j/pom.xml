@@ -45,7 +45,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.biemian.crawler.YaolanMain</mainClass>
+							<mainClass>com.biemian.crawler.CrawlerMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

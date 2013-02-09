@@ -7,6 +7,14 @@ public class ParserWorker {
 	
 	// 将来写个牛逼的函数把这个垃圾替代掉
 	public ContentParser getParserFactory(String url, String content) {
+		CiArticleParser cap = new CiArticleParser(content, url);
+		if (cap.shouldUseThisParser())
+			return cap;
+		
+		CiBlogParser cbp = new CiBlogParser(content, url);
+		if (cbp.shouldUseThisParser())
+			return cbp;
+		
 		YaolanParser yp = new YaolanParser(content, url);
 		if (yp.shouldUseThisParser())
 			return yp;

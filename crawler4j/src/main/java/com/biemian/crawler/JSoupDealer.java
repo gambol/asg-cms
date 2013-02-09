@@ -48,6 +48,34 @@ public class JSoupDealer {
 		return e.html();
 	}
 	
+	public String getHtmlForCiBlog(String query){
+		if (!inited){
+			init();
+		}
+		
+		Whitelist whitelist = Whitelist.basic();
+		whitelist.preserveRelativeLinks(false);
+		
+		Element e = doc.select(query).get(1);
+		String h = e.html();
+		String safe = Jsoup.clean(h, whitelist);
+		return safe;
+	}
+	
+	public String getHtmlWithBasic(String query){
+		if (!inited){
+			init();
+		}
+		
+		Whitelist whitelist = Whitelist.basic();
+		whitelist.preserveRelativeLinks(false);
+		
+		Elements e = doc.select(query);
+		String h = e.html();
+		String safe = Jsoup.clean(h, whitelist);
+		return safe;
+	}
+	
 	public String getText(String query) {
 		if (!inited){
 			init();

@@ -10,10 +10,10 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
-public class YaolanMain {
+public class CrawlerMain {
 
 	private final static String FOLDER  = "/home/zhenbao.zhou/"
-				+ ".crawler" + File.separator + "yaolan";
+				+ ".crawler" + File.separator + "crawler";
 	private final static int CRAWLER_NUM = 30;
 	private final static int DEPTH = 3;
 	
@@ -85,7 +85,8 @@ public class YaolanMain {
 		 * which are found in these pages
 		 */
 		
-		List<String> seedList = new YaolanSeeds().getSeedList();
+		//List<String> seedList = new YaolanSeeds().getSeedList();
+		List<String> seedList = new Ci123Seeds().getSeedList();
 		for (String s : seedList) {
 			controller.addSeed(s);
 		}
@@ -101,6 +102,6 @@ public class YaolanMain {
 		 * Start the crawl. This is a blocking operation, meaning that your code
 		 * will reach the line after this only when crawling is finished.
 		 */
-		controller.start(YaolanCrawler.class, CRAWLER_NUM);
+		controller.start(Cli123Crawler.class, CRAWLER_NUM);
 	}
 }

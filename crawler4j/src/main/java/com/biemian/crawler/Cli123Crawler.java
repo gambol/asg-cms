@@ -35,12 +35,17 @@ public class Cli123Crawler extends WebCrawler {
 		if (href.indexOf("ci123.com") < 0) {
 			return false;
 		}
-
+		
 		RedisHandler rh = new RedisHandler();
 		//return true;
 		boolean re = rh.isThisUrlHandled(url.getURL());
-		
 		rh.destory();
+
+		// 小于2层的url，都需要再被抓取
+		if (url.getDepth() < 2) {
+			return true;
+		}
+		
 		return re;
 	}
 

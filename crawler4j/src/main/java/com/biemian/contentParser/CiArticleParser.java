@@ -9,21 +9,20 @@ import com.biemian.db.dao.ArticleDao;
 import com.biemian.db.domain.Article;
 import com.biemian.utils.TextUtils;
 
-public class CliArticleParser extends ContentParser {
+public class CiArticleParser extends ContentParser {
 	String urlPattern = "http://www.ci123.com/article.php/\\w+";
 	Pattern p = Pattern.compile(urlPattern);
 
-	public CliArticleParser(String content) {
+	public CiArticleParser(String content) {
 		super(content);
 	} 
 
-	public CliArticleParser(String content, String url) {
+	public CiArticleParser(String content, String url) {
 		super(content, url, 0);
 	} 
 
-	private String titleQuery = "div.con>h1";
-	private String publishTimeQuery = "div.p_details_t>span.fr";
-	private String contentQuery = "div.best_con_wz>p";
+	private String titleQuery = "div.hack_border>h1";
+	private String contentQuery = "div#articletext";
 
 	public boolean shouldUseThisParser() {
 		Matcher m = p.matcher(url);
@@ -31,9 +30,8 @@ public class CliArticleParser extends ContentParser {
 	}
 
 	public boolean parseOk() {
-		if (TextUtils.isEmpty(title) || TextUtils.isEmpty(content)
-				|| TextUtils.isEmpty(publishTime)) {
-			logger.debug("[YaolanAsk] parse Error:" + this.toString());
+		if (TextUtils.isEmpty(title) || TextUtils.isEmpty(content)) {
+			logger.debug("[CiArticle] parse Error:" + this.toString());
 			return false;
 		}
 
@@ -44,24 +42,19 @@ public class CliArticleParser extends ContentParser {
 		title = jsd.getText(titleQuery);
 	}
 
-	protected void parsePublishTime() {
-		publishTime = jsd.getText(publishTimeQuery);
-	}
-
 	protected void parseContent() {
-		content = jsd.getText(contentQuery);
+		content = jsd.getHtmlWithBasic(contentQuery);
 	}
 	
 	public void store() {
-		int channelId = 11;
-		ArticleDao.insert(title, content, "", publishTime, channelId);
+		int channelId = 10;
+		ArticleDao.insert(title, content, "", "", channelId);
 	}
 
 	@Override
 	public void doParse() {
 		parseContent();
 		parseTitle();
-		parsePublishTime();
 	}
 
 	public static void main(String[] args) {
@@ -70,15 +63,13 @@ public class CliArticleParser extends ContentParser {
 		// "http://www.yaolan.com/parenting/article2007_45757286972.shtml");
 		// YaolanParser ylp = new YaolanParser(html,
 		// "http://www.yaolan.com/news/201301271019007.shtml");
-		CliArticleParser ylp = new CliArticleParser(html,
-				"http://ask.yaolan.com/question/130119174155a46bba33.html");
-		ylp.parseContent();
-		ylp.parseTitle();
-		ylp.parsePublishTime();
+		CiArticleParser ylp = new CiArticleParser(html,
+				"http://www.ci123.com/article.php/52442");
+		System.out.println(ylp.shouldUseThisParser());
+		ylp.doParse();
 
 		System.out.println(ylp.getTitle());
 		System.out.println(ylp.getContent());
-		System.out.println(ylp.getPublishTime());
 	}
 
 }
