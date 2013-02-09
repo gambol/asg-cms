@@ -29,15 +29,21 @@ public class Ci123Seeds {
 		String cate6 = "http://www.ci123.com/category.php/33";
 		
 		List<String> resultList = new ArrayList<String>();
-		resultList.add(index);
-		resultList.add(cate1);
-		resultList.add(blog);
-		resultList.add(cate2);
 		resultList.add(cate3);
 		resultList.add(cate4);
 		resultList.add(cate5);
 		resultList.add(cate6);
-
+		resultList.add(index);
+		resultList.add(cate1);
+		resultList.add(blog);
+		resultList.add(cate2);
+		
+		String iyayaUrl = "http://www.iyaya.com/yuer/zhinan-";
+		for(int i = 0; i < 6; i++) {
+			resultList.add(iyayaUrl + i);
+		}
+		
+		resultList.add("http://www.iyaya.com/yuer/zhinan-4562");
 		removeSeedInRedis(resultList);
 		
 		return resultList;

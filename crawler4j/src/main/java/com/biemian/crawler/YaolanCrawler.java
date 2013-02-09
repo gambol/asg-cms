@@ -38,7 +38,7 @@ public class YaolanCrawler extends WebCrawler {
 
 		RedisHandler rh = new RedisHandler();
 		//return true;
-		boolean re = rh.isThisUrlHandled(url.getURL());
+		boolean re = rh.isThisUrlNew(url.getURL());
 		
 		rh.destory();
 		return re;

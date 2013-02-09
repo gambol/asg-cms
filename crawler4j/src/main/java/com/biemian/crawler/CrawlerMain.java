@@ -14,8 +14,8 @@ public class CrawlerMain {
 
 	private final static String FOLDER  = "/home/zhenbao.zhou/"
 				+ ".crawler" + File.separator + "crawler";
-	private final static int CRAWLER_NUM = 30;
-	private final static int DEPTH = 3;
+	private final static int CRAWLER_NUM = 50;
+	private final static int DEPTH = 4;
 	
 	public static void main(String[] args) throws Exception {
 		/*
@@ -102,6 +102,6 @@ public class CrawlerMain {
 		 * Start the crawl. This is a blocking operation, meaning that your code
 		 * will reach the line after this only when crawling is finished.
 		 */
-		controller.start(Cli123Crawler.class, CRAWLER_NUM);
+		controller.start(Ci123Crawler.class, CRAWLER_NUM);
 	}
 }

@@ -7,22 +7,23 @@ import org.apache.commons.codec.binary.StringUtils;
 
 import com.biemian.db.dao.ArticleDao;
 import com.biemian.db.domain.Article;
+import com.biemian.redis.RedisHandler;
 import com.biemian.utils.TextUtils;
 
-public class CiBlogParser extends ContentParser {
-	private static final String urlPattern = "http://blog.ci123.com/\\w+/entry/\\w+";
+public class IyayaParser extends ContentParser {
+	private static final String urlPattern = "http://www.iyaya.com/yuer/zhinan";
 	private static final Pattern p = Pattern.compile(urlPattern);
 
-	public CiBlogParser(String content) {
+	public IyayaParser(String content) {
 		super(content);
 	} 
 
-	public CiBlogParser(String content, String url) {
+	public IyayaParser(String content, String url) {
 		super(content, url, 0);
 	} 
 
-	private String titleQuery = "div.content>h3";
-	private String contentQuery = "div.content>div";
+	private String titleQuery = "div#yr-article>h1>span";
+	private String contentQuery = "div#yr-article-body";
 
 	public boolean shouldUseThisParser() {
 		Matcher m = p.matcher(url);
@@ -31,7 +32,7 @@ public class CiBlogParser extends ContentParser {
 
 	public boolean parseOk() {
 		if (TextUtils.isEmpty(title) || TextUtils.isEmpty(content)) {
-			logger.debug("[ciBlog] parse Error:" + this.toString());
+			logger.debug("[CiArticle] parse Error:" + this.toString());
 			return false;
 		}
 
@@ -43,14 +44,12 @@ public class CiBlogParser extends ContentParser {
 	}
 
 	protected void parseContent() {
-		/**
-		 * 取出符合要求的第二个div
-		 */
-		content = jsd.getHtmlForCiBlog(contentQuery);
+		content = jsd.getHtmlWithBasic(contentQuery);
 	}
 	
 	public void store() {
-		int channelId = 13;
+		int channelId = 1;
+		
 		ArticleDao.insert(title, content, "", "", channelId);
 	}
 
@@ -66,8 +65,8 @@ public class CiBlogParser extends ContentParser {
 		// "http://www.yaolan.com/parenting/article2007_45757286972.shtml");
 		// YaolanParser ylp = new YaolanParser(html,
 		// "http://www.yaolan.com/news/201301271019007.shtml");
-		CiBlogParser ylp = new CiBlogParser(html,
-				"http://blog.ci123.com/linliang2000/entry/1409827");
+		IyayaParser ylp = new IyayaParser(html,
+				"http://www.iyaya.com/yuer/zhinan-1438");
 		System.out.println(ylp.shouldUseThisParser());
 		ylp.doParse();
 

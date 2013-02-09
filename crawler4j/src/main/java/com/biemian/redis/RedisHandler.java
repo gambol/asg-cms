@@ -60,7 +60,7 @@ public class RedisHandler {
 	 * @param url
 	 * @return
 	 */
-	public boolean isThisUrlHandled(String url) {
+	public boolean isThisUrlNew(String url) {
 		if (url == null) {
 			return false;
 		}

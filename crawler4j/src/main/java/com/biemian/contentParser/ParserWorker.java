@@ -2,6 +2,8 @@ package com.biemian.contentParser;
 
 import org.apache.log4j.Logger;
 
+import com.biemian.redis.RedisHandler;
+
 public class ParserWorker {
 	private final static Logger logger = Logger.getLogger(ParserWorker.class);
 	
@@ -14,6 +16,10 @@ public class ParserWorker {
 		CiBlogParser cbp = new CiBlogParser(content, url);
 		if (cbp.shouldUseThisParser())
 			return cbp;
+		
+		IyayaParser ip = new IyayaParser(content, url);
+		if (ip.shouldUseThisParser())
+			return ip;
 		
 		YaolanParser yp = new YaolanParser(content, url);
 		if (yp.shouldUseThisParser())
@@ -38,9 +44,18 @@ public class ParserWorker {
 		
 		if (parser.shouldUseThisParser()) {
 			parser.doParse();
+			
+			// 以后增加一个字段，判断这个页面是否已经存储过
+			// 规则是， 用store_+url的md5 做key
 			if (parser.parseOk()) {
-				logger.info("store it, url:" + parser.getUrl());
-				parser.store();
+				String key = parser.getUrl() + "store";
+				RedisHandler rh = new RedisHandler();
+				if (rh.isThisUrlNew(key)) {
+					logger.info("[store]store it, url:" + parser.getUrl());
+					parser.store();
+				} else {
+					logger.info("[store]already has it. donot store. url:" + parser.getUrl());
+				}
 			}
 		}
 		

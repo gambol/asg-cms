@@ -7,11 +7,12 @@ import org.apache.commons.codec.binary.StringUtils;
 
 import com.biemian.db.dao.ArticleDao;
 import com.biemian.db.domain.Article;
+import com.biemian.redis.RedisHandler;
 import com.biemian.utils.TextUtils;
 
 public class CiArticleParser extends ContentParser {
-	String urlPattern = "http://www.ci123.com/article.php/\\w+";
-	Pattern p = Pattern.compile(urlPattern);
+	private static final String urlPattern = "http://www.ci123.com/article.php/\\w+";
+	private static final Pattern p = Pattern.compile(urlPattern);
 
 	public CiArticleParser(String content) {
 		super(content);
@@ -48,6 +49,7 @@ public class CiArticleParser extends ContentParser {
 	
 	public void store() {
 		int channelId = 10;
+		
 		ArticleDao.insert(title, content, "", "", channelId);
 	}
 
