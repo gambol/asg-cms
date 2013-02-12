@@ -19,7 +19,7 @@ public class CiArticleParser extends ContentParser {
 	} 
 
 	public CiArticleParser(String content, String url) {
-		super(content, url, 0);
+		super(content, url);
 	} 
 
 	private String titleQuery = "div.hack_border>h1";
@@ -66,12 +66,13 @@ public class CiArticleParser extends ContentParser {
 		// YaolanParser ylp = new YaolanParser(html,
 		// "http://www.yaolan.com/news/201301271019007.shtml");
 		CiArticleParser ylp = new CiArticleParser(html,
-				"http://www.ci123.com/article.php/52442");
+				"http://www.ci123.com/article.php/50407");
 		System.out.println(ylp.shouldUseThisParser());
 		ylp.doParse();
 
 		System.out.println(ylp.getTitle());
 		System.out.println(ylp.getContent());
+		System.out.println(ylp.parseOk());
 	}
 
 }

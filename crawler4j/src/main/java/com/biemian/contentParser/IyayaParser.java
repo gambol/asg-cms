@@ -19,10 +19,14 @@ public class IyayaParser extends ContentParser {
 	} 
 
 	public IyayaParser(String content, String url) {
-		super(content, url, 0);
+		super(content, url);
 	} 
 
-	private String titleQuery = "div#yr-article>h1>span";
+	public IyayaParser(String content, String url, int noUse) {
+		super(content, url, 0);
+	} 
+	
+	private String titleQuery = "div.yr-article-title>h1";
 	private String contentQuery = "div#yr-article-body";
 
 	public boolean shouldUseThisParser() {
@@ -66,12 +70,13 @@ public class IyayaParser extends ContentParser {
 		// YaolanParser ylp = new YaolanParser(html,
 		// "http://www.yaolan.com/news/201301271019007.shtml");
 		IyayaParser ylp = new IyayaParser(html,
-				"http://www.iyaya.com/yuer/zhinan-1438");
+				"http://www.iyaya.com/yuer/zhinan-5278", 1);
 		System.out.println(ylp.shouldUseThisParser());
 		ylp.doParse();
 
 		System.out.println(ylp.getTitle());
 		System.out.println(ylp.getContent());
+		System.out.println(ylp.parseOk());
 	}
 
 }

@@ -18,7 +18,7 @@ public class YaolanAskParser extends ContentParser {
 	}
 
 	public YaolanAskParser(String content, String url) {
-		super(content, url, 0);
+		super(content, url);
 	}
 
 	private String titleQuery = "div.con>h1";

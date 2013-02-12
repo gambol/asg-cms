@@ -18,7 +18,7 @@ public class CiBlogParser extends ContentParser {
 	} 
 
 	public CiBlogParser(String content, String url) {
-		super(content, url, 0);
+		super(content, url);
 	} 
 
 	private String titleQuery = "div.content>h3";
@@ -73,6 +73,7 @@ public class CiBlogParser extends ContentParser {
 
 		System.out.println(ylp.getTitle());
 		System.out.println(ylp.getContent());
+		System.out.println(ylp.parseOk());
 	}
 
 }

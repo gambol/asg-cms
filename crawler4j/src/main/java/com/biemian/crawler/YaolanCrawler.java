@@ -12,6 +12,7 @@ import com.biemian.contentParser.ContentParser;
 import com.biemian.contentParser.ParserWorker;
 import com.biemian.redis.RedisHandler;
 import com.biemian.utils.HTTPGet;
+import com.biemian.utils.TextUtils;
 
 /**
  * @author zhenbao.zhou
@@ -37,10 +38,28 @@ public class YaolanCrawler extends WebCrawler {
 		}
 
 		RedisHandler rh = new RedisHandler();
-		//return true;
-		boolean re = rh.isThisUrlNew(url.getURL());
-		
-		rh.destory();
+		boolean re = false;
+		try {
+			re = rh.isThisUrlNew(url.getURL());
+			String key = TextUtils.md5(url.getURL());
+			// rh.removeKey(key);
+
+		} catch (Exception e) {
+			logger.error("error in crawler's handle if this url is new. msg:"
+					+ e.getMessage());
+		} finally {
+			rh.destory();
+		}
+		// 小于2层的url，都需要再被抓取
+		if (url.getDepth() < 2) {
+			logger.info("depth < 2.  vist it. url:" + url);
+			return true;
+		}
+
+		if (!re) {
+			logger.info("already has it. skip vist. url:" + url);
+		}
+
 		return re;
 	}
 

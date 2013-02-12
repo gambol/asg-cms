@@ -145,6 +145,7 @@ public class PageFetcher extends Configurable {
 		HttpGet get = null;
 		try {
 			get = new HttpGet(toFetchURL);
+			/* maosi 这里有bug
 			synchronized (mutex) {
 				long now = (new Date()).getTime();
 				if (now - lastFetchTime < config.getPolitenessDelay()) {
@@ -152,6 +153,7 @@ public class PageFetcher extends Configurable {
 				}
 				lastFetchTime = (new Date()).getTime();
 			}
+			*/
 			get.addHeader("Accept-Encoding", "gzip");
 			HttpResponse response = httpClient.execute(get);
 			fetchResult.setEntity(response.getEntity());

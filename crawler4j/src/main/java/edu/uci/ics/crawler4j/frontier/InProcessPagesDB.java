@@ -64,13 +64,18 @@ public class InProcessPagesDB extends WorkQueues {
 						result = cursor.delete();
 						if (result == OperationStatus.SUCCESS) {
 							return true;
+						} else {
+							logger.warn("[remove]delete url :" + webUrl.getURL() + " error. result is:" + result);
 						}
+					} else {
+						logger.warn("[remove]search url :" + webUrl.getURL() + " error. result is:" + result);
 					}
 				} catch (DatabaseException e) {
 					if (txn != null) {
 						txn.abort();
 						txn = null;
 					}
+					logger.warn("database exception while remove url:" + webUrl.getURL() + " msg:" + e.getMessage());
 					throw e;
 				} finally {
 					if (cursor != null) {

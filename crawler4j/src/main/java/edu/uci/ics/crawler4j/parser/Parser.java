@@ -104,6 +104,7 @@ public class Parser extends Configurable {
 		}
 
 		int urlCount = 0;
+		
 		for (ExtractedUrlAnchorPair urlAnchorPair : contentHandler.getOutgoingUrls()) {
 			String href = urlAnchorPair.getHref();
 			href = href.trim();

@@ -53,7 +53,7 @@ public class CrawlConfig {
 	 * Politeness delay in milliseconds (delay between sending two requests to
 	 * the same host).
 	 */
-	private int politenessDelay = 200;
+	private int politenessDelay = 20;
 
 	/**
 	 * Should we also crawl https pages?
@@ -88,7 +88,7 @@ public class CrawlConfig {
 	/**
 	 * Max number of outgoing links which are processed from a page
 	 */
-	private int maxOutgoingLinksToFollow = 5000;
+	private int maxOutgoingLinksToFollow = 10000;
 
 	/**
 	 * Max allowed size of a page. Pages larger than this size will not be

@@ -29,21 +29,33 @@ public class Ci123Seeds {
 		String cate6 = "http://www.ci123.com/category.php/33";
 		
 		List<String> resultList = new ArrayList<String>();
-		resultList.add(cate3);
-		resultList.add(cate4);
-		resultList.add(cate5);
-		resultList.add(cate6);
-		resultList.add(index);
-		resultList.add(cate1);
-		resultList.add(blog);
-		resultList.add(cate2);
-		
 		String iyayaUrl = "http://www.iyaya.com/yuer/zhinan-";
 		for(int i = 0; i < 6; i++) {
 			resultList.add(iyayaUrl + i);
 		}
 		
 		resultList.add("http://www.iyaya.com/yuer/zhinan-4562");
+		resultList.add("http://www.iyaya.com/yuer/zhinan-782");
+		resultList.add(cate5);
+		resultList.add(cate6);
+		resultList.add(index);
+		resultList.add(cate3);
+		resultList.add(cate4);
+		resultList.add(cate1);
+		resultList.add(blog);
+		resultList.add(cate2);
+		
+		String firstPage = "http://www.yaolan.com/";
+		String zhishiPage = "http://www.yaolan.com/zhishi/";
+		String newsPage = "http://www.yaolan.com/news/";
+		String healthPage = "http://www.yaolan.com/health/";
+		String aIndexPage = "http://www.yaolan.com/index/";
+		resultList.add(firstPage);
+		resultList.add(zhishiPage);
+		resultList.add(newsPage);
+		resultList.add(healthPage);
+		resultList.add(aIndexPage);
+		
 		removeSeedInRedis(resultList);
 		
 		return resultList;

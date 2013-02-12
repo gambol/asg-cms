@@ -24,7 +24,7 @@ public class Ci123Crawler extends WebCrawler {
 					+ "|png|tiff?|mid|mp2|mp3|mp4"
 					+ "|wav|avi|mov|mpeg|ram|m4v|pdf"
 					+ "|rm|smil|wmv|swf|wma|zip|rar|gz))$");
-	
+
 	@Override
 	public boolean shouldVisit(WebURL url) {
 		String href = url.getURL().toLowerCase();
@@ -32,26 +32,33 @@ public class Ci123Crawler extends WebCrawler {
 		if (FILTERS.matcher(href).matches()) {
 			return false;
 		}
-		
-		if (href.indexOf("user.ci123.com") > 0 || href.indexOf("ping.ci123.com") > 0 
-				|| href.indexOf("bbs.ci123.com") > 0) {
-			return false;
-		}
 
-		if (href.indexOf("ci123.com") < 0 && 
-				href.indexOf("http://www.iyaya.com/yuer/zhinan-") < 0) {
+		if (href.indexOf("www.ci123.com") < 0
+				&& href.indexOf("http://www.iyaya.com/yuer/zhinan-") < 0
+				&& href.indexOf("blog.ci123.com") < 0
+				&& href.indexOf("yaolan.com") < 0) {
 			return false;
 		}
 
 		RedisHandler rh = new RedisHandler();
-		boolean re = rh.isThisUrlNew(url.getURL());
-		rh.destory();
+		boolean re = false;
+		try {
+			re = rh.isThisUrlNew(url.getURL());
+		//	String key = TextUtils.md5(url.getURL());
+			// rh.removeKey(key);
+
+		} catch (Exception e) {
+			logger.error("error in crawler's handle if this url is new. msg:"
+					+ e.getMessage());
+		} finally {
+			rh.destory();
+		}
 		// 小于2层的url，都需要再被抓取
 		if (url.getDepth() < 2) {
 			logger.info("depth < 2.  vist it. url:" + url);
 			return true;
 		}
-		
+
 		if (!re) {
 			logger.info("already has it. skip vist. url:" + url);
 		}
@@ -68,19 +75,21 @@ public class Ci123Crawler extends WebCrawler {
 		int docid = page.getWebURL().getDocid();
 		String url = page.getWebURL().getURL();
 
-		// System.out.println("URL: " + url);
-
 		try {
 			if (page.getParseData() instanceof HtmlParseData) {
 				HtmlParseData htmlParseData = (HtmlParseData) page
 						.getParseData();
-				ParserWorker pw = new ParserWorker();
-				ContentParser cp = pw.getParserFactory(url,
-						htmlParseData.getHtml());
-				pw.parse(cp);
+				if (htmlParseData.getHtml() != null) {
+					ParserWorker pw = new ParserWorker();
+					ContentParser cp = pw.getParserFactory(url,
+							htmlParseData.getHtml());
+					pw.parse(cp);
+				}
 			}
 
 		} catch (Exception e) {
+			System.out.println("error in parse url:" + url + " msg:"
+					+ e.getMessage());
 		}
 		// System.out.println("=============");
 	}

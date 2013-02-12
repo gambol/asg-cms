@@ -180,6 +180,8 @@ public class DBTool {
         } finally {
             closeAll(conn, pstmt, rs);
         }
+        
+        logger.info("[execute over]sql:" + sql.substring(0, 1) + " sql length:" + sql.length());
         return retVal;
     }
 

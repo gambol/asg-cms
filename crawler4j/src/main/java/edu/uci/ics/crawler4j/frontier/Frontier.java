@@ -91,6 +91,7 @@ public class Frontier extends Configurable {
 					break;
 				}
 				try {
+//					System.out.println("www:" + url.getURL());
 					workQueues.put(url);
 					newScheduledPage++;
 				} catch (DatabaseException e) {

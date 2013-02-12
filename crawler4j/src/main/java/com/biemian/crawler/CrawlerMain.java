@@ -14,7 +14,7 @@ public class CrawlerMain {
 
 	private final static String FOLDER  = "/home/zhenbao.zhou/"
 				+ ".crawler" + File.separator + "crawler";
-	private final static int CRAWLER_NUM = 50;
+	private final static int CRAWLER_NUM = 30;
 	private final static int DEPTH = 4;
 	
 	public static void main(String[] args) throws Exception {
@@ -66,7 +66,7 @@ public class CrawlerMain {
 		 * want to start a fresh crawl, you need to delete the contents of
 		 * rootFolder manually.
 		 */
-		config.setResumableCrawling(false);
+		config.setResumableCrawling(true);
 
 		/*
 		 * Instantiate the controller for this crawl.

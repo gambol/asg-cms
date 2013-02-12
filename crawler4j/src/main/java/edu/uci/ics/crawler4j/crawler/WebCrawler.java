@@ -301,6 +301,7 @@ public class WebCrawler implements Runnable {
 							}
 						}
 					}
+					
 					frontier.scheduleAll(toSchedule);
 				}
 				visit(page);
