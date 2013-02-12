@@ -1,0 +1,37 @@
+#publishform label.error {
+    background: url("/img/alert.png") no-repeat scroll 0 0 transparent;
+    padding-top:2px;
+    padding-bottom: 2px;
+    padding-left: 26px;
+     color: #DD0000;
+    margin-left: 20px;
+    text-transform: none;
+    vertical-align: middle;
+    font-size: 12px;
+    
+} 
+
+#publishform label.checked {
+    background:  no-repeat scroll 0 0 transparent;
+    padding-top:2px;
+    padding-bottom: 2px;
+    padding-left: 26px;
+     color: #DD0000;
+    margin-left: 20px;
+    text-transform: none;
+    vertical-align: middle;
+    font-size: 12px;
+    
+} 
+
+#publishform label.required {
+    padding-left:6px;
+    font-size: 14px;
+    
+} 
+
+#publishform {
+    margin-top:-4px;
+    background-color:#f6f6f3;                                                    
+    
+}

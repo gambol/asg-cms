@@ -1,0 +1,54 @@
+fieldset {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #DDDDDD -moz-use-text-color -moz-use-text-color;
+    border-right: 0 none;
+    border-style: solid none none;
+    border-width: 1px 0 0;
+    margin: 10px 0;
+    padding: 10px 0;
+    position: relative;
+}
+
+legend {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #93BB3A;
+    font-weight: bold;
+    padding: 0 6px 0 0;
+}
+b, strong, caption, th, thead, dt, legend {
+    font-weight: bold;
+}
+
+p {
+    margin-top: 1em;
+    word-spacing: 0.125em;
+}
+
+label.required:before {
+    color: red;
+    content: "*";
+    font-family: "Lucida Grande",Verdana,Arial,Helvetica,sans-serif;
+}
+label {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+input.half, select.half, textarea.half {
+    width: 50%;
+}
+input[type="text"], input[type="password"], input[type="select"], input[type="search"], input[type="file"], textarea, select {
+    border-color: #C4C4C4 #E9E9E9 #E9E9E9 #C4C4C4;
+    border-style: solid;
+    border-width: 1px;
+    color: #777777;
+    padding: 4px;
+}
+input, select {
+    vertical-align: middle;
+}
