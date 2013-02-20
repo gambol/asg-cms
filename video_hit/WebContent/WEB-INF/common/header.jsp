@@ -14,12 +14,9 @@
 <header id="top">
     <div class="wrapper">
         <!-- Title/Logo - can use text instead of image -->
-        <div id="title"><a href="/index.htm" ><img src="/img/logo.png" alt="无敌微博统计"></a></div>
+        <div id="title"><a href="/index.htm" ><img src="/img/logo.png" alt="刷跨网"></a></div>
         <div id="topnav">  
-			掌控你的微博,无敌微博统计 
-			<%if (session.getAttribute(SessionConst.AT) != null) {  %>				
-				 | <a href="/logout.htm">登出</a>
-			<%} %>
+		
         </div>
 
     </div>

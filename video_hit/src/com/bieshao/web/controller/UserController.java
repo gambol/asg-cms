@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import cn.bieshao.utils.DateUtil;
 
-import com.bieshao.model.User;
+import com.bieshao.model.Proxy;
 import com.bieshao.web.common.EmailSenderDriver;
 import com.bieshao.web.common.SessionConst;
 import com.bieshao.web.common.UserBean;
@@ -34,6 +34,7 @@ import com.bieshao.web.dao.UserDao;
 @RequestMapping("/user")
 public class UserController {
 
+	/*
     // Invoked initially to create the "form" attribute
     // Once created the "form" attribute comes from the HTTP session (see @SessionAttributes)
     @ModelAttribute("userBean")
@@ -240,4 +241,5 @@ public class UserController {
         return !check(request, response, model);
 
     }
+    */
 }

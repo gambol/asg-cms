@@ -7,7 +7,7 @@ package com.bieshao.web.dao;
 import cn.bieshao.dao.DBTool;
 import cn.bieshao.utils.JDBCUtils;
 
-import com.bieshao.model.User;
+import com.bieshao.model.Proxy;
 
 /**
  *
@@ -15,17 +15,17 @@ import com.bieshao.model.User;
  */
 public class UserDao {
     
-    public User getUserByEmail(String userEmail){
-        String sql = "select * from " + DBTool.getTableName(User.class) + " where username=?";
-        return DBTool.queryEntity(User.class, sql, userEmail);
+    public Proxy getUserByEmail(String userEmail){
+        String sql = "select * from " + DBTool.getTableName(Proxy.class) + " where username=?";
+        return DBTool.queryEntity(Proxy.class, sql, userEmail);
     }
     
     
-    public void addUser(User user){
+    public void addUser(Proxy user){
         JDBCUtils.insert(user);
     }
     
-    public void udpateUser(User user){
+    public void udpateUser(Proxy user){
         JDBCUtils.update(user, true);
     }
     

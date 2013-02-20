@@ -33,13 +33,7 @@ public class UserFilter implements Filter {
 
         HttpSession session = req.getSession();
         
-        Object at =  session.getAttribute(SessionConst.AT);
-        System.out.println("filter code:" + at);
         
-        if(at == null){
-            res.sendRedirect("/login.htm"); 
-            return;
-        }
 
         chain.doFilter(request, response);
     }

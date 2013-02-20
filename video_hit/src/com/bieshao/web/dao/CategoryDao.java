@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import cn.bieshao.common.PageResult;
 import cn.bieshao.utils.JDBCUtils;
 
-import com.bieshao.model.Category;
+import com.bieshao.model.TodoJob;
 import com.bieshao.model.ServerInfo;
 
 /**
@@ -24,11 +24,11 @@ public class CategoryDao {
      * 按照display 逆序, id 顺序
      * @return 
      */
-      public static PageResult<Category> getAllCategory() {
+      public static PageResult<TodoJob> getAllCategory() {
        LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
        orderBy.put("display_order", true);
        orderBy.put("id", false);
-       PageResult<Category> pr = JDBCUtils.getPageData(Category.class, 200, 1, orderBy, " is_disabled = 0");
+       PageResult<TodoJob> pr = JDBCUtils.getPageData(TodoJob.class, 200, 1, orderBy, " is_disabled = 0");
        return pr;   
     }
 }

@@ -10,8 +10,8 @@ import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import cn.bieshao.common.CallBack;
 import cn.bieshao.common.DBColumnName;
@@ -22,7 +22,7 @@ import cn.bieshao.common.DBTableName;
  * @author zhenbao.zhou
  */
 public class DBTool {
-
+	private static Logger logger = Logger.getLogger(DBTool.class); 
     public static String getTableName(Class clz) {
 
         Annotation[] as = clz.getAnnotations();
@@ -79,7 +79,7 @@ public class DBTool {
                 conn.rollback();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DBTool.class.getName()).log(Level.SEVERE, null, ex);
+           logger.fatal("error in sql", ex);
         }
     }
 
@@ -88,7 +88,7 @@ public class DBTool {
             try {
                 stmt.close();
             } catch (SQLException ex) {
-                Logger.getLogger(DBTool.class.getName()).log(Level.SEVERE, null, ex);
+               logger.fatal("error in sql", ex);
             }
         }
     }
@@ -98,7 +98,7 @@ public class DBTool {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(DBTool.class.getName()).log(Level.SEVERE, null, ex);
+                logger.fatal("error in close conn", ex);
             }
         }
     }
@@ -108,7 +108,7 @@ public class DBTool {
             try {
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(DBTool.class.getName()).log(Level.SEVERE, null, ex);
+                logger.fatal("error in close rs", ex);
             }
         }
     }

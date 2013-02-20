@@ -10,9 +10,12 @@ package com.bieshao.web.common;
  */
 public class SessionConst {
     
-    public static final String AT = "access_token";
+    public static final String NUM = "num";
     public static final String USERID = "id";
-     public static final String USERNAME = "nouse";
+    public static final String USERNAME = "nouse";
+    public static final String LAST_STEP_NAME = "last_step_name";
+    public static final String LAST_STEP_URL = "last_step_url";
+    public static final String POST_URL = "post_url";
     
     
 }

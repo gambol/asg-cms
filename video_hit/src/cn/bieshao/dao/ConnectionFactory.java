@@ -18,6 +18,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -27,15 +28,15 @@ public class ConnectionFactory {
 
     private static final String KEY_DB_URL = "KEY_DB_URL";
     private static final String DEFAULT_DB_URL =
-            "jdbc:mysql://localhost/bieshao?useUnicode=true&characterEncoding=utf-8&autoReconnect=true";
+            "jdbc:mysql://localhost/shuakua?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull";
     private static final String KEY_DB_USERNAME = "KEY_DB_USERNAME";
     private static final String DEFAULT_DB_USERNAME = "gambol";
     private static final String KEY_DB_PASSWORD = "KEY_DB_PASSWORD";
     private static final String DEFAULT_DB_PASSWORD = "";
     private static final String KEY_DB_USE_POOL = "KEY_DB_USE_POOL";
     private static final String DEFAULT_DB_USE_POOL = "false";
-    private static final String DEFAULT_POOL_NAME = "jdbc/bieshao";
-    private static Log log = LogFactory.getLog(ConnectionFactory.class);
+    private static final String DEFAULT_POOL_NAME = "jdbc/shuakua";
+    private static Logger log = Logger.getLogger(ConnectionFactory.class); 
     private static final String KEY_POOL_NAME = "KEY_POOL_NAME";
     private static ConnectionFactory instance = new ConnectionFactory();
     private Properties prop;

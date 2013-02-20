@@ -5,6 +5,7 @@
 package cn.bieshao.utils;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,6 +15,12 @@ import java.util.Date;
 public class DateUtil {
    public static Timestamp getCurrentTimestamp() {                                                                                                
         return new Timestamp(new Date().getTime());                                                                                                
-    }                                                                                                                                              
+    }    
+   
+   public static String getTimeStr(Date d){
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd- HH:mm:ss");
+		return dateFormat.format(d);
+	}
          
 }

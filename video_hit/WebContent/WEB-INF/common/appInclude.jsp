@@ -1,9 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <head>
     <meta charset="utf-8" />
-    <title>无敌微博统计</title>
-    <meta name="description" content="无敌微博统计 微博转发数量统计" />
-    <meta name="keywords" content="无敌微博统计 新浪微博" />
+    <title>刷跨网--第一个在线免费刷视频流量网站。</title>
+    <meta name="description" content="刷跨网，免费在线帮您增加视频点击。土豆，优酷，新浪视频，腾讯视频，56,爱奇异" />
+    <meta name="keywords" content="刷跨网 视频 点击 刷 增加 土豆 优酷 新浪 腾讯 56 爱奇异" />
     <!-- Favicons --> 
     <link rel="shortcut icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
     <link rel="icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
@@ -15,6 +15,4 @@
   <!--  <script type="text/javascript" SRC="js/swfobject.js"></script> -->
     <!-- jQuery with plugins -->
     <script type="text/javascript" SRC="/js/jquery-1.7.2.min.js"></script>
-  
-
 </head>

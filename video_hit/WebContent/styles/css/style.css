@@ -1,7 +1,7 @@
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
-    font-size: 100%;
+    font-size: 12px;
     margin: 0;
     outline: 0 none;
     padding: 0;
@@ -268,6 +268,24 @@ table.stylized a {
     width:120px;
 }
 
+table.url_form {
+	width:600px;
+}
+
+table.url_form th{
+	padding: 12px 10px 0 0;
+	text-align:right;
+	width:80px;
+	font-weight:normal;
+}
+
+
+table.url_form td{
+	padding-left:10px;
+	padding-top:12px;
+	text-align:left;
+}
+
 table.stylized tr.high {
     background-color: #FFFFAA !important;
 }
@@ -281,14 +299,13 @@ table.stylized tfoot td {
 table.stylized tr:nth-child(2n) td {
 }
 
-/*
+
 table.stylized tbody tr:nth-child(2n+1) th, table.stylized tbody tr:nth-child(2n+1) td {
     background: none repeat scroll 0 0 #f6f6f3;
 }
-*/
 
 table.stylized caption {
-    font-size: 11px;
+    font-size: 12px;
     margin-bottom: 1em;
     text-align: left;
     text-transform: uppercase;
@@ -307,7 +324,7 @@ table.no-style caption {
     text-align: left;
 }
 td.legendLabel {
-    font-size: 11px;
+    font-size: 12px;
     padding: 0 4px;
     vertical-align: middle;
 }
@@ -338,6 +355,11 @@ textarea.medium {
 textarea.large {
     height: 20em;
 }
+
+input.three, select.three, textarea.three {
+    width: 30%;
+}
+
 input.half, select.half, textarea.half {
     width: 50%;
 }
@@ -376,7 +398,7 @@ legend {
     padding: 0 6px 0 0;
 }
 label {
-       font-size: 11px;
+       font-size: 12px;
        font-weight: bold;
     
     text-transform: uppercase;
@@ -388,7 +410,7 @@ label.required:before {
     padding-right: 3px;
 }
 label.ok {
-    background: url("../img/valid.gif") no-repeat scroll 0 0 transparent;
+    background: url("/img/valid.gif") no-repeat scroll 0 0 transparent;
     padding-left: 16px;
 }
 label.error {
@@ -404,7 +426,7 @@ label.choice {
 fieldset small {
     color: #999999;
     display: block;
-    font-size: 11px;
+    font-size: 12px;
 }
 .column {
     display: block;
@@ -682,7 +704,7 @@ header#top aside a {
 }
 #topnav small {
     color: #666666;
-    font-size: 11px;
+    font-size: 12px;
     text-align: right;
 }
 #topnav img.avatar {
@@ -829,8 +851,8 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
     font: bold 2.4em/26px 'Trebuchet MS',Trebuchet,Arial,sans-serif;
     letter-spacing: -0.02em;
     padding: 20px 0 12px;
-    height:95px;
-/*    text-shadow: 1px 1px 3px #111111; */
+ /*   height:95px; */
+   text-shadow: 1px 1px 3px #111111; 
 }
 #title span {
 /*    color: #FFC806; */
@@ -887,7 +909,11 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
     float: left;
     width: 100%;
 }
-/*
+
+#page #countForm a {
+    border-bottom: none;
+}
+
 #page a {
     border-bottom: 1px solid #A1CFD4;
     color: #329ECC;
@@ -897,7 +923,7 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
     background-color: #E2EFFF;
     border-bottom: 1px solid #329ECC;
 }
-*/
+
 #page .subtitle {
     color: #93BB3A;
     font-family: Tahoma,Arial,sans-serif;
@@ -910,7 +936,7 @@ footer#bottom {
     /* border-top: 4px solid #D9D9D9; */
     color: #999999;
     float: left;
-    font-size: 11px;
+    font-size: 12px;
     padding-bottom: 2em;
     width: 100%;
     padding-left:0px;
@@ -1015,7 +1041,7 @@ footer#animated a:hover, footer#animated a:focus, footer#animated a:active {
     cursor: pointer;
     display: inline-block;
     font-family: Tahoma,Arial,sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     padding: 5px 10px;
     position: relative;
@@ -1095,12 +1121,26 @@ footer#animated a:hover, footer#animated a:focus, footer#animated a:active {
 .btn-special .icon {
     margin-top: 2px;
 }
+
 #rightmenu {
-    background: -moz-linear-gradient(center bottom , #E1F1FF 10%, #F5FAFF 80%) repeat scroll 0 0 transparent;
-    border-bottom: 1px solid #C4E3FF;
-    border-top: 4px solid #C4E3FF;
-    margin-top: 18px;
+	border-top:4px solid #C4E3FF;
+	border-bottom:1px solid #C4E3FF;
+	margin-top:18px;
+	background-color:#E1F1FF;
+	background:-webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.1, rgb(225,241,255)),
+		color-stop(0.8, rgb(245,250,255))
+	);
+	background: -moz-linear-gradient(
+		center bottom,
+		rgb(225,241,255) 10%,
+		rgb(245,250,255) 80%
+	);
 }
+
 #rightmenu header, #rightmenu dl {
     margin: 0;
     padding: 12px 12px 0;
@@ -1118,7 +1158,7 @@ footer#animated a:hover, footer#animated a:focus, footer#animated a:active {
 }
 #rightmenu dd {
     color: #828282;
-    font-size: 11px;
+    font-size: 12px;
     margin-left: 25px;
     padding-bottom: 4px;
 }
@@ -1277,7 +1317,7 @@ a#totop {
     color: #666666;
     cursor: pointer;
     display: block;
-    font-size: 11px;
+    font-size: 12px;
     opacity: 0.9;
     padding: 3px 6px;
     position: fixed;
@@ -1513,7 +1553,7 @@ div.wysiwyg iframe {
     text-align: right;
 }
 .tagInputSuggestedTags {
-    font-size: 11px;
+    font-size: 12px;
 }
 .tagInputSuggestedTags .label {
     background: none repeat scroll 0 50% transparent;
@@ -1608,7 +1648,7 @@ div.wysiwyg iframe {
     border-radius: 3px 3px 3px 3px;
     box-shadow: 0 0 3px #555555;
     color: #FFFFFF;
-    font-size: 11px;
+    font-size: 12px;
     padding: 4px 8px;
     text-shadow: 0 0 2px #000000;
 }
@@ -2153,7 +2193,7 @@ button.datepick-cmd {
 }
 .datepick-month-header select, .datepick-month-header input {
     border: medium none;
-    font-size: 11px;
+    font-size: 12px;
 }
 .datepick-month-header input {
     display: none;

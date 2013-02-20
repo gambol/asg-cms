@@ -20,8 +20,6 @@ import cn.bieshao.common.PageResult;
 import cn.bieshao.common.QueryResult;
 import cn.bieshao.dao.DBTool;
 
-import com.bieshao.model.ServerSysInfo;
-
 /**
  *
  * @author root
@@ -50,7 +48,7 @@ public class JDBCUtils {
         sbSql.append(") values(");
         sbSql.append(param);
         sbSql.append(")");
-        System.out.println("sql==" + sbSql.toString());
+      //  System.out.println("sql==" + sbSql.toString());
         return DBTool.execute(sbSql.toString());
     }
 
@@ -86,7 +84,7 @@ public class JDBCUtils {
         sbSql.deleteCharAt(sbSql.length() - 1);//删除最后一个逗号 
 
         sbSql.append(idSql);
-        System.out.println("sql==" + sbSql.toString());
+       // System.out.println("sql==" + sbSql.toString());
         return DBTool.execute(sbSql.toString());
     }
 
@@ -118,7 +116,7 @@ public class JDBCUtils {
         }
         sbSql.deleteCharAt(sbSql.length() - 1);
         sbSql.append(")");
-        System.out.println("sql==" + sbSql.toString());
+       // System.out.println("sql==" + sbSql.toString());
         return DBTool.execute(sbSql.toString());
     }
 
@@ -187,7 +185,7 @@ public class JDBCUtils {
             sbSql.append(" limit ").append(firstResult).append(",").append(maxResult);
         }
 
-  //      System.out.println(sbSql.toString());
+     //   System.out.println(sbSql.toString());
         List<T> list = DBTool.queryList(clazz, sbSql.toString(), params);
         QueryResult<T> qr = new QueryResult<T>();
         qr.setResultlist(list);
@@ -261,7 +259,7 @@ public class JDBCUtils {
      * @param clazz 显示类
      * @param maxresult 每页显示数
      * @param currentpage 当前页
-     * @param orderBy 排序
+     * @param orderBy 排序  true为升序
      * @param where 条件
      * @param params 参数 access失效
      * @return
@@ -307,10 +305,10 @@ public class JDBCUtils {
             } else if (f.getType() == Date.class) {
                 //日期,转换为'2012-01-01 00:00::00' 的形式 
                 Date date = (Date) o;
-                retVal = "'" + date.toLocaleString() + "'";//SimpleDateFormat 
+                retVal = "'" + DateUtil.getTimeStr(date) + "'";//SimpleDateFormat 
             } else if (f.getType() == Timestamp.class) {
                 Timestamp ts = (Timestamp) o;
-                retVal = "'" + ts.toLocaleString() + "'";
+                retVal = "'" + DateUtil.getTimeStr(ts) + "'";//SimpleDateFormat 
             } else {
                 //其它如int float等,直接写就OK 
                 retVal = o + "";
