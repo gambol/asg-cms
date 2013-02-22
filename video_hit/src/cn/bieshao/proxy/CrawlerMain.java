@@ -31,7 +31,7 @@ public class CrawlerMain {
 	}
 	
 	public void cnproxyCrawl() {
-		List urlList = new ArrayList<String>();
+		List<String> urlList = new ArrayList<String>();
 		String cnProxyUrl = "http://www.cnproxy.com/proxy";
 		for (int i = 1; i < 11; i++) {
 			urlList.add(cnProxyUrl + i + ".html");

@@ -24,7 +24,6 @@
 					required : true,
 					remote : "/validateImage.htm"
 				}
-
 			},
 			messages : {
 				url : {

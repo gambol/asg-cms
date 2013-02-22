@@ -53,7 +53,7 @@ public class CnProxyCrawler {
 		}
 		
 		logger.info("Proxy Crawler result. size:" + allProxy.size());
-		ProxyDao.coverAllProxy(allProxy);
+		ProxyService.coverAllProxy(allProxy);
 	}
 	
 	public static void main(String[] args) {

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class ImageValidationController {
 
-    @RequestMapping(value = "/validateImage")
+    @RequestMapping(value = "validateImage")
     public @ResponseBody boolean validateCaptchaImage(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         Boolean isResponseCorrect = Boolean.TRUE;

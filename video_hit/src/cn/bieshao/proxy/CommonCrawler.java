@@ -50,10 +50,10 @@ public class CommonCrawler {
 		}
 		
 		logger.info("Proxy Crawler result. size:" + allProxy.size());
-		List rightProxy = pruneProxy(allProxy);
-		logger.info("after prune, proxy Crawler result. size:" + rightProxy.size());
+//		List rightProxy = pruneProxy(allProxy);
+//		logger.info("after prune, proxy Crawler result. size:" + rightProxy.size());
 		
-		ProxyDao.coverAllProxy(rightProxy);
+		ProxyService.coverAllProxy(allProxy);
 	}
 	
 	/**

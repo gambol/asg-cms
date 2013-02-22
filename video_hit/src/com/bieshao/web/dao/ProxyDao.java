@@ -33,23 +33,7 @@ public class ProxyDao {
 		return JDBCUtils.getCount(Proxy.class, "ip = ? and port = ?", p.getIp(), p.getPort());
 	}
 	
-	/**
-	 * 判断这个host之前是否已经存在， 如果已经存在，那么就不需要插入。
-	 * 如果数据多了之后，可以改成将原来的都删除
-	 * @param pl
-	 */
-	public static void coverAllProxy(List<Proxy> pl) {
-		//DBTool.execute("update proxy set disabled='true', disable_time = now()");
-		int i = 0;
-		for(Proxy p : pl) {
-			if (selectProxyNum(p) == 0) {
-				logger.info("insert proxy:" + p.getIp() + ":" + p.getPort());
-				insertProxy(p);
-				i++;
-			}
-		}
-		logger.info("total insert:" + i + " proxies");
-	}
+
 	
 	
 }

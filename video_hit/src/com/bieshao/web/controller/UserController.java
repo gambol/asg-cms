@@ -23,7 +23,6 @@ import com.bieshao.model.Proxy;
 import com.bieshao.web.common.EmailSenderDriver;
 import com.bieshao.web.common.SessionConst;
 import com.bieshao.web.common.UserBean;
-import com.bieshao.web.dao.UserDao;
 
 /**
  *

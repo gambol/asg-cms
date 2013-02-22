@@ -28,7 +28,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
-import org.apache.catalina.util.Base64;
+
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -460,7 +461,7 @@ public class EmailSenderDriver {
         enc_b = bos.toByteArray();
          */
 //        encodeByte = Base64.encodeToByte(b, false);
-        encodeByte = Base64.encode(b);
+        encodeByte = new Base64().encode(b);
 
         logMsg = "Encoded Byte Count: " + Integer.toString(encodeByte.length);
         log.debug(logMsg);

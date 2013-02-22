@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author zhenbao.zhou
+ * @deprecated
  */
 public class UserFilter implements Filter {
 
