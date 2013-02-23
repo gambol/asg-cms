@@ -133,7 +133,7 @@ public class IndexController {
 		model.addAttribute(SessionConst.POST_URL, url);
 		model.addAttribute(SessionConst.LAST_STEP_NAME, stepName);
 
-		model.addAttribute("deleteUrl", url + "n2=" + Cryptor.encryptedM500);
+		model.addAttribute("deleteUrl", url + "?n2=" + Cryptor.encryptedM500);
 		model.addAttribute("addUrl", url + "?n2=" + Cryptor.encrypted500);
 		return "url_form";
 	}

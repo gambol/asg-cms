@@ -6,6 +6,8 @@
 package com.bieshao.shua;
 
 import cn.bieshao.utils.MultiHttpGet;
+import cn.bieshao.utils.PoolHttpGet;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -27,7 +29,7 @@ public class Ku6Shua extends Shua {
     private final static String URL_PREFIX = "http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&o=5438544&c=138000&rnd=0.7482359842397273&v=";
     private final static Pattern URL_ID_PATTERN = Pattern.compile("v.ku6.com/.*/(.*)\\.html");   // 从url中取出id
     // 一次最多发50个请求
-    private final static int EVERY_STEP = 30;
+    private final static int EVERY_STEP = 100;
     private final static int SLEEP_TIME = 20;
     private String id;
     private String shuaUrl;
@@ -76,9 +78,9 @@ public class Ku6Shua extends Shua {
             }
 
             i += EVERY_STEP;
-            MultiHttpGet client = new MultiHttpGet(urls);
+            PoolHttpGet client = new PoolHttpGet(urls);
             try {
-                client.asynGet();
+                client.multiGet();
             } catch (IOReactorException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {

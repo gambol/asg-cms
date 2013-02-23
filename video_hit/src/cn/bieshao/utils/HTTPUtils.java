@@ -25,7 +25,7 @@ import cn.bieshao.proxy.ProxyHandler;
 
 public class HTTPUtils {
 
-	private final static Logger logger = Logger.getLogger(HTTPUtils.class);
+	private final static Logger logger = Logger.getLogger("http");
 
 	private final static String VERIFY_URL = "http://www.baidu.com";
 

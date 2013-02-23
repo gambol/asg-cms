@@ -21,7 +21,9 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
+import org.apache.log4j.Logger;
 
+import com.bieshao.backend.job.JobConsumer;
 import com.bieshao.model.Proxy;
 
 import cn.bieshao.common.HTTPConst;
@@ -29,12 +31,12 @@ import cn.bieshao.proxy.ProxyHandler;
 
 /**
  * 多线程去请求
- *
+ * 这个有个bug，在大量并发情况下，会死锁
  * @author zhenbao.zhou
  *
  */
 public class MultiHttpGet {
-
+	private final static Logger logger = Logger.getLogger("http");
     /**
      * @param args
      * @throws IOReactorException
@@ -62,38 +64,38 @@ public class MultiHttpGet {
             i++;
         }
 
-        final CountDownLatch latch = new CountDownLatch(urlLength);
+   //     final CountDownLatch latch = new CountDownLatch(urlLength);
         final Map<String, String> responseMap = new HashMap<String, String>();
         try {
             for (final GetEntity entity : entities) {
                 try {
                     httpclient.execute(entity.getGet(), new FutureCallback<HttpResponse>() {
                         public void completed(final HttpResponse response) {
-                            latch.countDown();
+//                            latch.countDown();
                             ProxyHandler.getInstance().succAProxy(entity.getProxy());
                             // responseMap.put(request.getURI().toString(),
                             // response.getStatusLine().toString());
 
                             try {
-                                System.out.println(entity.getGet().getRequestLine()
+                                logger.info(entity.getGet().getRequestLine()
                                         + "->"
                                         + response.getStatusLine()
                                         //   + readInputStream(response.getEntity().getContent())
                                         );
                             }  catch (Exception e) {
-                                e.printStackTrace();
+                               logger.info("error in http client. msg:" + e.getMessage());
                             }
                         }
 
                         public void failed(final Exception ex) {
-                            latch.countDown();
-                            ex.printStackTrace();
+  //                          latch.countDown();
+                            logger.info("error in fail. msg: " + ex.getMessage());
                             ProxyHandler.getInstance().failAProxy(entity.getProxy());
 
                         }
 
                         public void cancelled() {
-                            latch.countDown();
+//                            latch.countDown();
                         }
                     });
                 } catch (Exception e) {
@@ -101,12 +103,12 @@ public class MultiHttpGet {
                 }
             }
 
-            System.out.println("Doing...");
+            logger.info("Doing...");
         } finally {
-            latch.await();
+  //          latch.await();
             httpclient.shutdown();
         }
-        System.out.println("Done");
+        logger.info("Done");
         return responseMap;
     }
 
@@ -128,7 +130,7 @@ public class MultiHttpGet {
     public static void main(String[] args) {
         List<String> urls = new ArrayList<String>();
        // urls.add("http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&o=5438544&c=138000&v=mgUkHRUrxHeI9_KEXuURrQ..&rnd=0.414234123");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             //urls.add("http://count.vrs.sohu.com/count/stat.do?videoId=972998&t=1361489935902");
             urls.add("http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&o=5438544&c=138000&v=3U_MDV_bXQGsTiCi0iDySw..&rnd=0.19318498158827424");
         }

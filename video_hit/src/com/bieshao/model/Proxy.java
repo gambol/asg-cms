@@ -82,6 +82,10 @@ public class Proxy implements Serializable {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
+	public String toString() {
+		return ip + ":" + port;
+	}
    
 	public static void main(String[] args) {
 		Proxy p = new Proxy();

@@ -81,6 +81,9 @@
 				<h3>
 					<a href="/">回到首页</a> → ${last_step_name }
 				</h3>
+				
+				
+				
 				<form id="countForm" action="${post_url }" method="post">
 					<table class="url_form">
 					<tbody>
@@ -92,6 +95,7 @@
 						<tr>
 							<th>增加数量:</th>
 							<td>
+								
 								<a href="${deleteUrl}" title="减少500次"> 
 									<img width="16" height="16" src="/img/delete.png">
 								</a>&nbsp; 
@@ -99,6 +103,7 @@
 								<a href="${addUrl }" title="增加500次，最多不超过3000次">
 								 	<img width="16" height="16" src="/img/add.png">
 								</a>
+								<div class="box box-info" style="margin-top:2px">根据视频网站规则不同，每次操作最终产生的播放增加数可能比预设的播放数多，请酌情设定想要增加的播放数。</div>
 							</td>
 						</tr>
 						<tr>

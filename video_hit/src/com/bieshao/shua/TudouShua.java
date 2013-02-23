@@ -12,6 +12,7 @@ import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
 
 import cn.bieshao.utils.HTTPUtils;
 import cn.bieshao.utils.MultiHttpGet;
+import cn.bieshao.utils.PoolHttpGet;
 
 /**
  * 刷土豆的播放量
@@ -27,7 +28,7 @@ public class TudouShua extends Shua {
     private final static String TUDOU_URL_PREFIX = "http://istat.tudou.com/play.srv?";
     private final static Pattern IID_PATTERN = Pattern.compile("iid:\\s*(\\d+)");
     // 一次最多给土豆发50个请求
-    private final static int EVERY_STEP = 30;
+    private final static int EVERY_STEP = 100;
     private final static int SLEEP_TIME = 20;
     private Random rand;
     private String iid;
@@ -90,9 +91,9 @@ public class TudouShua extends Shua {
             }
 
             i += EVERY_STEP;
-            MultiHttpGet client = new MultiHttpGet(urls);
+            PoolHttpGet client = new PoolHttpGet(urls);
             try {
-                client.asynGet();
+                client.multiGet();
             } catch (IOReactorException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
