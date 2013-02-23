@@ -33,7 +33,8 @@
             <div class="wrapper">
                 <section class="width6 column first">					
     				<h3>刷垮网</h3>
-					<p>刷！刷！刷！专刷土豆网视频播放量！</p>
+					<h4>刷！刷！刷！专刷各种视频播放量！</h4>
+					</p>
 					<p style="color:red">也许，你正经历着这样的苦恼……</p>
 					<p>辛苦做出视频，发动所有亲朋好友微博传播，也只能累计少得可怜的播放量；</p>
 					<p>没有推广费用，没有视频网站内部人脉，绞尽脑汁也无法获得视频网站推荐位;</p>
@@ -44,62 +45,34 @@
 					<p>NO！</p>
 					<p>你的视频离上百万的播放量，只差一步！</p>
 					<p>让刷垮网帮你刷！</p> 
-					<p>让你在短时间内迅速提升视频播放量，让你的视频成为人气视频，自动提高搜索排名靠前的几率，扫除阴霾，让你的视频重见天日！</p>				
+					<p>让你在短时间内迅速提升视频播放量，让你的视频成为人气视频，自动提高搜索排名靠前的几率，扫除阴霾，让你的视频重见天日！</p>
+					<p></p>				
  				<p>
-					<a href="/tudou.htm">刷土豆视频点击数</a>
+ 				<br/>
+					<a href="/tudou.htm"><img src="/img/tudou.png"/>&nbsp;&nbsp;刷土豆视频点击数</a>
+				</p>
+			
+				<p>
+					<a href="/sina.htm"><img src="/img/sina.png"/>&nbsp;&nbsp;刷新浪视频点击数</a>
+				</p>
+				
+				<p>
+					<a href="/sohu.htm"><img src="/img/sohu.png"/>&nbsp;&nbsp;刷搜狐视频点击数</a>
+				</p>
+				
+				<p>
+					<a href="/56.htm"><img src="/img/56.png"/>&nbsp;&nbsp;刷56视频点击数</a>
+				</p>
+				
+				<p>
+					<a href="/ku6.htm"><img src="/img/ku6.png"/>&nbsp;&nbsp;刷酷6视频点击数</a>
+				</p>
+				
+				<p>
+					<a href="#"><img src="/img/youku.png"/>&nbsp;&nbsp;刷优酷视频点击数</a>&nbsp;&nbsp;(即将推出,敬请期待)
 				</p>
 				<p>
-					<q>
-							服务器免费刷新土豆点击, balallaaa, 是不是最好还能有个截图，评论什么的
-					</q>
-				</p>
-				<p>
-					<a href="/sina.htm">刷新浪视频点击数</a>
-				</p>
-				<p>
-					<q>
-						新浪视频，是xxxx
-					</q>
-				</p>
-				<p>
-					<a href="/sohu.htm">刷搜狐视频点击数</a>
-				</p>
-				<p>
-					<q>
-						搜狐视频，是xxxx
-					</q>
-				</p>
-				<p>
-					<a href="/56.htm">刷56视频点击数</a>
-				</p>
-				<p>
-					<q>
-						56视频，是xxxx
-					</q>
-				</p>
-				<p>
-					<a href="/ku6.htm">刷酷6视频点击数</a>
-				</p>
-				<p>
-					<q>
-						酷6视频，是xxxx
-					</q>
-				</p>
-				<p>
-					<a href=“#">刷优酷视频点击数</a>
-				</p>
-				<p>
-					<q>
-						正在紧急推出，敬请期待
-					</q>
-				</p>
-				<p>
-					<a href=“#">刷爱奇异视频点击数</a>
-				</p>
-				<p>
-					<q>
-						正在紧急推出,敬请期待
-					</q>
+					<a href="#"><img src="/img/iqiyi.png"/>&nbsp;&nbsp;刷爱奇异视频点击数</a> &nbsp;&nbsp;(即将推出,敬请期待)
 				</p>
                 </section>
 

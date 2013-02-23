@@ -27,7 +27,7 @@ public class TudouShua extends Shua {
     private final static String TUDOU_URL_PREFIX = "http://istat.tudou.com/play.srv?";
     private final static Pattern IID_PATTERN = Pattern.compile("iid:\\s*(\\d+)");
     // 一次最多给土豆发50个请求
-    private final static int EVERY_STEP = 50;
+    private final static int EVERY_STEP = 30;
     private final static int SLEEP_TIME = 20;
     private Random rand;
     private String iid;

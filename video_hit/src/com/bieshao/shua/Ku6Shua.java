@@ -5,8 +5,6 @@
 
 package com.bieshao.shua;
 
-import cn.bieshao.utils.DateUtil;
-import cn.bieshao.utils.HTTPUtils;
 import cn.bieshao.utils.MultiHttpGet;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,46 +12,42 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.http.nio.reactor.IOReactorException;
 import org.apache.log4j.Logger;
-import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
 
 /**
  * 关键是取vid
- * http://count.kandian.com/kcount.php?vid=95335874&sid=0&type=play&url=http%3A%2F%2Fvideo.sina.com.cn%2Fp%2Fmusic%2Fv%2F2013%2F0117%2F094361978135.html 
- * 
- * http://video.sina.com.cn/z/sports/nba/130221okchou/#97644084  这种类型的，对应vid是97644084
- * http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html  对应的vid是页面里的  vid\s:\s'(\d+)'
+ * http://www.56.com/p83/v_MTIwOTAzMDA4.htm
+ * http://stat.56.com/stat/flv.php?id=MTIwOTAzMDA4&pct=3
  * @author zhenbao.zhou
  */
-public class SinaShua extends Shua {
+public class Ku6Shua extends Shua {
 
-    private static final Logger logger = Logger.getLogger(SohuShua.class);
-    // http://my.tv.sohu.com/us/15991709/52395185.shtml
-    // http://vstat.v.blog.sohu.com/dostat.do?method=setVideoPlayCount&v=52395185
-    private final static String SINA_URL_PREFIX = "http://count.kandian.com/kcount.php?sid=0&type=play&vid=";
-    private final static Pattern URL_ID_PATTERN = Pattern.compile("http://video.sina.com.*/#(\\d+)");   // 从url中取出id
-    private final static Pattern VID_PATTERN = Pattern.compile("\\s+vid\\s*:\\s*'(\\d+)[\'|\\|]");  // 从内容中取出id
+    private static final Logger logger = Logger.getLogger(Ku6Shua.class);
+    // http://v.ku6.com/special/show_6557552/mgUkHRUrxHeI9_KEXuURrQ...html
+    // http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&o=5438544&c=138000&v=mgUkHRUrxHeI9_KEXuURrQ..&rnd=0.7482359842397273
+    private final static String URL_PREFIX = "http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&o=5438544&c=138000&rnd=0.7482359842397273&v=";
+    private final static Pattern URL_ID_PATTERN = Pattern.compile("v.ku6.com/.*/(.*)\\.html");   // 从url中取出id
     // 一次最多发50个请求
     private final static int EVERY_STEP = 30;
     private final static int SLEEP_TIME = 20;
-    String id;
-    String shuaUrl;
+    private String id;
+    private String shuaUrl;
 
-    public SinaShua() {
-    	super();
-    }
-    
-    public SinaShua(String url, int num) {
+    public Ku6Shua(String url, int num) {
         this.url = url.trim();
         this.num = num;
     }
 
+    public Ku6Shua() {
+    	super();
+    }
+    
     /**
      * 生成一个基本的url
      *
      * @throws Exception
      */
     public boolean generateShuaUrl() throws Exception {
-        if (!url.contains("video.sina.com")) {
+        if (!url.contains("v.ku6.com")) {
             return false;
         }
 
@@ -61,26 +55,12 @@ public class SinaShua extends Shua {
         if (m.find()) {
             // 2个不同的地方，计数器地址页不同
             id = m.group(1);
-            shuaUrl = SINA_URL_PREFIX + id + "&url=" + url;
-         
-        } else {
-            String content = HTTPUtils.getContent(url);
-            if (StringUtils.isBlank(content)) {
-                return false;
-            }
-            // logger.info(content);
-            // content = "iid:123123 iid:4231";
-            m = VID_PATTERN.matcher(content);
-            if (m.find()) {
-                id = m.group(1);
-                shuaUrl = SINA_URL_PREFIX + id + "&url=" + url;
-            }
-        }
+            shuaUrl = URL_PREFIX + "id=" + id;
+        }         
 
         // logger.info(content);
         // content = "iid:123123 iid:4231";
         return (shuaUrl != null);
-
     }
 
     /**
@@ -106,7 +86,6 @@ public class SinaShua extends Shua {
             }
             Thread.sleep(SLEEP_TIME);
         }
-
     }
 
     @Override
@@ -123,7 +102,8 @@ public class SinaShua extends Shua {
     public static void main(String[] args) {
         
       // SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 20);
-         SinaShua s = new SinaShua("http://video.sina.com.cn/m/xnedmmqs_61193045.html", 20);
+//         WuliuShua s = new WuliuShua("http://www.56.com/u44/v_ODY2NTgxMjE.html", 10);
+            Ku6Shua s = new Ku6Shua("http://v.ku6.com/special/show_6572212/m35Om8fiWRdAu8ND5baWcg...html", 10);
        //  SinaShua s = new SinaShua("http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html", 20);
         try {
              if (s.generateShuaUrl()) {

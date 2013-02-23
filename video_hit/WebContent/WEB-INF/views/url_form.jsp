@@ -87,7 +87,7 @@
 						<tr>
 							<th>视频链接:
 							</th>
-							<td><input style="width:400px" type="text" name="url" value=""></td>
+							<td><input style="width:400px" type="text" name="url" value="" placeholder="视频播放链接"></td>
 						</tr>
 						<tr>
 							<th>增加数量:</th>

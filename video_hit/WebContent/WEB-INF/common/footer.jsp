@@ -30,15 +30,17 @@
     <div class="wrapper ">
     <div class="width1 first column" style="font-size:1px">&nbsp</div>
     <div class="width5 column">
-        <p>Copyright &copy; 2010-2012 <b><a HREF="http://www.iozz.cn" title="www.iozz.cn">www.iozz.cn</a></b>网站备案：粤ICP备11050245号</p>
+        <p>Copyright &copy; 2010-2013 <b><a HREF="http://www.shuakua.com" title="www.shuakua.com">www.shuakua.com</a></b>网站备案：粤ICP备11050245号</p>
     </div>
     </div>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F70455cb2fc8dd05ad07ac539a1492684' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
 </footer>
 <!-- Animated footer -->
    
-    <script type="text/javascript">
-    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F7a16ce98490af007e2a2dafcb25645fd' type='text/javascript'%3E%3C/script%3E"));
-</script>
+
 
 <!-- End of Animated footer -->

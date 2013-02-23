@@ -33,7 +33,7 @@ public class SohuShua extends Shua {
     private final static String SOHU_URL_PREFIX = "http://count.vrs.sohu.com/count/stat.do?videoId=";
     private final static Pattern VID_PATTERN = Pattern.compile("vid=\\s*\"(\\d+)\"");
     // 一次最多给sohu发50个请求
-    private final static int EVERY_STEP = 50;
+    private final static int EVERY_STEP = 30;
     private final static int SLEEP_TIME = 20;
     String id;
     String shuaUrl;

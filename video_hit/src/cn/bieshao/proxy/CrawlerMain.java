@@ -40,9 +40,32 @@ public class CrawlerMain {
 		cc.run(CnProxyParser.class);
 	}
 	
+	public void czproxyCrawl() {
+		List<String> urlList = new ArrayList<String>();
+		String czProxyUrl = "http://www.cz88.net/proxy/index.aspx";
+		urlList.add(czProxyUrl);
+		String czurl = "http://www.cz88.net/proxy/http_"; //2.aspx";
+		for (int i = 2; i < 11; i++) {
+			urlList.add(czurl + i + ".aspx");
+		}
+		CommonCrawler cc = new CommonCrawler(urlList);
+		cc.run(CZProxyParser.class);
+	}
+	
+	public void wydlProxyCrawl() {
+		List<String> urlList = new ArrayList<String>();
+		urlList.add("http://51dai.li/http_non_anonymous.html");	
+		urlList.add("http://51dai.li/http_fast.html");	
+		urlList.add("http://51dai.li/http_anonymous.html");	
+		
+		CommonCrawler cc = new CommonCrawler(urlList);
+		cc.run(WYDLProxyParser.class);
+	}
+	
 	public static void main(String[] args) throws Exception {
 		CrawlerMain cm = new CrawlerMain();
-		cm.cnproxyCrawl();
+	//	cm.cnproxyCrawl();
+		cm.czproxyCrawl();
 	//	cm.xiziCrawl();
 	}
 }

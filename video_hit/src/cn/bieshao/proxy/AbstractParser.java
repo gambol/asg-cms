@@ -28,8 +28,6 @@ public class AbstractParser {
 		return doc;
 	}
 
-
-
 	public void setDoc(Document doc) {
 		this.doc = doc;
 	}
