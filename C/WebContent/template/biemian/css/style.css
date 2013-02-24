@@ -1006,6 +1006,16 @@ a:focus>.sf-sub-indicator,a:hover>.sf-sub-indicator,a:active>.sf-sub-indicator,l
 	-webkit-focus-ring-color: none;
 }
 
+#pagetitle a {
+	color: white;
+	text-decoration:none;
+	border-bottom:1px solid #A1CFD4;
+}
+#pagetitle a:hover, #pagetitle a:focus, #pagetitle a:active {
+	background-color:#282828;
+	border-bottom:1px solid #329ECC;
+}
+
 #page {
 	float:left;
 	width:100%;
