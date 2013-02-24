@@ -6,16 +6,33 @@
    	  <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <properties>
       
-
+	
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/> 
+         
          <property name="hibernate.connection.driver_class" value="org.gjt.mm.mysql.Driver"/>		
 		 <property name="hibernate.connection.username" value="gambol"/>
 		 <property name="hibernate.connection.password" value=""/>
 		 <property name="hibernate.connection.url" value="jdbc:mysql://localhost/j2cms?characterEncoding=utf-8"/>
+		  
+		  
          <property name="hibernate.hbm2ddl.auto" value="update"/>
 	     <property name="hibernate.show_sql" value="false"/>
 	     <property name="hibernate.format_sql" value="false"/> 
- 
+        <!-- hibernate的proxool连接池配置（需要jar包：proxool.jar）-->
+        <!-- 
+	    <property name="hibernate.connection.provider_class" value="org.hibernate.connection.ProxoolConnectionProvider"/>    
+       	<property name="hibernate.proxool.pool_alias" value="j2cmsPool"/>    
+       	<property name="hibernate.proxool.xml" value="proxool.xml"/>  
+       	<property name="hibernate.proxool.existing_pool" value="true"/>
+       	-->
+           <property name="connection.provider_class" value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
+          <property name="hibernate.c3p0.min_size" value="10"/>
+          <property name="hibernate.c3p0.max_size" value="30"/>
+          <property name="hibernate.c3p0.timeout" value="360"/>
+          <property name="hibernate.c3p0.max_statements" value="25"/>
+          <property name="hibernate.c3p0.idle_test_period" value="120"/>
+         <property name="hibernate.c3p0.acquire_increment" value="2"/>
+       	
 <!-- 
           <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> 
          <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>		
