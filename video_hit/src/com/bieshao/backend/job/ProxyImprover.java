@@ -44,6 +44,7 @@ public class ProxyImprover implements Runnable {
 	 */
 	public synchronized static void searchNew() {
 		CrawlerMain cm = new CrawlerMain();
+		
 		cm.cnproxyCrawl();
 		cm.xiziCrawl();
 		cm.czproxyCrawl();
@@ -74,7 +75,7 @@ public class ProxyImprover implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		clean();
+//		clean();
 		searchNew();
 	}
 }

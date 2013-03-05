@@ -47,7 +47,11 @@ public class JobConsumer {
 		try {
 			Class clazz = Class.forName(SHUA_PACKAGE + job.getJobClass());
 			Shua ts = (Shua)clazz.newInstance();
-			ts.setNum(job.getNum());
+			
+			// 由于经常有代理服务器异常，所以我自己给他乘以2好了
+			ts.setNum(job.getNum() * 2);
+			//ts.setNum(job.getNum());
+			
 			ts.setUrl(job.getUrl());
 			ts.doJob();
 		} catch (Exception e) {

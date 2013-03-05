@@ -33,7 +33,8 @@ public class ProxyDao {
 		return JDBCUtils.getCount(Proxy.class, "ip = ? and port = ?", p.getIp(), p.getPort());
 	}
 	
-
-	
+	public static PageResult<Proxy> selectProxy(String ip, int port) {
+        return JDBCUtils.getPageData(Proxy.class, 10, 1, "ip = ? and port = ?", ip, port);
+    }
 	
 }

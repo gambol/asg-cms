@@ -99,6 +99,16 @@ public class IndexController {
 	public String ku6Post(HttpServletRequest request, HttpServletResponse response, Model model) {
 		return postCommonFunction(request, response, model, "/ku6.htm", "Ku6Shua", "酷6视频");
 	}
+	
+	@RequestMapping(value = "youku", method = RequestMethod.GET)
+    public String youkuIndex(HttpServletRequest request, HttpServletResponse response, Model model) {
+        return getCommonFunction(request, response, model, "/youku.htm", "优酷视频");
+    }
+
+    @RequestMapping(value = "youku", method = RequestMethod.POST)
+    public String youku6Post(HttpServletRequest request, HttpServletResponse response, Model model) {
+        return postCommonFunction(request, response, model, "/youku.htm", "YoukuShua", "优酷视频");
+    }
 
 	/**
 	 * 展示各个页面的函数

@@ -13,12 +13,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.DataSources;
 
 /**
  *
@@ -43,9 +40,8 @@ public class ConnectionFactory {
     private String username;
     private String password;
     private boolean usePool;
-    private DataSource pool;
+    private ComboPooledDataSource ds;
     private String url;
-    private String poolname;
 
     private ConnectionFactory() {
         try {
@@ -60,19 +56,56 @@ public class ConnectionFactory {
         password = prop.getProperty(KEY_DB_PASSWORD);
         url = prop.getProperty(KEY_DB_URL);
         usePool = Boolean.parseBoolean(prop.getProperty(KEY_DB_USE_POOL));
-        poolname = prop.getProperty(KEY_POOL_NAME);
 
         System.out.println("ur:" + url);
 
         if (usePool) {
             try {
-                pool = (DataSource) new InitialContext().lookup(poolname);
-                if (pool == null) {
-                    log.warn("Connection pool is NULL");
-                } else {
-                    log.info("connection pool looked up");
+                
+                ds = new ComboPooledDataSource();
+
+                ds.setDriverClass("com.mysql.jdbc.Driver");
+                ds.setJdbcUrl(url);
+                ds.setUser(username);
+                if (password != null && password.trim().length() != 0) {
+                    ds.setPassword(password);
                 }
-            } catch (NamingException ex) {
+
+                //初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 initialPoolSize
+                ds.setInitialPoolSize(10);
+                //连接池中保留的最大连接数。Default: 15 maxPoolSize
+                ds.setMaxPoolSize(30);
+                //// 连接池中保留的最小连接数。
+                //ds.setMinPoolSize(1);
+                //当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 acquireIncrement
+                ds.setAcquireIncrement(3);
+
+                //每60秒检查所有连接池中的空闲连接。Default: 0  idleConnectionTestPeriod
+                ds.setIdleConnectionTestPeriod(60);
+                //最大空闲时间,25000秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0  maxIdleTime
+                ds.setMaxIdleTime(25000);
+                //连接关闭时默认将所有未提交的操作回滚。Default: false autoCommitOnClose
+                ds.setAutoCommitOnClose(true);
+
+                //定义所有连接测试都执行的测试语句。在使用连接测试的情况下这个一显著提高测试速度。注意：
+                //测试的表必须在初始数据源的时候就存在。Default: null  preferredTestQuery
+                ds.setPreferredTestQuery("select count(1) from mysql.user");
+                // 因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的
+                // 时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable
+                // 等方法来提升连接测试的性能。Default: false testConnectionOnCheckout
+                ds.setTestConnectionOnCheckout(true);
+                //如果设为true那么在取得连接的同时将校验连接的有效性。Default: false  testConnectionOnCheckin
+                ds.setTestConnectionOnCheckin(true);
+
+                //定义在从数据库获取新连接失败后重复尝试的次数。Default: 30  acquireRetryAttempts
+                ds.setAcquireRetryAttempts(30);
+                //两次连接中间隔时间，单位毫秒。Default: 1000 acquireRetryDelay
+                ds.setAcquireRetryDelay(1000);
+                //获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效
+                //保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试
+                //获取连接失败后该数据源将申明已断开并永久关闭。Default: false  breakAfterAcquireFailure
+                ds.setBreakAfterAcquireFailure(true);                
+            } catch (Exception ex) {
                 log.warn("Failed to look up connection pool from context",
                         ex);
             }
@@ -81,7 +114,7 @@ public class ConnectionFactory {
 
     public Connection getConnection() throws SQLException {
         if (usePool) {
-            return pool.getConnection();
+            return ds.getConnection();
         } else {
             try {
                 Class.forName("com.mysql.jdbc.Driver");

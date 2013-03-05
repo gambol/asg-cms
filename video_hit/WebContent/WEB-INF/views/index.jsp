@@ -45,10 +45,14 @@
 					<p>NO！</p>
 					<p>你的视频离上百万的播放量，只差一步！</p>
 					<p>让刷垮网帮你刷！</p> 
-					<p>让你在短时间内迅速提升视频播放量，让你的视频成为人气视频，自动提高搜索排名靠前的几率，扫除阴霾，让你的视频重见天日！</p>
-					<p></p>				
+					<p>让你在<b>短时间内迅速提升视频播放量</b>，让你的视频成为人气视频，自动提高搜索排名靠前的几率，扫除阴霾，让你的视频重见天日！</p>
+					<p></p>
+					<br/>
+				<p>
+					<a href="/youku.htm"><img src="/img/youku.png"/>&nbsp;&nbsp;刷优酷视频点击数</a>&nbsp;&nbsp;<span class="label label-red">最新火热推出!</span>
+				</p>				
  				<p>
- 				<br/>
+
 					<a href="/tudou.htm"><img src="/img/tudou.png"/>&nbsp;&nbsp;刷土豆视频点击数</a>
 				</p>
 			
@@ -67,10 +71,7 @@
 				<p>
 					<a href="/ku6.htm"><img src="/img/ku6.png"/>&nbsp;&nbsp;刷酷6视频点击数</a>
 				</p>
-				
-				<p>
-					<a href="#"><img src="/img/youku.png"/>&nbsp;&nbsp;刷优酷视频点击数</a>&nbsp;&nbsp;(即将推出,敬请期待)
-				</p>
+			
 				<p>
 					<a href="#"><img src="/img/iqiyi.png"/>&nbsp;&nbsp;刷爱奇异视频点击数</a> &nbsp;&nbsp;(即将推出,敬请期待)
 				</p>

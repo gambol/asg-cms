@@ -1329,9 +1329,9 @@ a#totop:hover, a#totop:focus, a#totop:active {
     text-decoration: none;
 }
 span.label {
-    background: url("../img/tag-bg.gif") no-repeat scroll 100% 50% transparent;
+    background: url("/img/tag-bg.gif") no-repeat scroll 100% 50% transparent;
     color: #FFFFFF;
-    font: bold 10px/1.2 "tahoma",sans-serif;
+    font: bold 10px/1.2 "tahoma",sans-serif; 
     padding: 4px 16px 5px 5px;
     text-transform: uppercase;
 }

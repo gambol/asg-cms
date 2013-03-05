@@ -30,7 +30,7 @@
     <div class="wrapper ">
     <div class="width1 first column" style="font-size:1px">&nbsp</div>
     <div class="width5 column">
-        <p>Copyright &copy; 2010-2013 <b><a HREF="http://www.shuakua.com" title="www.shuakua.com">www.shuakua.com</a></b>网站备案：粤ICP备11050245号</p>
+        <p>Copyright &copy; 2010-2013 <b><a HREF="http://www.shuakua.com" title="www.shuakua.com">www.shuakua.com</a> 邮箱:shuakua@gmail.com&nbsp;</b>网站备案：粤ICP备11050245号</p>
     </div>
     </div>
 <script type="text/javascript">

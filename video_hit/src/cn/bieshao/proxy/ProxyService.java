@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.bieshao.utils.HTTPUtils;
+import cn.bieshao.utils.JDBCUtils;
 
 import com.bieshao.model.Proxy;
 import com.bieshao.web.dao.ProxyDao;
@@ -19,8 +20,12 @@ public class ProxyService {
 		//DBTool.execute("update proxy set disabled='true', disable_time = now()");
 		int i = 0;
 		for(Proxy p : pl) {
-			if (ProxyDao.selectProxyNum(p) == 0) {
-				if (HTTPUtils.verifyProxy(p.getIp(), p.getPort())) {
+		    boolean isDisable = !HTTPUtils.verifyProxy(p.getIp(), p.getPort());
+		    
+		    List<Proxy> proxyList = ProxyDao.selectProxy(p.getIp(), p.getPort()).getPageList();
+		    
+			if (proxyList.size() == 0) {
+				if (isDisable) {
 					logger.info("insert proxy:" + p.getIp() + ":" + p.getPort());
 					ProxyDao.insertProxy(p);
 					i++;
@@ -28,7 +33,15 @@ public class ProxyService {
 					logger.debug("error in verify. ip:" + p.getIp() + " port:" + p.getPort());
 				}
 			} else {
-				logger.debug("already has it. ip:" + p.getIp() + " port:" + p.getPort());
+			    Proxy newProxy = proxyList.get(0);
+			    if (isDisable != newProxy.isDisabled()) {
+                    logger.info("update proxy:" + p.getIp() + ":" + p.getPort() + " disabled status:" + isDisable);
+                    newProxy.setDisabled(isDisable);
+                    JDBCUtils.update(newProxy, false);
+                    i++;
+                } else {
+                    logger.debug("the same with verify result");
+                }
 			}
 		}
 		logger.info("we has " + pl.size() +" proxies, total insert:" + i + " proxies");

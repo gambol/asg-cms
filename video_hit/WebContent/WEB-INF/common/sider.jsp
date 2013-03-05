@@ -12,11 +12,16 @@
 				<img width="16" height="16" src="/img/key.png" alt="">
 			</dt>
 			<dd><b>免费</b>在线服务</dd>
-			<dd class="last">与市面上常见收费刷视频软件不同，永久在线免费使用，无需购买软件，无需担心软件有效期问题。</dd>
+			<dd class="last">免费！与市面上常见收费刷视频软件不同，永久在线免费使用，无需购买软件，无需担心软件有效期问题</dd>
 			<dt>
 				<img width="16" height="16" src="/img/key.png" alt="">
 			</dt>
-			<dd>采用<b>全自动动态</b>IP，给你真实而稳定的数字；</dd>
+			<dd><b>快</b></dd>
+			<dd class="last">超豪华服务器集群配置，每秒增加几千点击！视频点击过亿不是梦</dd>
+			<dt>
+				<img width="16" height="16" src="/img/key.png" alt="">
+			</dt>
+			<dd>采用<b>全自动动态</b>IP，给你真实而稳定的数字</dd>
 		</dl>
 	</div>
 
@@ -26,6 +31,9 @@
 		</header>
 		<section>
 			<dl>
+				<dd>
+					<a href="/youku.htm" target="_blank" title="增加优酷视频点击">增加优酷视频点击</a>
+				</dd>
 				<dd>
 					<a href="/tudou.htm" target="_blank" title="增加土豆视频点击">增加土豆视频点击</a>
 				</dd>				
