@@ -47,19 +47,15 @@ public class YoukuShuaImpl  extends AbstractThread {
     private  HttpGet httpget;
     private  Proxy proxy;
     private  HttpPost httppost;
-    private String youkuId;
+    private  String youkuId;
     
     // 从外部传进来的参数, 在我们这个函数里， params是一个string
     private Object param;
     
     public YoukuShuaImpl() {
-        this.httpClient = HttpConnPool.getHttpClient();
-        this.context = new BasicHttpContext();
+        httpClient = HttpConnPool.getHttpClient();
+        context = new BasicHttpContext();
         proxy = ProxyHandler.getInstance().getRandomProxy();
-        if (proxy != null) {
-            HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
-            httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
-        }
     }
     
     public void setYoukuId(String id) {
@@ -137,7 +133,7 @@ public class YoukuShuaImpl  extends AbstractThread {
             return null;
 
         String infoUlr = VIDEO_INFO_URL + id;
-        String content = HTTPUtils.get(httpClient, infoUlr);
+        String content = HTTPUtils.get(httpClient, proxy, infoUlr);
 
         try {
             Map resultMap = JsonUtil.parserStrToObj(content);
@@ -145,7 +141,8 @@ public class YoukuShuaImpl  extends AbstractThread {
             Map data = (Map) dataList.get(0);
             return data;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug("error in get youku data : " + e.getMessage());
+            //e.printStackTrace();
         }
 
         // System.out.println("ts:" + ts);
@@ -174,11 +171,11 @@ public class YoukuShuaImpl  extends AbstractThread {
         try {
             Map postParams = getPostParam();
             if (postParams == null) {
-                logger.info("error in get post params. skip");
+                logger.debug("error in get post params. skip");
                 return;
             }
             
-            HTTPUtils.post(httpClient, POST_URL, postParams);
+            HTTPUtils.post(httpClient, proxy, POST_URL, postParams);
         } catch(Exception e) {
             logger.error("error in youkushua thread. msg:" + e.getMessage());
             e.printStackTrace();
@@ -188,7 +185,7 @@ public class YoukuShuaImpl  extends AbstractThread {
     public static void main(String[] args) throws Exception {
         YoukuShuaImpl ys = new YoukuShuaImpl();
         // ys.getTsForId("XNTIxNDA3OTA4");
-        String id = "XNTIxNDEyNDA4";
+        String id = "XMzUzNjIyMzUy";
         ys.setYoukuId(id);
         for (int i = 0; i < 10; i++) {
         

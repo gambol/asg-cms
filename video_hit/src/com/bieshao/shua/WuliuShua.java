@@ -118,7 +118,7 @@ public class WuliuShua extends Shua {
         
       // SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 20);
 //         WuliuShua s = new WuliuShua("http://www.56.com/u44/v_ODY2NTgxMjE.html", 10);
-            WuliuShua s = new WuliuShua("http://www.56.com/u45/v_NjMyNTAxMjI.html", 10);
+            WuliuShua s = new WuliuShua("http://www.56.com/u45/v_NjMyNTAxMjI.html", 10000);
        //  SinaShua s = new SinaShua("http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html", 20);
         try {
              if (s.generateShuaUrl()) {

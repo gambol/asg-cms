@@ -39,20 +39,18 @@ import cn.bieshao.proxy.ProxyHandler;
  */
 public class PoolHttpGet {
 	private final static Logger logger = Logger.getLogger("http");
-	
-    // 线程池
-    private ExecutorService exe = null;
-    // 线程池的容量
+	// 线程池的容量
     private static final int POOL_SIZE = 200;
     
+    // 线程池
+    private static ExecutorService exe =  Executors.newFixedThreadPool(POOL_SIZE);
+  
     List urls;
     public PoolHttpGet(List urls){
         this.urls=urls;
     }
     
-    public void multiGet() throws Exception {
-        exe = Executors.newFixedThreadPool(POOL_SIZE);
-        
+    public synchronized void multiGet() throws Exception {
         // URIs to perform GETs on
         final List urisToGet = urls;
         /* 有多少url创建多少线程，url多时机子撑不住
@@ -107,8 +105,8 @@ public class PoolHttpGet {
         }
         
         */
-        exe.shutdown();
-        System.out.println("Done");
+        //    exe.shutdown();
+       // System.out.println("Done");
     }
     
     static class GetThread extends Thread{
@@ -139,14 +137,14 @@ public class PoolHttpGet {
                 HttpResponse response = this.httpClient.execute(this.httpget, this.context);
                 HttpEntity entity = response.getEntity();
                 if (entity != null) {
-                    logger.info(this.httpget.getURI()+" status:"+response.getStatusLine().toString());
+                    logger.debug(this.httpget.getURI()+" status:"+response.getStatusLine().toString());
                 }
                 // ensure the connection gets released to the manager
                 // EntityUtils.consume(entity);
             } catch (Exception ex) {
-            	logger.info("error in get url:" + this.httpget.getURI() + " errmsg:" + ex.getMessage() + " proxy:" + proxy.toString());
+            	logger.debug("error in get url:" + this.httpget.getURI() + " errmsg:" + ex.getMessage() + " proxy:" + proxy.toString());
                 this.httpget.abort();
-                ex.printStackTrace();
+               // ex.printStackTrace();
             } finally {
                 httpget.releaseConnection();
             }
@@ -163,7 +161,7 @@ public class PoolHttpGet {
 		try {
 			phg.multiGet();
 		} catch (Exception e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 		
 		System.out.println("we are done");

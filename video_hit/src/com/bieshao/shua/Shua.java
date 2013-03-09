@@ -11,8 +11,8 @@ public abstract class Shua {
 	// id
 	public  int id;
 	
-	public final static int EVERY_STEP = 100;
-	public final static int SLEEP_TIME = 200;
+	public final static int EVERY_STEP = 30;
+	public final static int SLEEP_TIME = 2000;
 	/**
 	 * 暴露出来的接口
 	 */

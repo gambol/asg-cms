@@ -57,7 +57,7 @@ public class Ku6Shua extends Shua {
         if (m.find()) {
             // 2个不同的地方，计数器地址页不同
             id = m.group(1);
-            shuaUrl = URL_PREFIX + "id=" + id;
+            shuaUrl = URL_PREFIX + id;
         }         
 
         // logger.info(content);
@@ -105,7 +105,7 @@ public class Ku6Shua extends Shua {
         
       // SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 20);
 //         WuliuShua s = new WuliuShua("http://www.56.com/u44/v_ODY2NTgxMjE.html", 10);
-            Ku6Shua s = new Ku6Shua("http://v.ku6.com/special/show_6572212/m35Om8fiWRdAu8ND5baWcg...html", 10);
+            Ku6Shua s = new Ku6Shua("http://v.ku6.com/show/E6n9tol4nPEeVfVBZ4fgXg...html", 100);
        //  SinaShua s = new SinaShua("http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html", 20);
         try {
              if (s.generateShuaUrl()) {

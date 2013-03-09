@@ -39,7 +39,7 @@ import java.io.InputStreamReader;
 public class IndexController {
 
 	private final static int DEFAULT_NUM = 500;
-	private final static int MAX_NUM = 3000;
+	private final static int MAX_NUM = 2000;
 
 	public IndexController() {
 

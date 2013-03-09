@@ -31,6 +31,8 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
+import com.bieshao.model.Proxy;
+
 import cn.bieshao.common.HTTPConst;
 import cn.bieshao.proxy.ProxyHandler;
 
@@ -136,17 +138,25 @@ public class HTTPUtils {
 
     }
 
-    public static String get(HttpClient httpClient, String url) {
+    public static String get(HttpClient httpClient, Proxy proxy, String url) {
         String content = null;
         HttpGet httpget = new HttpGet(url);
+        if (proxy != null) {
+            HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
+            httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
+        }
+        
         try {
             HttpResponse response = httpClient.execute(httpget);
+            HttpHost host = (HttpHost)httpget.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY);
+ //           System.out.println("host:" + host.getHostName() + ":" + host.getPort());
+//            System.out.println("httpclient:" + httpClient);
             HttpEntity entity = response.getEntity();
             // ensure the connection gets released to the manager
             // EntityUtils.consume(entity);
             content = HTTPUtils.readInputStream(entity.getContent());
         } catch (Exception ex) {
-            logger.info("error in get url:" + httpget.getURI() + " errmsg:" + ex.getMessage());
+            logger.debug("error in get url:" + httpget.getURI() + " errmsg:" + ex.getMessage());
             httpget.abort();
         } finally {
             httpget.releaseConnection();
@@ -155,10 +165,11 @@ public class HTTPUtils {
         return content;
     }
 
-    public static void post(HttpClient httpClient, String url, Map dataMap) {
+    public static void post(HttpClient httpClient, Proxy proxy, String url, Map dataMap) {
         httpClient.getParams().setParameter(CoreProtocolPNames.USER_AGENT, HTTPConst.IPAD_USER_AGENT);
         // 创建POST方法的 实例
         HttpPost httppost = new HttpPost(url);
+      
         // 填入各个表单域的 值
         List<NameValuePair> data = new ArrayList<NameValuePair>();
         Iterator it = dataMap.entrySet().iterator();
@@ -169,17 +180,22 @@ public class HTTPUtils {
             data.add(new BasicNameValuePair(key.toString(), value.toString()));
         }
 
-        logger.info("do post: param:" + dataMap.toString());
+        logger.debug("do post: param:" + dataMap.toString());
         try {
             // 执行postMethod
             HttpEntity requestHttpEntity = new UrlEncodedFormEntity(data);
             httppost.setEntity(requestHttpEntity);
+            if (proxy != null) {
+                HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
+                httppost.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
+            }
+        
             HttpResponse response = httpClient.execute(httppost);
-
+            logger.debug("ok in post url:" + httppost.getURI());
         } catch (Exception ex) {
-            logger.info("error in post url:" + httppost.getURI() + " errmsg:" + ex.getMessage());
+            logger.debug("error in post url:" + httppost.getURI() + " errmsg:" + ex.getMessage());
             httppost.abort();
-            // ex.printStackTrace();
+      //       ex.printStackTrace();
         } finally {
             httppost.releaseConnection();
         }

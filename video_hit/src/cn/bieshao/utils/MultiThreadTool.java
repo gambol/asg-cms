@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -40,24 +42,46 @@ import cn.bieshao.proxy.ProxyHandler;
  */
 public class MultiThreadTool {
 	private final static Logger logger = Logger.getLogger("http");
+	private static MultiThreadTool mul;
 	
     // 线程池
-    private ExecutorService exe = null;
+    private static ExecutorService exe = null;
     // 线程池的容量
-    private static final int POOL_SIZE = 200;
+    private static final int  POOL_SIZE = 200;
+    
+    private static final int delay = 3000;
 
-    public <T extends AbstractThread> void multiRun(int threadSize, final Class<T> clz, Object param) throws Exception {
-        exe = Executors.newFixedThreadPool(POOL_SIZE);
-
+    
+    public static MultiThreadTool getInstance() {
+        if (mul == null) {
+            mul = new MultiThreadTool();
+            exe = Executors.newFixedThreadPool(POOL_SIZE);
+        }
+        
+        return mul;
+    }
+    
+    private MultiThreadTool() {
+       
+    }
+    
+    public <T extends AbstractThread> void multiRun(int threadSize, final Class<T> clz, 
+            Object param) throws Exception {
+        int nowDelay = 0;
         for (int i = 0; i < threadSize; i++) {
             T t = clz.newInstance();
             t.setParam(param);
-            exe.execute(t);
+           // exe.schedule(t, nowDelay, TimeUnit.MILLISECONDS);
+             exe.execute(t);
+             /*   
+            if (nowDelay % 100 == 99) {
+                nowDelay += delay;
+            }
+            */
         }
-        
-        exe.shutdown();
-        System.out.println("Done");
     }
     
-  
+    public void destroy() {
+        exe.shutdown();
+    }
 }

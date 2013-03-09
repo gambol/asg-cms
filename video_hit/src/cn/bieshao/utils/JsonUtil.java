@@ -13,7 +13,7 @@ public class JsonUtil {
         try {
             map = mapper.readValue(str, HashMap.class);
         } catch (Exception e){
-            e.printStackTrace();
+         //   e.printStackTrace();
         }
        return map;
     }

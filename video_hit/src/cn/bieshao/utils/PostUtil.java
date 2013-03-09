@@ -105,6 +105,7 @@ public class PostUtil {
     }
 
    public static void main(String[] args) {
+       
        Map m = new HashMap();
        /*
         * fullflag 0
@@ -134,9 +135,18 @@ videoid 117618538
        m.put("url", "http://v.youku.com/v_show/id_XNDcwNDc0MTUy.html");
        m.put("videoid", 117618538);
        
+       /*
        for(int i = 0; i < 1000; i++)
            getBody("http://stat.youku.com/player/addPlayerStaticReport", m);
+       */
        
-   }
+       m.put("iid", "164315488");
+       m.put("content", "aaaa");
+       m.put("parent", 0);
+       String s = getBody("http://www.tudou.com/comments/itemnewcomment.srv?method=add", m);
+       System.out.println(s);
+       
+       System.out.println("ends");
+   } 
 
 }

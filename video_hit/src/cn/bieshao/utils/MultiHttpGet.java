@@ -89,7 +89,7 @@ public class MultiHttpGet {
 
                         public void failed(final Exception ex) {
   //                          latch.countDown();
-                            logger.info("error in fail. msg: " + ex.getMessage());
+                            logger.debug("error in fail. msg: " + ex.getMessage());
                             ProxyHandler.getInstance().failAProxy(entity.getProxy());
 
                         }
@@ -103,12 +103,12 @@ public class MultiHttpGet {
                 }
             }
 
-            logger.info("Doing...");
+            logger.debug("Doing...");
         } finally {
   //          latch.await();
             httpclient.shutdown();
         }
-        logger.info("Done");
+        logger.debug("Done");
         return responseMap;
     }
 

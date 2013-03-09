@@ -19,7 +19,7 @@ import cn.bieshao.common.PageResult;
  * 
  */
 public class JobConsumer {
-	private final static int SLEEP_TIME = 1000;
+	private final static int SLEEP_TIME = 20;
 	private final static Logger logger = Logger.getLogger(JobConsumer.class);
 	private final static String SHUA_PACKAGE = "com.bieshao.shua.";
 
@@ -31,6 +31,7 @@ public class JobConsumer {
 				doJob(job);
 				TodoJobDao.updateJobToDone(job);
 			}
+			
 			try {
 				Thread.sleep(SLEEP_TIME);
 				logger.debug("job consumer sleep for " + SLEEP_TIME + "millseconds");
@@ -48,8 +49,8 @@ public class JobConsumer {
 			Class clazz = Class.forName(SHUA_PACKAGE + job.getJobClass());
 			Shua ts = (Shua)clazz.newInstance();
 			
-			// 由于经常有代理服务器异常，所以我自己给他乘以2好了
-			ts.setNum(job.getNum() * 2);
+			// 由于经常有代理服务器异常，所以我自己给他乘以3好了
+			ts.setNum(job.getNum() * 3);
 			//ts.setNum(job.getNum());
 			
 			ts.setUrl(job.getUrl());
@@ -57,6 +58,7 @@ public class JobConsumer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.info("do job done. jobUrl:" + job.getUrl() + " count:" + job.getNum() + " ip:" + job.getUserIp() + " job class:" + job.getJobClass());
 	}
 	
 	public static void main(String[] args) throws Exception {

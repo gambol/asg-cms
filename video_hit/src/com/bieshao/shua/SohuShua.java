@@ -23,6 +23,8 @@ import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
  * tv.sohu计数器在
  * http://count.vrs.sohu.com/count/stat.do?t=1361461744237.7104&videoId=972998&playListId=337981884
  *
+ * http://17173.tv.sohu.com/v/1/11668/150/MTUwNjAzMQ==
+ * http://17173.tv.sohu.com/port/get_videoinfo.php?id=1506031&uid=5413386
  * @author zhenbao.zhou
  */
 public class SohuShua extends Shua {
@@ -34,6 +36,11 @@ public class SohuShua extends Shua {
     private final static Pattern ID_PATTERN = Pattern.compile("/(\\d+).shtml");
     private final static String SOHU_URL_PREFIX = "http://count.vrs.sohu.com/count/stat.do?videoId=";
     private final static Pattern VID_PATTERN = Pattern.compile("vid=\\s*\"(\\d+)\"");
+    
+    private final static Pattern ID_17173_PATTERN = Pattern.compile("id:\\s*\'(\\d+)\'");
+    private final static Pattern UID_17173_PATTERN = Pattern.compile("uid:\\s*\'(\\d+)\'");
+    private final static String URL_17173_PREFIX = "http://17173.tv.sohu.com/port/get_videoinfo.php?";
+    
     // 一次最多给sohu发50个请求
     private final static int EVERY_STEP = 100;
     private final static int SLEEP_TIME = 20;
@@ -66,6 +73,20 @@ public class SohuShua extends Shua {
                 id = m.group(1);
                 shuaUrl = MY_SOHU_URL_PREFIX + id + "&c=131&o=15991709&type=my&vc=131109&act=&st=&ar=0&ye=0&ag=&r=" + url;
             } 
+        } else if (url.contains("17173.tv.sohu.com")) {
+            String content = HTTPUtils.getContent(url);
+            if (StringUtils.isBlank(content)) {
+                return false;
+            }
+            Matcher idMatcher = ID_17173_PATTERN.matcher(content);
+            Matcher uidMatcher = UID_17173_PATTERN.matcher(content);
+            long time = DateUtil.getCurrentTimestamp().getTime();
+            if (idMatcher.find() && uidMatcher.find()) {
+                String id = idMatcher.group(1);
+                String uid = uidMatcher.group(1);
+                shuaUrl = URL_17173_PREFIX + "id=" +id + "&uid=" + uid;
+            }
+            
         } else {
             String content = HTTPUtils.getContent(url);
             if (StringUtils.isBlank(content)) {
@@ -126,7 +147,7 @@ public class SohuShua extends Shua {
 
     public static void main(String[] args) {
         System.out.append("hehe");
-        SohuShua s = new SohuShua("http://tv.sohu.com/20120831/n352013332.shtml", 20);
+        SohuShua s = new SohuShua("http://17173.tv.sohu.com/v/1/11668/150/MTUwNjAzMQ==", 20);
         try {
              if (s.generateShuaUrl()) {
                  s.shua();
@@ -134,5 +155,6 @@ public class SohuShua extends Shua {
         } catch (Exception e) {
             logger.error("ERROR:" + e.getMessage());
         }
+        System.out.println("done");
     }
 }

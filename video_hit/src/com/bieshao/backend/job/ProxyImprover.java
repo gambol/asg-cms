@@ -33,7 +33,7 @@ public class ProxyImprover implements Runnable {
 				p.setDisabled(true);
 				p.setDisable_time(DateUtil.getCurrentTimestamp());
 				JDBCUtils.update(p, false);
-				logger.info("set this proxy to disabled. ip: " + p.getIp() + " port:" + p.getPort());
+				logger.debug("set this proxy to disabled. ip: " + p.getIp() + " port:" + p.getPort());
 			}
 		}
 		logger.info("stop proxy clean");

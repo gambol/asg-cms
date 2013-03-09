@@ -47,27 +47,34 @@ public class YoukuShua extends Shua {
             Matcher m = URL_ID_PATTERN.matcher(url);
             if (m.find()) {
                 id = m.group(1);
-            } 
-            
+            }             
             
             if (id == null) {
-                logger.info("error in get id");
+                logger.debug("error in get id");
                 return;
             }
-            MultiThreadTool pho = new MultiThreadTool();
-            for(int i = 0; i * EVERY_STEP < num;  i++) {
-                pho.multiRun(EVERY_STEP, YoukuShuaImpl.class, id);
-                Thread.sleep(SLEEP_TIME);
+            
+            MultiThreadTool pho = MultiThreadTool.getInstance();
+
+            pho.multiRun(num, YoukuShuaImpl.class, id);
+              //  Thread.sleep(SLEEP_TIME);
+            //  pho.destroy();
+            
+            /*
+            YoukuShuaImpl ys = new YoukuShuaImpl();
+            ys.setYoukuId(id);
+            for(int i = 0; i < num; i++) {
+               ys.run();
             }
-            
-            
+            System.out.println("succtimes:" + YoukuShuaImpl.succTimes);
+            */
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }           
     
     public static void main(String[] args) {
-        YoukuShua ys = new YoukuShua("http://v.youku.com/v_show/id_XNTIyMjQ5OTMy.html", 500);
+        YoukuShua ys = new YoukuShua("http://v.youku.com/v_show/id_XMzUzNjIyMzUy.html", 2000);
         ys.doJob();
     }
 }
