@@ -19,7 +19,6 @@ import cn.bieshao.common.HTTPConst;
  * 用来测试的方法，不用于生产
  * @author panguixiang
  * 
- *
  */
 public class PostUtil {
     /**

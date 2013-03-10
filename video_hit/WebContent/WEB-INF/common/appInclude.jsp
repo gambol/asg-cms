@@ -2,8 +2,8 @@
 <head>
     <meta charset="utf-8" />
     <title>刷跨网--第一个在线免费刷视频流量网站</title>
-    <meta name="description" content="刷跨网，快速免费在线帮您增加视频点击流量。土豆，优酷，新浪视频，腾讯视频，56,爱奇异" />
-    <meta name="keywords" content="刷跨网 视频 点击 刷 增加 土豆 优酷 新浪 腾讯 56 爱奇异 流量" />
+    <meta name="description" content="刷跨网，快速免费在线帮您增加视频点击流量。土豆，优酷，新浪视频，腾讯视频，56,爱奇异，刷视频流量" />
+    <meta name="keywords" content="刷跨网 视频 点击 刷 增加 土豆 优酷 新浪 腾讯 56 爱奇异 流量 刷kua shua跨 shuakua" />
     <!-- Favicons --> 
     <link rel="shortcut icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
     <link rel="icon" type="image/png" HREF="/img/favicons/small-logo.png"/>

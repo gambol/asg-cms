@@ -72,9 +72,6 @@
 					<a href="/ku6.htm"><img src="/img/ku6.png"/>&nbsp;&nbsp;刷酷6视频点击数</a>
 				</p>
 			
-				<p>
-					<a href="#"><img src="/img/iqiyi.png"/>&nbsp;&nbsp;刷爱奇异视频点击数</a> &nbsp;&nbsp;(即将推出,敬请期待)
-				</p>
                 </section>
 
                 <%@include file="../common/sider.jsp" %>

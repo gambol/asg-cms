@@ -48,30 +48,7 @@ public class HTTPUtils {
      * @throws ClientProtocolException
      */
     public static String getContent(String url) throws ClientProtocolException, IOException {
-        // 创建HttpClient实例
-        HttpClient httpclient = new DefaultHttpClient();
-        // 创建Get方法实例
-        httpclient.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
-        httpclient.getParams().setParameter(CoreProtocolPNames.USER_AGENT, HTTPConst.USER_AGENT);
-        HttpGet httpgets = new HttpGet(url);
-        HttpResponse response = httpclient.execute(httpgets);
-        HttpEntity entity = response.getEntity();
-        if (entity != null) {
-            String contentCharset = EntityUtils.getContentCharSet(entity);
-
-            byte[] contentData = EntityUtils.toByteArray(entity);
-            String str = null; //
-            if (contentCharset != null) {
-                str = new String(contentData, contentCharset);
-            } else {
-                str = new String(contentData);
-            }
-            logger.debug(url + " : " + str);
-            // Do not need the rest
-            httpgets.abort();
-            return str;
-        }
-        return null;
+       return getContentWithProxy(url, null, 0);
     }
 
     public static String readInputStream(InputStream input) throws IOException {
@@ -105,6 +82,45 @@ public class HTTPUtils {
         return sb.toString();
     }
 
+    /**
+     * 由某个代理，来取得内容
+     * @param url
+     * @param ip
+     * @param port
+     * @return
+     * @throws Exception
+     */
+    public static String getContentWithProxy(String url, String ip, int port)  throws ClientProtocolException, IOException {
+        // 创建HttpClient实例
+        HttpClient httpclient = new DefaultHttpClient();
+        // 创建Get方法实例
+        httpclient.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
+        httpclient.getParams().setParameter(CoreProtocolPNames.USER_AGENT, HTTPConst.USER_AGENT);
+        if (port != 0 && ip != null) {
+            HttpHost host = new HttpHost(ip, port);
+            httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
+        }
+        HttpGet httpgets = new HttpGet(url);
+        HttpResponse response = httpclient.execute(httpgets);
+        HttpEntity entity = response.getEntity();
+        if (entity != null) {
+            String contentCharset = EntityUtils.getContentCharSet(entity);
+
+            byte[] contentData = EntityUtils.toByteArray(entity);
+            String str = null; //
+            if (contentCharset != null) {
+                str = new String(contentData, contentCharset);
+            } else {
+                str = new String(contentData);
+            }
+            logger.debug(url + " : " + str);
+            // Do not need the rest
+            httpgets.abort();
+            return str;
+        }
+        return null;
+    }
+    
     /**
      * 验证proxy是否可以正常工作
      * 

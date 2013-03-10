@@ -25,10 +25,24 @@
                 <param name="ConversionPattern" value="%p %c %d{yyyy-MM-dd HH:mm:ss} - %m%n" />
         </layout>
     </appender>
+	
+	 <appender name="commentAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/shuakua-comment.log" />
+        <param name="MaxFileSize" value="10240KB" />
+        <param name="MaxBackupIndex" value="5" />
+        <layout class="org.apache.log4j.PatternLayout">
+                <param name="ConversionPattern" value="%p %c %d{yyyy-MM-dd HH:mm:ss} - %m%n" />
+        </layout>
+    </appender>
 
 	<logger name="http">
         <level value="INFO" />
         <appender-ref ref="HttpAppender" />
+    </logger>
+
+	<logger name="comment">
+        <level value="INFO" />
+        <appender-ref ref="commentAppender" />
     </logger>
 	
    	<root>     

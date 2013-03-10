@@ -10,17 +10,22 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import cn.bieshao.comment.AddTudouComment;
+
 public class TimerJobListener implements ServletContextListener {
 	private ScheduledExecutorService proxyImproveJob =  Executors.newScheduledThreadPool(1);
+	private ScheduledExecutorService tudouCommentJob =  Executors.newScheduledThreadPool(1);
 	
 	public void contextInitialized(ServletContextEvent context) {
 		// testService.scheduleWithFixedDelay(new TestTimer(), 1, 10,  TimeUnit.SECONDS);
 		// indexHtml.scheduleWithFixedDelay(new HTMLGenerator(context.getServletContext()), 1, 4000,  TimeUnit.SECONDS);
 		proxyImproveJob.scheduleWithFixedDelay(new ProxyImprover(), 5, 120,  TimeUnit.MINUTES);
+		tudouCommentJob.scheduleWithFixedDelay(new AddTudouComment(), 2, 480,  TimeUnit.MINUTES);
 	}
 	
 	public void contextDestroyed(ServletContextEvent context) {
 		proxyImproveJob.shutdown();
+		tudouCommentJob.shutdown();
 	}
 	
 	

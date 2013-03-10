@@ -10,8 +10,6 @@ import cn.bieshao.common.PageResult;
 import cn.bieshao.utils.JDBCUtils;
 
 import com.bieshao.model.TodoJob;
-import com.bieshao.model.ServerInfo;
-
 /**
  *
  * @author zhenbao.zhou
@@ -24,7 +22,7 @@ public class CategoryDao {
      * 按照display 逆序, id 顺序
      * @return 
      */
-      public static PageResult<TodoJob> getAllCategory() {
+    public static PageResult<TodoJob> getAllCategory() {
        LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
        orderBy.put("display_order", true);
        orderBy.put("id", false);
