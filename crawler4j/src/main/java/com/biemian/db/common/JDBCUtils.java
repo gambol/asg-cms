@@ -22,7 +22,7 @@ import java.text.DateFormat;
 import org.apache.log4j.Logger;
 
 import com.biemian.db.common.QueryResult;
-import com.biemian.utils.DateUtils;
+import com.biemian.utils.DateUtil;
 
 /**
  *
@@ -309,10 +309,10 @@ public class JDBCUtils {
             } else if (f.getType() == Date.class) {
                 //日期,转换为'2012-01-01 00:00::00' 的形式 
                 Date date = (Date) o;
-                retVal = "'" + DateUtils.getTimeStr(date) + "'";//SimpleDateFormat 
+                retVal = "'" + DateUtil.getTimeStr(date) + "'";//SimpleDateFormat 
             } else if (f.getType() == Timestamp.class) {
                 Timestamp ts = (Timestamp) o;
-                retVal = "'" + DateUtils.getTimeStr(ts) + "'";
+                retVal = "'" + DateUtil.getTimeStr(ts) + "'";
             } else {
                 //其它如int float等,直接写就OK 
                 retVal = o + "";

@@ -10,7 +10,7 @@ import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import com.biemian.db.dao.ArticleDao;
-import com.biemian.utils.DateUtils;
+import com.biemian.utils.DateUtil;
 import com.biemian.utils.HTTPGet;
 import com.biemian.utils.IOUtil;
 import com.biemian.utils.TextUtils;
@@ -98,7 +98,7 @@ public class YaolanZhishiParser extends ContentParser {
 
 	public void store() {
 		int channelId = 1;
-		ArticleDao.insert(title, content, "", DateUtils.getNowtimeStr(), channelId);
+		ArticleDao.insert(title, content, "", DateUtil.getNowtimeStr(), channelId);
 	}
 	
 	

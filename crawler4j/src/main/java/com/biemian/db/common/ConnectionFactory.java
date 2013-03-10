@@ -23,11 +23,11 @@ public class ConnectionFactory {
 
     private static final String KEY_DB_URL = "KEY_DB_URL";
     private static final String DEFAULT_DB_URL =
-            "jdbc:mysql://localhost/j2cms?useUnicode=true&characterEncoding=utf-8&autoReconnect=true";
+            "jdbc:mysql://118.192.19.156/j2cms?useUnicode=true&characterEncoding=utf-8&autoReconnect=true";
     private static final String KEY_DB_USERNAME = "KEY_DB_USERNAME";
-    private static final String DEFAULT_DB_USERNAME = "gambol";
+    private static final String DEFAULT_DB_USERNAME = "zhenbao.zhou";
     private static final String KEY_DB_PASSWORD = "KEY_DB_PASSWORD";
-    private static final String DEFAULT_DB_PASSWORD = "121212";
+    private static final String DEFAULT_DB_PASSWORD = "qunar@123";
     private static final String KEY_DB_USE_POOL = "KEY_DB_USE_POOL";
     private static final String DEFAULT_DB_USE_POOL = "yes";
     private static final String DEFAULT_POOL_NAME = "jdbc/biemian";
@@ -111,4 +111,6 @@ public class ConnectionFactory {
             log.warn("Cannot create db.xml", e);
         }
     }
+    
+    
 }
