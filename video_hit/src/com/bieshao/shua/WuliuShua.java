@@ -32,8 +32,8 @@ public class WuliuShua extends Shua {
     private final static String URL_PREFIX = "http://stat.56.com/stat/flv.php?";
     private final static Pattern URL_ID_PATTERN = Pattern.compile("http://www.56.com/.*/.*[_|-](.+).html");   // 从url中取出id
     // 一次最多发50个请求
-    private final static int EVERY_STEP = 100;
-    private final static int SLEEP_TIME = 20;
+    private final static int EVERY_STEP = 5;
+    private final static int SLEEP_TIME = 200;
     private String id;
     private String shuaUrl;
     private String pct;
@@ -118,7 +118,7 @@ public class WuliuShua extends Shua {
         
       // SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 20);
 //         WuliuShua s = new WuliuShua("http://www.56.com/u44/v_ODY2NTgxMjE.html", 10);
-            WuliuShua s = new WuliuShua("http://www.56.com/u45/v_NjMyNTAxMjI.html", 10000);
+            WuliuShua s = new WuliuShua("http://www.56.com/u43/v_ODg2ODU4MTY.html", 500);
        //  SinaShua s = new SinaShua("http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html", 20);
         try {
              if (s.generateShuaUrl()) {

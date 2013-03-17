@@ -36,7 +36,7 @@ public class SinaShua extends Shua {
     private final static Pattern VID_PATTERN = Pattern.compile("\\s+vid\\s*:\\s*'(\\d+)[\'|\\|]");  // 从内容中取出id
     // 一次最多发50个请求
     private final static int EVERY_STEP = 100;
-    private final static int SLEEP_TIME = 20;
+    private final static int SLEEP_TIME = 250;
     String id;
     String shuaUrl;
 
@@ -124,8 +124,8 @@ public class SinaShua extends Shua {
 
     public static void main(String[] args) {
         
-      // SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 20);
-         SinaShua s = new SinaShua("http://video.sina.com.cn/m/xnedmmqs_61193045.html", 20);
+       SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 200);
+      //   SinaShua s = new SinaShua("http://video.sina.com.cn/m/xnedmmqs_61193045.html", 200);
        //  SinaShua s = new SinaShua("http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html", 20);
         try {
              if (s.generateShuaUrl()) {

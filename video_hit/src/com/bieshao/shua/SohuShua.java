@@ -43,7 +43,7 @@ public class SohuShua extends Shua {
     
     // 一次最多给sohu发50个请求
     private final static int EVERY_STEP = 100;
-    private final static int SLEEP_TIME = 20;
+    private final static int SLEEP_TIME = 100;
     String id;
     String shuaUrl;
 
@@ -147,7 +147,9 @@ public class SohuShua extends Shua {
 
     public static void main(String[] args) {
         System.out.append("hehe");
-        SohuShua s = new SohuShua("http://17173.tv.sohu.com/v/1/11668/150/MTUwNjAzMQ==", 20);
+       //SohuShua s = new SohuShua("http://17173.tv.sohu.com/v/1/11668/151/MTUxNzk2OA==", 200);
+    //     SohuShua s = new SohuShua("http://tv.sohu.com/20130315/n368979003.shtml", 200);
+         SohuShua s = new SohuShua("http://my.tv.sohu.com/user/detail/65748923.shtml", 200);
         try {
              if (s.generateShuaUrl()) {
                  s.shua();

@@ -49,7 +49,7 @@
 					<p></p>
 					<br/>
 				<p>
-					<a href="/youku.htm"><img src="/img/youku.png"/>&nbsp;&nbsp;刷优酷视频点击数</a>&nbsp;&nbsp;<span class="label label-red">最新火热推出!</span>
+					<a href="/youku.htm"><img src="/img/youku.png"/>&nbsp;&nbsp;刷优酷视频点击数</a>
 				</p>				
  				<p>
 

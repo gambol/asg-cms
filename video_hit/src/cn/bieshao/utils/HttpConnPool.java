@@ -42,7 +42,7 @@ public class HttpConnPool {
 	    /** 
 	     * 读取超时时间 
 	     */  
-	    public final static int READ_TIMEOUT = 15000;  
+	    public final static int READ_TIMEOUT = 10000;  
 	  
 	    static {  
 	        httpParams = new BasicHttpParams();  

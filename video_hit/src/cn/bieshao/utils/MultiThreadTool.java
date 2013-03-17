@@ -37,50 +37,47 @@ import cn.bieshao.proxy.ProxyHandler;
 
 /**
  * 目前这个类只有Youkushua使用。考虑将来将PoolHttpGet里的东西，迁移过来
+ * 
  * @author zhenbao.zhou
- *
+ * 
  */
 public class MultiThreadTool {
-	private final static Logger logger = Logger.getLogger("http");
-	private static MultiThreadTool mul;
-	
+    private final static Logger logger = Logger.getLogger("http");
+    private static MultiThreadTool mul;
+
     // 线程池
     private static ExecutorService exe = null;
     // 线程池的容量
-    private static final int  POOL_SIZE = 200;
-    
+    private static final int POOL_SIZE = 100;
+
     private static final int delay = 3000;
 
-    
     public static MultiThreadTool getInstance() {
         if (mul == null) {
             mul = new MultiThreadTool();
             exe = Executors.newFixedThreadPool(POOL_SIZE);
         }
-        
+
         return mul;
     }
-    
+
     private MultiThreadTool() {
-       
+
     }
-    
-    public <T extends AbstractThread> void multiRun(int threadSize, final Class<T> clz, 
-            Object param) throws Exception {
+
+    public <T extends AbstractThread> void multiRun(int threadSize, final Class<T> clz, Object param) throws Exception {
         int nowDelay = 0;
         for (int i = 0; i < threadSize; i++) {
             T t = clz.newInstance();
             t.setParam(param);
-           // exe.schedule(t, nowDelay, TimeUnit.MILLISECONDS);
-             exe.execute(t);
-             /*   
-            if (nowDelay % 100 == 99) {
-                nowDelay += delay;
+            // exe.schedule(t, nowDelay, TimeUnit.MILLISECONDS);
+            exe.execute(t);
+            if (i % POOL_SIZE == POOL_SIZE - 1) {
+                Thread.sleep(200);
             }
-            */
         }
     }
-    
+
     public void destroy() {
         exe.shutdown();
     }

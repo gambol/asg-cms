@@ -172,7 +172,7 @@ public class HTTPUtils {
             // EntityUtils.consume(entity);
             content = HTTPUtils.readInputStream(entity.getContent());
         } catch (Exception ex) {
-            logger.debug("error in get url:" + httpget.getURI() + " errmsg:" + ex.getMessage());
+            logger.info("error in get url:" + httpget.getURI() + " errmsg:" + ex.getMessage());
             httpget.abort();
         } finally {
             httpget.releaseConnection();
@@ -207,9 +207,9 @@ public class HTTPUtils {
             }
         
             HttpResponse response = httpClient.execute(httppost);
-            logger.debug("ok in post url:" + httppost.getURI());
+            logger.info("ok in post url:" + httppost.getURI());
         } catch (Exception ex) {
-            logger.debug("error in post url:" + httppost.getURI() + " errmsg:" + ex.getMessage());
+            logger.info("error in post url:" + httppost.getURI() + " errmsg:" + ex.getMessage());
             httppost.abort();
       //       ex.printStackTrace();
         } finally {

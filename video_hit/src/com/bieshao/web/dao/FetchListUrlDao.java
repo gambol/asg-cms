@@ -16,5 +16,10 @@ public class FetchListUrlDao {
         return pr.getPageList();
     }
     
-    
+    public static List<FetchListUrl> queryList(String webName) {
+        LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
+        PageResult<FetchListUrl> pr = JDBCUtils.getPageData(FetchListUrl.class, 10000, 1, orderBy, " web = '" + webName.trim()
+                +  "' and disabled = false");
+        return pr.getPageList();
+    }
 }

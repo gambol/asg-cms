@@ -1,18 +1,14 @@
 package cn.bieshao.comment;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import cn.bieshao.common.PageResult;
-import cn.bieshao.utils.JDBCUtils;
 
 import com.bieshao.model.Comment;
 import com.bieshao.model.FetchListUrl;
-import com.bieshao.model.Proxy;
 import com.bieshao.model.WebSiteAccount;
 import com.bieshao.web.dao.CommentDao;
 import com.bieshao.web.dao.FetchListUrlDao;
@@ -25,8 +21,8 @@ import com.bieshao.web.dao.WebAccountDao;
  * 
  */
 public class AddTudouComment implements Runnable {
-    private final static int COMMENT_INTERVAL = 60000; // 两次评论之间的间隔
-    private final static int REFRESH_LIST_INTERVAL = COMMENT_INTERVAL * 20; // 每次刷新列表页的时间
+    private final static int COMMENT_INTERVAL = 480000; // 两次评论之间的间隔
+    //  private final static int REFRESH_LIST_INTERVAL = COMMENT_INTERVAL * 20; // 每次刷新列表页的时间
     private final static Logger logger = Logger.getLogger("comment");
 
     @Override
@@ -44,16 +40,13 @@ public class AddTudouComment implements Runnable {
         // 随机用一个帐号
         for (FetchListUrl fetchListUrl : listUrlList) {
             String url = fetchListUrl.getUrl();
-            WebSiteAccount account = accountList.get(new Random().nextInt(accountList.size()));
+           
             try {
-                doTudouComment(account.getUsername(), account.getPassword(), url, commentList);
+                doTudouComment(accountList, url, commentList);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-        logger.info("tudou comment. sleep " + REFRESH_LIST_INTERVAL + " mill seconds");
-
     }
 
     /**
@@ -65,27 +58,33 @@ public class AddTudouComment implements Runnable {
      * @param commentList
      * @throws Exception
      */
-    public void doTudouComment(String user, String password, String listUrl, List<Comment> commentList)
+    public void doTudouComment(List<WebSiteAccount> accountList, String listUrl, List<Comment> commentList)
             throws Exception {
-        TudouComment tc = new TudouComment();
+        TudouCommentService tc = new TudouCommentService();
 
         if (commentList == null || commentList.size() == 0) {
             return;
         }
-
-        tc.login(user.trim(), password.trim(), true);
+        WebSiteAccount account = accountList.get(new Random().nextInt(accountList.size()));
+        tc.login(account.getUsername().trim(), account.getPassword().trim(), true);
         Set<String> urlList = tc.getVideoUrlSet(listUrl);
 
+        Random rand = new Random();
         for (String url : urlList) {
-            String iid = tc.getIid(url.trim());
+            account = accountList.get(rand.nextInt(accountList.size()));
+            TudouCommentService commentTc = new TudouCommentService();
+            commentTc.login(account.getUsername().trim(), account.getPassword().trim(), true);
+            String iid = commentTc.getIid(url.trim());
             if (iid == null) {
                 logger.error("error in get iid. url:" + url);
                 return;
             }
 
-            Comment comment = commentList.get(new Random().nextInt(commentList.size()));
+            Comment comment = commentList.get(rand.nextInt(commentList.size()));
             String newComment = generateNewComment(comment.getComment());
-            tc.post(iid, newComment, true);
+            logger.info("tudou post:" + url + " content:" + newComment);
+            commentTc.post(iid, newComment, true);
+            
             try {
                 Thread.sleep(COMMENT_INTERVAL);
             } catch (Exception e) {

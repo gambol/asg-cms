@@ -15,4 +15,11 @@ public class WebAccountDao {
         PageResult<WebSiteAccount> pr = JDBCUtils.getPageData(WebSiteAccount.class, 10000, 1, orderBy, " web = 'tudou' and disabled = false");
         return pr.getPageList();
     }
+    
+    public static List<WebSiteAccount> queryAccount(String webName) {
+        LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
+        PageResult<WebSiteAccount> pr = JDBCUtils.getPageData(WebSiteAccount.class, 10000, 1, orderBy, " web = '"+ webName.trim() + 
+                "' and disabled = false");
+        return pr.getPageList();
+    }
 }

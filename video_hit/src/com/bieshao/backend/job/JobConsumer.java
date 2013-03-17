@@ -22,7 +22,8 @@ public class JobConsumer {
 	private final static int SLEEP_TIME = 20;
 	private final static Logger logger = Logger.getLogger(JobConsumer.class);
 	private final static String SHUA_PACKAGE = "com.bieshao.shua.";
-
+	private final static double ERROR_TRY_TIME  = 1.5; //系统进程有代理服务器异常，所以我们给他一个大于1的系数。。
+	
 	public void go() {
 		logger.info("start job Consumer");
 		while (true) {
@@ -49,8 +50,8 @@ public class JobConsumer {
 			Class clazz = Class.forName(SHUA_PACKAGE + job.getJobClass());
 			Shua ts = (Shua)clazz.newInstance();
 			
-			// 由于经常有代理服务器异常，所以我自己给他乘以3好了
-			ts.setNum(job.getNum() * 3);
+			// 由于经常有代理服务器异常，所以我自己给他乘以一个系数好了
+			ts.setNum((int)(job.getNum() * ERROR_TRY_TIME));
 			//ts.setNum(job.getNum());
 			
 			ts.setUrl(job.getUrl());
