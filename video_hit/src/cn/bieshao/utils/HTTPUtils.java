@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -34,13 +33,19 @@ import org.apache.log4j.Logger;
 import com.bieshao.model.Proxy;
 
 import cn.bieshao.common.HTTPConst;
-import cn.bieshao.proxy.ProxyHandler;
+import cn.bieshao.global.Config;
 
 public class HTTPUtils {
 
     private final static Logger logger = Logger.getLogger("http");
 
-    private final static String VERIFY_URL = "http://www.baidu.com";
+    private final static String VERIFY_URL = "http://www.shuakua.com/ip/realIp.htm";
+    //private final static String VERIFY_URL = "http://www.baidu.com/";
+    
+    public final static int ERROR_PROXY = 0;
+    public final static int WORKING_PROXY = 1;
+    public final static int ANONYMOUS_PROXY = 2; 
+    public final static int MOVE_AWAY_PROXY = 3;
 
     /**
      * @param args
@@ -96,11 +101,12 @@ public class HTTPUtils {
         // 创建Get方法实例
         httpclient.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
         httpclient.getParams().setParameter(CoreProtocolPNames.USER_AGENT, HTTPConst.USER_AGENT);
+        HttpGet httpgets = new HttpGet(url);
         if (port != 0 && ip != null) {
             HttpHost host = new HttpHost(ip, port);
-            httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
+            httpgets.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
         }
-        HttpGet httpgets = new HttpGet(url);
+        
         HttpResponse response = httpclient.execute(httpgets);
         HttpEntity entity = response.getEntity();
         if (entity != null) {
@@ -122,36 +128,59 @@ public class HTTPUtils {
     }
     
     /**
-     * 验证proxy是否可以正常工作
+     * 验证proxy是否可以正常工作,
+     * 如果不能走带里，返回0
+     * 如果可以正常工作，返回1.
+     * 如果这个代理是匿名代理，返回2
+     * 
      * 
      * @param proxy
      * @return
      */
-    public static boolean verifyProxy(String ip, int port) {
+    public static int verifyProxy(String ip, int port) {
         // 创建HttpClient实例
         HttpClient httpclient = new DefaultHttpClient();
         // 创建Get方法实例
         httpclient.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
-        httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 500);
-        httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 500);
+        httpclient.getParams().setParameter(CoreProtocolPNames.USER_AGENT, HTTPConst.USER_AGENT);
+        httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
+        httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 2000);
 
         HttpHost host = new HttpHost(ip, port);
-        httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
+        HttpGet httpgets = new HttpGet(VERIFY_URL);
+        httpgets.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
 
-        HttpHead header = new HttpHead(VERIFY_URL);
         try {
-            HttpResponse response = httpclient.execute(header);
+            HttpResponse response = httpclient.execute(httpgets);
             int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpStatus.SC_OK) {
-                return true;
+            if (statusCode != HttpStatus.SC_OK) {
+                return ERROR_PROXY;
+            }
+            
+            HttpEntity entity = response.getEntity();
+            String str = null;
+            if (entity != null) {
+                // ensure the connection gets released to the manager
+                // EntityUtils.consume(entity);
+                str = HTTPUtils.readInputStream(entity.getContent());
+                // Do not need the rest
+                httpgets.abort();
+            }
+            
+            if (ip.equals(str)){
+                return ANONYMOUS_PROXY;
             } else {
-                return false;
+                // 如果长度过长，肯定是因为丫转到其他网站去了
+                if (str.length() < 50) {
+                    return WORKING_PROXY;
+                } else {
+                    return MOVE_AWAY_PROXY;
+                }
             }
         } catch (Exception e) {
-
+            // e.printStackTrace();
+            return ERROR_PROXY;
         }
-        return false;
-
     }
 
     public static String get(HttpClient httpClient, Proxy proxy, String url) {
@@ -164,7 +193,7 @@ public class HTTPUtils {
         
         try {
             HttpResponse response = httpClient.execute(httpget);
-            HttpHost host = (HttpHost)httpget.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY);
+ //           HttpHost host = (HttpHost)httpget.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY);
  //           System.out.println("host:" + host.getHostName() + ":" + host.getPort());
 //            System.out.println("httpclient:" + httpClient);
             HttpEntity entity = response.getEntity();
@@ -188,6 +217,7 @@ public class HTTPUtils {
       
         // 填入各个表单域的 值
         List<NameValuePair> data = new ArrayList<NameValuePair>();
+        
         Iterator it = dataMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
@@ -207,7 +237,13 @@ public class HTTPUtils {
             }
         
             HttpResponse response = httpClient.execute(httppost);
-            logger.info("ok in post url:" + httppost.getURI());
+            String msg = "ok in post url:" + httppost.getURI();
+            if (dataMap.get("url") != null) {
+                // 方便我在logger里看究竟是哪个url
+                msg += " youkuUrl: " + dataMap.get("url").toString();
+            }
+            
+            logger.info(msg);
         } catch (Exception ex) {
             logger.info("error in post url:" + httppost.getURI() + " errmsg:" + ex.getMessage());
             httppost.abort();
@@ -216,9 +252,22 @@ public class HTTPUtils {
             httppost.releaseConnection();
         }
     }
+    /*
+     * 0 2.135.243.138:9090
+0 2.135.243.154:9090
+0 2.135.243.162:9090
+0 27.50.81.73:3128
+0 42.121.18.69:9088
+0 58.215.75.170:80
+0 59.65.233.132:80
+0 60.160.112.67:808
+2 61.145.121.124:88
+2 61.145.121.124:89
+2 203.92.47.202:8082
+     */
 
     public static void main(String[] args) {
-        System.out.println(verifyProxy("110.4.12.170", 83));
+        System.out.println(verifyProxy("203.92.47.202", 8082));
     }
 
 }

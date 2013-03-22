@@ -1,0 +1,1 @@
+alter table proxy add column proxy_type int default 0;

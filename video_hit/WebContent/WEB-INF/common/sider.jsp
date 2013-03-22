@@ -52,5 +52,16 @@
 			</dl>
 		</section>
 	</div>
+	
+	<div class="content-box">
+		<header style="cursor: s-resize;">
+			<h3>其他方式</h3>
+		</header>
+		<section>
+			<dd>
+			为了方便需要大量刷视频流量的用户，特补充一个淘宝链接。10块钱20万次浏览量。<a href="http://item.taobao.com/item.htm?id=17342509603" target="_blank">点此进入</a>
+			</dd>
+		</section>
+	</div>
 </aside>
 

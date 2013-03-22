@@ -18,7 +18,7 @@
 			rules : {
 				url : {
 					required : true,
-					url : true,
+					url : true
 				},
 				captcha : {
 					required : true,
@@ -82,16 +82,9 @@
 					<a href="/">回到首页</a> → ${last_step_name }
 				</h3>
 				
-				
-				
 				<form id="countForm" action="${post_url }" method="post">
 					<table class="url_form">
 					<tbody>
-						<tr>
-							<th>视频链接:
-							</th>
-							<td><input style="width:400px" type="text" name="url" value="" placeholder="视频播放链接"></td>
-						</tr>
 						<tr>
 							<th>增加数量:</th>
 							<td>
@@ -100,11 +93,27 @@
 									<img width="16" height="16" src="/img/delete.png">
 								</a>&nbsp; 
 								<input	type="text" readonly value="${num }次" size="5" name="num">
-								<a href="${addUrl }" title="增加500次，最多不超过3000次">
+								<a href="${addUrl }" title="增加500次，最多不超过2000次">
 								 	<img width="16" height="16" src="/img/add.png">
 								</a>
-								<div class="box box-info" style="margin-top:2px">根据视频网站规则不同，每次操作最终产生的播放增加数可能比预设的播放数多，请酌情设定想要增加的播放数。</div>
+								<div class="box box-info" style="margin-top:2px"><p>根据视频网站规则不同，每次操作最终产生的播放增加数可能比预设的播放数多，请酌情设定想要增加的播放数。</p>
+								<p>
+									为了给新用户提供更好的服务，每个IP的前十个任务可以刷新3000次，并且这些任务有更高的优先级。
+								</p>
+								</div>
+								
 							</td>
+						</tr>
+						<tr>
+							<th>视频链接:
+							</th>
+							<td><input style="width:400px" type="text" name="url" value="" placeholder="视频播放链接"></td>
+						</tr>
+
+						<tr>
+							<th>验&nbsp;证&nbsp;码:</th>
+							<td><input type="text" name="captcha" id="captcha"
+								class="three" /></td>
 						</tr>
 						<tr>
 							<th></th>
@@ -112,12 +121,6 @@
 								<a href="javascript:void(0)" onclick="refreshImage()">看不清?
 									换一张</a></td>
 						</tr>
-						<tr>
-							<th>验&nbsp;证&nbsp;码:</th>
-							<td><input type="text" name="captcha" id="captcha"
-								class="three" /></td>
-						</tr>
-
 						<tr>
 							<td></td>
 							<td><input type="submit" value="刷！"

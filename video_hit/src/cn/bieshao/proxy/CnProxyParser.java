@@ -11,6 +11,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import cn.bieshao.utils.HTTPUtils;
+
 import com.bieshao.model.Proxy;
 
 /**
@@ -124,10 +126,13 @@ public class CnProxyParser extends AbstractParser {
 	}
 	
 	public static void main(String[] args) throws Exception{
-		String url = "http://www.cnproxy.com/proxy2.html";
+		String url = "http://www.cnproxy.com/proxy3.html";
 		Document doc = Jsoup.connect(url).get();
 		CnProxyParser pp = new CnProxyParser(doc);
-		List l = pp.parse();
+		List<Proxy> l = pp.parse();
+        for(Proxy p : l) {
+            System.out.println(HTTPUtils.verifyProxy(p.getIp(), p.getPort()) + " " + p);
+        }
 		System.out.println(l);
 	}
 }

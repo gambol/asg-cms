@@ -28,6 +28,9 @@ public class Proxy implements Serializable {
     @DBColumnName(value = "from_source")
     private String from;
     
+    @DBColumnName(value = "proxy_type")
+    private int proxyType;
+    
 	public int getId() {
 		return id;
 	}
@@ -86,8 +89,14 @@ public class Proxy implements Serializable {
 	public String toString() {
 		return ip + ":" + port;
 	}
-   
-	public static void main(String[] args) {
+	
+    public int getProxyType() {
+        return proxyType;
+    }
+    public void setProxyType(int proxyType) {
+        this.proxyType = proxyType;
+    }
+    public static void main(String[] args) {
 		Proxy p = new Proxy();
 		p.setIp("asdf");
 		System.out.println(p.hashCode());

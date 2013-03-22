@@ -19,15 +19,21 @@ import cn.bieshao.common.PageResult;
  * 
  */
 public class JobConsumer {
-	private final static int SLEEP_TIME = 20;
+	private final static int SLEEP_TIME = 1000;
 	private final static Logger logger = Logger.getLogger(JobConsumer.class);
 	private final static String SHUA_PACKAGE = "com.bieshao.shua.";
 	private final static double ERROR_TRY_TIME  = 1.5; //系统进程有代理服务器异常，所以我们给他一个大于1的系数。。
 	
+	private String jobName;
+	
+	public JobConsumer(String jobName) {
+	    this.jobName = jobName; 
+	}
+	
 	public void go() {
 		logger.info("start job Consumer");
 		while (true) {
-			PageResult<TodoJob> jobPR = TodoJobDao.getTodoJob();
+			PageResult<TodoJob> jobPR = TodoJobDao.getTodoJob(jobName);
 			for (TodoJob job : jobPR.getPageList()) {
 				doJob(job);
 				TodoJobDao.updateJobToDone(job);
@@ -64,7 +70,7 @@ public class JobConsumer {
 	
 	public static void main(String[] args) throws Exception {
 
-		JobConsumer jc = new JobConsumer();
+		JobConsumer jc = new JobConsumer("" + TudouShua.class);;
 		jc.go();
 
 		

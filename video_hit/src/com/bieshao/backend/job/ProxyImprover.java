@@ -29,12 +29,25 @@ public class ProxyImprover implements Runnable {
 		List<Proxy> proxyList = ProxyDao.selectAvailableProxy();
 
 		for (Proxy p : proxyList) {
-			if (!verifyProxy(p)) {
-				p.setDisabled(true);
-				p.setDisable_time(DateUtil.getCurrentTimestamp());
-				JDBCUtils.update(p, false);
-				logger.debug("set this proxy to disabled. ip: " + p.getIp() + " port:" + p.getPort());
-			}
+            int proxyType = HTTPUtils.verifyProxy(p.getIp(), p.getPort());
+
+            switch (proxyType) {
+            case HTTPUtils.ANONYMOUS_PROXY:
+            case HTTPUtils.WORKING_PROXY:
+                if (p.isDisabled() || p.getProxyType() != proxyType) {
+                    p.setDisabled(false);
+                    p.setProxyType(proxyType);
+                    JDBCUtils.update(p, false);
+                }
+                break;
+            default:
+                if (!p.isDisabled() || p.getProxyType() != proxyType) {
+                    p.setDisabled(true);
+                    p.setProxyType(proxyType);
+                    JDBCUtils.update(p, false);
+                }
+                break;
+            }
 		}
 		logger.info("stop proxy clean");
 	}
@@ -49,14 +62,6 @@ public class ProxyImprover implements Runnable {
 		cm.xiziCrawl();
 		cm.czproxyCrawl();
 		cm.wydlProxyCrawl();
-	}
-
-	public static boolean verifyProxy(Proxy p) {
-		if (p == null) {
-			return false;
-		}
-
-		return HTTPUtils.verifyProxy(p.getIp(), p.getPort());
 	}
 
 	@Override
@@ -75,7 +80,7 @@ public class ProxyImprover implements Runnable {
 	}
 
 	public static void main(String[] args) {
-//		clean();
-		searchNew();
+		clean();
+//		searchNew();
 	}
 }

@@ -11,6 +11,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import cn.bieshao.utils.HTTPUtils;
+
 import com.bieshao.model.Proxy;
 
 /**
@@ -79,18 +81,19 @@ public class XiciProxyParser extends AbstractParser {
 				logger.info("error in XiciProxy: " + e.getMessage());
 				e.printStackTrace();
 			}
-
 		}
-
 		return proxyList;
 	}
 
 	public static void main(String[] args) throws Exception {
-		String url = "http://www.xici.net.co/wn";
+		String url = "http://www.xici.net.co/wn/55";
 		Document doc = Jsoup.connect(url).get();
 		XiciProxyParser pp = new XiciProxyParser();
 		pp.setDoc(doc);
-		List l = pp.parse();
+		List<Proxy> l = pp.parse();
+		for(Proxy p : l) {
+		    System.out.println(HTTPUtils.verifyProxy(p.getIp(), p.getPort()) + " " + p);
+		}
 		System.out.println(l.size());
 	}
 }

@@ -13,35 +13,58 @@ import com.bieshao.web.dao.ProxyDao;
 public class ProxyService {
 	private final static Logger logger = Logger.getLogger(ProxyService.class);
 	/**
-	 * 判断这个host之前是否已经存在， 如果已经存在，那么就不需要插入。
+	 * 更新这个proxy的类型 和 type
+	 * 暂时同时保留 proxy_type 和 disabled 2个状态，慢慢改成只用proxy_type.
+	 * add comment in 2013-3-23
 	 * @param pl
 	 */
 	public static void coverAllProxy(List<Proxy> pl) {
 		//DBTool.execute("update proxy set disabled='true', disable_time = now()");
 		int i = 0;
 		for(Proxy p : pl) {
-		    boolean isDisable = !HTTPUtils.verifyProxy(p.getIp(), p.getPort());
+		    int proxyType = HTTPUtils.verifyProxy(p.getIp(), p.getPort());
 		    
 		    List<Proxy> proxyList = ProxyDao.selectProxy(p.getIp(), p.getPort()).getPageList();
 		    
 			if (proxyList.size() == 0) {
-				if (isDisable) {
-					logger.info("insert proxy:" + p.getIp() + ":" + p.getPort());
-					ProxyDao.insertProxy(p);
-					i++;
-				} else {
-					logger.debug("error in verify. ip:" + p.getIp() + " port:" + p.getPort());
-				}
+			    // 这个代理之前不存在
+			     switch (proxyType) {
+	                case HTTPUtils.ANONYMOUS_PROXY:
+	                case HTTPUtils.WORKING_PROXY:
+	                    p.setProxyType(proxyType);
+	                    p.setDisabled(false);
+	                    logger.info("insert proxy:" + p.getIp() + ":" + p.getPort() + " proxy_type:" + proxyType);
+	                    ProxyDao.insertProxy(p);
+	                    i++;
+	                    break;
+	                default:
+	                    logger.debug("error in verify. ip:" + p.getIp() + " port:" + p.getPort());
+	                    break;
+	            }
 			} else {
+			    // 已经存在过的
 			    Proxy newProxy = proxyList.get(0);
-			    if (isDisable != newProxy.isDisabled()) {
-                    logger.info("update proxy:" + p.getIp() + ":" + p.getPort() + " disabled status:" + isDisable);
-                    newProxy.setDisabled(isDisable);
-                    JDBCUtils.update(newProxy, false);
-                    i++;
-                } else {
-                    logger.debug("the same with verify result");
-                }
+			    
+			    switch (proxyType) {
+                case HTTPUtils.ANONYMOUS_PROXY:
+                case HTTPUtils.WORKING_PROXY:
+                    newProxy.setProxyType(proxyType);
+                    if (newProxy.isDisabled() || newProxy.getProxyType() != proxyType) {
+                        newProxy.setDisabled(false);
+                        logger.info("update proxy:" + p.getIp() + ":" + p.getPort() + " proxy type:" + proxyType);
+                        JDBCUtils.update(newProxy, false);
+                        i++;
+                    }
+                    break;
+                default:
+                    logger.debug("error in verify. ip:" + p.getIp() + " port:" + p.getPort());
+                    if (!newProxy.isDisabled() || newProxy.getProxyType() != proxyType) {
+                        newProxy.setDisabled(true);
+                        newProxy.setProxyType(proxyType);
+                        JDBCUtils.update(newProxy, false);
+                    }
+                    break;
+			    }
 			}
 		}
 		logger.info("we has " + pl.size() +" proxies, total insert:" + i + " proxies");

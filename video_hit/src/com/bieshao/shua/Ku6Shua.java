@@ -26,11 +26,11 @@ public class Ku6Shua extends Shua {
     private static final Logger logger = Logger.getLogger(Ku6Shua.class);
     // http://v.ku6.com/special/show_6557552/mgUkHRUrxHeI9_KEXuURrQ...html
     // http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&o=5438544&c=138000&v=mgUkHRUrxHeI9_KEXuURrQ..&rnd=0.7482359842397273
-    private final static String URL_PREFIX = "http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&o=5438544&c=138000&rnd=0.7482359842397273&v=";
+    private final static String URL_PREFIX = "http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&v=";
     private final static Pattern URL_ID_PATTERN = Pattern.compile("v.ku6.com/.*/(.*)\\.html");   // 从url中取出id
     // 一次最多发50个请求
-    private final static int EVERY_STEP = 100;
-    private final static int SLEEP_TIME = 50;
+    private final static int EVERY_STEP = 30;
+    private final static int SLEEP_TIME = 100;
     private String id;
     private String shuaUrl;
 
@@ -105,7 +105,7 @@ public class Ku6Shua extends Shua {
         
       // SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 20);
 //         WuliuShua s = new WuliuShua("http://www.56.com/u44/v_ODY2NTgxMjE.html", 10);
-            Ku6Shua s = new Ku6Shua("http://v.ku6.com/show/E6n9tol4nPEeVfVBZ4fgXg...html", 500);
+            Ku6Shua s = new Ku6Shua("http://v.ku6.com/special/show_6579983/SSct4cmjXbESK-kfK9Ptqg...html", 200);
        //  SinaShua s = new SinaShua("http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html", 20);
         try {
              if (s.generateShuaUrl()) {

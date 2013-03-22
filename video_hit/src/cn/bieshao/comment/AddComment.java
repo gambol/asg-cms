@@ -88,6 +88,7 @@ public class AddComment implements Runnable {
         Random rand = new Random();
 
         for (String url : urlList) {
+            
             try {
                 account = accountList.get(rand.nextInt(accountList.size()));
                 cs = (CommentService) clazz.newInstance();
@@ -100,8 +101,8 @@ public class AddComment implements Runnable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            System.out.println(url);
+            
+//            System.out.println(url);
             urlCounter++;
 
         }

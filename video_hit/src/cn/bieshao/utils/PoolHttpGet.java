@@ -1,5 +1,8 @@
 package cn.bieshao.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -61,6 +64,8 @@ public class PoolHttpGet {
         }
     }
     
+
+    
     static class GetThread extends Thread{
         
         private final HttpClient httpClient;
@@ -72,10 +77,12 @@ public class PoolHttpGet {
             this.httpClient = httpClient;
             this.context = new BasicHttpContext();
             this.httpget = httpget;
+//            proxy = new Proxy();
+            
             proxy = ProxyHandler.getInstance().getRandomProxy();
             if (proxy != null) {
-                HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
-                httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
+              HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
+              httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
             }
         }
         @Override
@@ -89,7 +96,8 @@ public class PoolHttpGet {
                 HttpResponse response = this.httpClient.execute(this.httpget, this.context);
                 HttpEntity entity = response.getEntity();
                 if (entity != null) {
-                    logger.info(this.httpget.getURI()+" status:"+response.getStatusLine().toString());
+                    logger.info(this.httpget.getURI()+" status:"+response.getStatusLine().toString() + "-> " 
+                            + readInputStream(response.getEntity().getContent()) +" proxy:" + proxy);
                 }
                 // ensure the connection gets released to the manager
                 // EntityUtils.consume(entity);
@@ -101,6 +109,17 @@ public class PoolHttpGet {
                 httpget.releaseConnection();
             }
         }
+        
+        private String readInputStream(InputStream input) throws IOException {
+            byte[] buffer = new byte[128];
+            int len = 0;
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            while ((len = input.read(buffer)) >= 0) {
+                bytes.write(buffer, 0, len);
+            }
+            return bytes.toString();
+        }
+        
     }
     
     public static void main(String[] args) {

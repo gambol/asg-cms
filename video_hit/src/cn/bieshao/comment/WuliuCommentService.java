@@ -1,7 +1,6 @@
 package cn.bieshao.comment;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -63,9 +62,7 @@ public class WuliuCommentService extends CommentService {
     public static void main(String[] args) throws IOException {
         WuliuCommentService wc = new WuliuCommentService();
 
-        wc.login("shuakua58", "121212");
-        String[] idArray = wc.getIds("http://www.56.com/u33/v_ODg3MDQ3MjY.html");
-        wc.postComment(idArray[0], idArray[1], "21shipin 推广@亮增长@，@ shuakua");
+       
     }
 
     public Set<String> getVideoUrlSet(String listUrl) throws IOException {
@@ -152,13 +149,12 @@ public class WuliuCommentService extends CommentService {
     public void postComment(String videoId, String userId, String content) throws IOException {
         HttpPost post = new HttpPost("http://comment.56.com/trickle/api/commentApi.php");
         post.setHeader("User-Agent", HTTPConst.USER_AGENT);
-        /*
+        
         Proxy proxy = ProxyHandler.getInstance().getRandomProxy();
         if (proxy != null) {
             HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
             post.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
         }
-         */
         // 登录表单的信息
         List<NameValuePair> qparams = new ArrayList<NameValuePair>();
         qparams.add(new BasicNameValuePair("a", "insert"));

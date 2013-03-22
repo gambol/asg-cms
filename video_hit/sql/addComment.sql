@@ -72,6 +72,30 @@ insert into website_account(username, password, web) values ('shuakua69', '12121
 insert into website_account(username, password, web) values ('shuakua70', '121212', '56');
 insert into website_account(username, password, web) values ('shuakua71', '121212', '56');
 
+
+insert into website_account(username, password, web) values ('papasky1', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky2', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky3', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky4', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky5', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky6', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky7', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky8', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky9', '121212', '56'); 
+insert into website_account(username, password, web) values ('papasky10', '121212', '56'); 
+insert into website_account(username, password, web) values ('x1inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x2inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x3inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x4inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x5inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x6inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x7inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x8inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x9inlang', '121212', '56'); 
+insert into website_account(username, password, web) values ('x10inlang', '121212', '56'); 
+
+
+
  insert into fetch_list_url(url, web) values ('http://video.56.com/videolist-v-_type-new_t-_c-0_key-.html','56');
  insert into fetch_list_url(url, web) values ('http://video.56.com/videolist-v-_type-new_t-_c-26_key-.html','56');
  insert into fetch_list_url(url, web) values ('http://video.56.com/videolist-v-_type-new_t-_c-8_key-.html','56');

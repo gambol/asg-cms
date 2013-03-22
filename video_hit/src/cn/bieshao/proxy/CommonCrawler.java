@@ -93,9 +93,16 @@ public class CommonCrawler {
 	public List<Proxy> pruneProxy(List<Proxy> proxyList) {
 		List<Proxy> newProxyList = new ArrayList<Proxy>();
 		for(Proxy p : proxyList) {
-			if (HTTPUtils.verifyProxy(p.getIp(), p.getPort())) {
-				newProxyList.add(p);
-			}
+		    int proxyType = HTTPUtils.verifyProxy(p.getIp(), p.getPort());
+		    switch (proxyType) {
+    		    case HTTPUtils.ANONYMOUS_PROXY:
+    		    case HTTPUtils.WORKING_PROXY:
+    		        p.setProxyType(proxyType);
+    		        newProxyList.add(p);
+    		        break;
+    		    default:
+    		        break;
+		    }
 		}
 		
 		return newProxyList;

@@ -79,8 +79,8 @@ public class MultiHttpGet {
                             try {
                                 logger.info(entity.getGet().getRequestLine()
                                         + "->"
-                                        + response.getStatusLine()
-                                        //   + readInputStream(response.getEntity().getContent())
+                                        + response.getStatusLine() + "->"
+                                        + readInputStream(response.getEntity().getContent())
                                         );
                             }  catch (Exception e) {
                                logger.info("error in http client. msg:" + e.getMessage());

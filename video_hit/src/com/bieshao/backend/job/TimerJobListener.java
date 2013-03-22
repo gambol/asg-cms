@@ -23,8 +23,8 @@ public class TimerJobListener implements ServletContextListener {
 		// testService.scheduleWithFixedDelay(new TestTimer(), 1, 10,  TimeUnit.SECONDS);
 		// indexHtml.scheduleWithFixedDelay(new HTMLGenerator(context.getServletContext()), 1, 4000,  TimeUnit.SECONDS);
 		proxyImproveJob.scheduleWithFixedDelay(new ProxyImprover(), 5, 120,  TimeUnit.MINUTES);
-		tudouCommentJob.scheduleWithFixedDelay(new AddTudouComment(), 2, 600,  TimeUnit.MINUTES);
-		wuliuCommentJob.scheduleWithFixedDelay(new AddComment(180000,  "56", WuliuCommentService.class), 1, 600,  TimeUnit.MINUTES);
+	//	tudouCommentJob.scheduleWithFixedDelay(new AddTudouComment(), 2, 600,  TimeUnit.MINUTES);
+	//	wuliuCommentJob.scheduleWithFixedDelay(new AddComment(180000,  "56", WuliuCommentService.class), 1, 300,  TimeUnit.MINUTES);
 	}
 	
 	public void contextDestroyed(ServletContextEvent context) {
