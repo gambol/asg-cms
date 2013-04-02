@@ -96,7 +96,7 @@ public class YoukuShuaImpl  extends AbstractThread {
         for (int i = 0; i < flvList.size(); i++) {
             Map flvMap = (Map) flvList.get(0);
             totalSec += Integer.parseInt((String)flvMap.get("seconds"));
-        }
+        }  
 
         int totalSeg = flvList.size();
 

@@ -39,7 +39,7 @@ public class ProxyHandler {
 	 * 从db中重新读取所有有效的proxy
 	 */
 	public synchronized static void reloadProxy() {
-		List<Proxy> proxyList = ProxyDao.selectAvailableProxy();
+		List<Proxy> proxyList = ProxyDao.selectAvailableProxy(false);
 		ConcurrentHashMap newProxyMap = new ConcurrentHashMap<Proxy, Integer>();
 		for(Proxy p : proxyList) {
 			newProxyMap.put(p, 0);
@@ -55,7 +55,7 @@ public class ProxyHandler {
 	 */
 	public Proxy getRandomProxy() {
 		if (proxyMap == null) {
-			List<Proxy> proxyList = ProxyDao.selectAvailableProxy();
+			List<Proxy> proxyList = ProxyDao.selectAvailableProxy(false);
 			proxyMap = new ConcurrentHashMap<Proxy, Integer>();
 			for(Proxy p : proxyList) {
 				proxyMap.put(p, 0);
@@ -79,6 +79,24 @@ public class ProxyHandler {
 		return null;
 
 	}
+	
+	   /**
+     * 随机得到得到一个匿名proxy
+     * 如果得到null，则不使用任何proxy
+     * @return
+     */
+    public Proxy getNimingProxy() {
+        Proxy p = getRandomProxy();
+        int i = 1000;
+        while (p.getProxyType() != 2) {
+            p = getRandomProxy();
+            i--;
+            if (i == 0) {
+                return p;
+            }
+        }
+        return p;
+    }
 	
 	/*
 	 * 如果失败了，更新map里的failedTime

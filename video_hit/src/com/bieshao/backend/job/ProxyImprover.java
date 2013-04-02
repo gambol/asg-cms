@@ -26,7 +26,7 @@ public class ProxyImprover implements Runnable {
 
 	public synchronized static void clean() {
 		logger.info("start proxy clean");
-		List<Proxy> proxyList = ProxyDao.selectAvailableProxy();
+		List<Proxy> proxyList = ProxyDao.selectAvailableProxy(false);
 
 		for (Proxy p : proxyList) {
             int proxyType = HTTPUtils.verifyProxy(p.getIp(), p.getPort());

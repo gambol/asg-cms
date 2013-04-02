@@ -185,7 +185,7 @@ public class JDBCUtils {
             sbSql.append(" limit ").append(firstResult).append(",").append(maxResult);
         }
 
-     //   System.out.println(sbSql.toString());
+ //       System.out.println(sbSql.toString());
         List<T> list = DBTool.queryList(clazz, sbSql.toString(), params);
         QueryResult<T> qr = new QueryResult<T>();
         qr.setResultlist(list);

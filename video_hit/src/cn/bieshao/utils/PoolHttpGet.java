@@ -43,7 +43,7 @@ import cn.bieshao.proxy.ProxyHandler;
 public class PoolHttpGet {
 	private final static Logger logger = Logger.getLogger("http");
 	// 线程池的容量
-    private static final int POOL_SIZE = 10;
+    private static final int POOL_SIZE = 300;
     
     // 线程池
     private static ExecutorService exe =  Executors.newFixedThreadPool(POOL_SIZE);

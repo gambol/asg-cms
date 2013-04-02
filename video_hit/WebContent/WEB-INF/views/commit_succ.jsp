@@ -27,6 +27,9 @@
 				<p>
 					<a href="${url }" target="_blank">${url }</a>
 				</p>
+				<div class="box box-info" style="margin-top:2px">
+					<p>由于最近网友热情高涨，服务器较为繁忙。请略等十几分钟再查看您的视频链接，会有惊喜哦</p>
+				</div>
 			</section>
 			<%@include file="../common/sider.jsp"%>
 		</div>

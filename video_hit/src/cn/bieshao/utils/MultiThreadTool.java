@@ -48,7 +48,7 @@ public class MultiThreadTool {
     // 线程池
     private static ExecutorService exe = null;
     // 线程池的容量
-    private static final int POOL_SIZE = 100;
+    private static final int POOL_SIZE = 200;
 
     private static final int delay = 3000;
 
@@ -73,7 +73,7 @@ public class MultiThreadTool {
             // exe.schedule(t, nowDelay, TimeUnit.MILLISECONDS);
             exe.execute(t);
             if (i % POOL_SIZE == POOL_SIZE - 1) {
-                Thread.sleep(200);
+           //      Thread.sleep(10);
             }
         }
     }

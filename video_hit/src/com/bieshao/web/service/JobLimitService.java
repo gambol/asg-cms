@@ -24,12 +24,16 @@ public class JobLimitService {
         int jobNumForToday = TodoJobDao.getJobNumFormIpToday(ip);
         if (jobNumForToday < NEW_USER) {
             return 3000;
-        } else if (NEW_USER < jobNumForToday  && jobNumForToday < FIRST_THRESHOLD) {
+        } else if (NEW_USER <= jobNumForToday  && jobNumForToday < FIRST_THRESHOLD) {
             return 2000;
-        } else if (jobNumForToday > FIRST_THRESHOLD && jobNumForToday < SECOND_THRESHOLD) {
-            return 50;
+        } else if (jobNumForToday >= FIRST_THRESHOLD && jobNumForToday < SECOND_THRESHOLD) {
+            return 100;
         } else {
             return 10;
         }
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(getMaxNumForIp(""));
     }
 }

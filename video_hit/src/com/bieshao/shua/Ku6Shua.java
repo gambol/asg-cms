@@ -29,7 +29,7 @@ public class Ku6Shua extends Shua {
     private final static String URL_PREFIX = "http://v0.stat.ku6.com/dostatv.do?method=setVideoPlayCount&v=";
     private final static Pattern URL_ID_PATTERN = Pattern.compile("v.ku6.com/.*/(.*)\\.html");   // 从url中取出id
     // 一次最多发50个请求
-    private final static int EVERY_STEP = 30;
+    private final static int EVERY_STEP = 10;
     private final static int SLEEP_TIME = 100;
     private String id;
     private String shuaUrl;
@@ -105,8 +105,9 @@ public class Ku6Shua extends Shua {
         
       // SinaShua s = new SinaShua("http://video.sina.com.cn/v/b/97615043-1314731975.html", 20);
 //         WuliuShua s = new WuliuShua("http://www.56.com/u44/v_ODY2NTgxMjE.html", 10);
-            Ku6Shua s = new Ku6Shua("http://v.ku6.com/special/show_6579983/SSct4cmjXbESK-kfK9Ptqg...html", 200);
+            //Ku6Shua s = new Ku6Shua("http://v.ku6.com/special/show_6579983/SSct4cmjXbESK-kfK9Ptqg...html", 200);
        //  SinaShua s = new SinaShua("http://video.sina.com.cn/p/music/v/2013/0117/094361978135.html", 20);
+            Ku6Shua s = new Ku6Shua("http://v.ku6.com/special/show_6556627/n4GVQyUyQ3Neikf_c7YQvA...html?nr=1", 100);
         try {
              if (s.generateShuaUrl()) {
                  s.shua();

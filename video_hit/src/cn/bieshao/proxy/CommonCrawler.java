@@ -27,7 +27,7 @@ public class CommonCrawler {
 
 	public <T extends AbstractParser> void run(final Class<T> _c) {
 		List<Proxy> allProxy = new ArrayList<Proxy>();
-		List<Proxy> originProxyList = ProxyDao.selectAvailableProxy();
+		List<Proxy> originProxyList = ProxyDao.selectAvailableProxy(false);
 		Proxy workingProxy = null;
 		for (String url : urlList) {
 			Document doc = null;

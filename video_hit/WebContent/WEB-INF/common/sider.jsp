@@ -63,5 +63,19 @@
 			</dd>
 		</section>
 	</div>
+	
+	<div class="content-box">
+		<header style="cursor: s-resize;">
+			<h3>友情链接</h3>
+		</header>
+		<section>
+			<dl>
+				<a href="http://www.papasky.com" target="_blank">爸爸天空</a>
+			</dl>
+			<dl>
+				<a href="http://www.jpshi.com" target="_blank">极品视</a>
+			</dl>
+		</section>
+	</div>
 </aside>
 
