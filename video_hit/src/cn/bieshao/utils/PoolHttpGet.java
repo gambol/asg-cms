@@ -43,7 +43,7 @@ import cn.bieshao.proxy.ProxyHandler;
 public class PoolHttpGet {
 	private final static Logger logger = Logger.getLogger("http");
 	// 线程池的容量
-    private static final int POOL_SIZE = 300;
+    private static final int POOL_SIZE = 30;
     
     // 线程池
     private static ExecutorService exe =  Executors.newFixedThreadPool(POOL_SIZE);
@@ -79,7 +79,7 @@ public class PoolHttpGet {
             this.httpget = httpget;
 //            proxy = new Proxy();
             
-            proxy = ProxyHandler.getInstance().getRandomProxy();
+            proxy = ProxyHandler.getInstance().getNimingProxy();
             if (proxy != null) {
               HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
               httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
