@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://www.papasky.com/sitemapxml/sitemap1.xml.gz

@@ -57,7 +57,7 @@
 						       	   <#list articles as article>
 							           <tr>
 							           	<td> 
-							           		<a href="article?id=${article.id?c}" title='${article.title!""}' target="_blank"><#if article.title?length gt 20>${article.title[0..20]}<#else>${article.title!""}</#if></a>
+							           		<a href="article_${article.id?c}.htm" title='${article.title!""}' target="_blank"><#if article.title?length gt 20>${article.title[0..20]}<#else>${article.title!""}</#if></a>
 							           	</td>
 							           	<td class="ta-right">[${article.sysDate?string("yyyy-MM-dd")}]</td>
 							           </tr> 

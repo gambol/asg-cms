@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>  
+ <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.1//EN"  
+       "http://tuckey.org/res/dtds/urlrewrite3.1.dtd">  
+<urlrewrite>  
+    <rule>       
+        <from>/article_(.*).htm</from>       
+        <to>/article?id=$1</to>        
+    </rule>    
+     <rule>       
+        <from>/channel_(.*)_(.*).htm</from>       
+        <to>/channel?id=$1&amp;page=$2</to>        
+    </rule>    
+</urlrewrite> 

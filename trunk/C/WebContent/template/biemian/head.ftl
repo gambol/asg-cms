@@ -4,7 +4,7 @@
 		<li><a href="/">首页</a></li>
 		<#if channelsDisplay??>
           <#list channelsDisplay as channel>
-         	 	<li><a href="channel?id=${channel.id}">${channel.name}</a></li>
+         	 	<li><a href="channel_${channel.id}_1.htm">${channel.name}</a></li>
           </#list>
         </#if>
 	</ul>

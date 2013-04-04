@@ -118,19 +118,21 @@ public class ArticleAction extends EntityAction<Article> {
 		List<Article> latestArticles = new ArrayList<Article>();
 		List<Article> mostVisitArticles = new ArrayList<Article>(); // visit
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
-		LinkedHashMap<String, String> orderbyVisitTotal = new LinkedHashMap<String, String>();
+	//	LinkedHashMap<String, String> orderbyVisitTotal = new LinkedHashMap<String, String>();
 		orderby.put("id", "desc");
-		orderbyVisitTotal.put("visitTotal", "desc");
+		//orderbyVisitTotal.put("visitTotal", "desc");
 
 		try {
-			latestArticles = articleService.getScrollData(0, 15,
+			latestArticles = articleService.getScrollData(0, 30,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderby).getResultlist();
+			/*
 			mostVisitArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyVisitTotal).getResultlist();
+			*/
 			map.put("latestArticles", latestArticles);
-			map.put("mostVisitArticles", mostVisitArticles);
+//			map.put("mostVisitArticles", mostVisitArticles);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
