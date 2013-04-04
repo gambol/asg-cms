@@ -143,15 +143,17 @@ public class JIndexAction extends ActionSupport {
 					"o.father=?1 and o.display=true",
 					new Object[] { new Channel(1) }, orderbyRankid)
 					.getResultlist();
-			latestArticles = articleService.getScrollData(0, 15,
+			latestArticles = articleService.getScrollData(0, 45,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderby).getResultlist();
+			/*
 			mostVisitArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyVisitTotal).getResultlist();
 			mostCommentArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyCommentCount).getResultlist();
+			*/
 			channelInIndexs = channelService.getScrollData(0, -1,
 					"o.displayInIndex=true", null, orderbyRankid)
 					.getResultlist();
@@ -182,8 +184,8 @@ public class JIndexAction extends ActionSupport {
 			map.put("channelsDisplay", channelsDisplay);
 			map.put("channelInIndexs", channelInIndexs);
 			map.put("latestArticles", latestArticles);
-			map.put("mostVisitArticles", mostVisitArticles);
-			map.put("mostCommentArticles", mostCommentArticles);
+		//	map.put("mostVisitArticles", mostVisitArticles);
+			// map.put("mostCommentArticles", mostCommentArticles);
 			map.put("channelArticleMaps", channelArticleMaps);
 			String[] ftls = { "head.ftl", "foot.ftl", "left.ftl", "index.ftl" };
 			String[] htmlNames = { "head.html", "foot.html", "left.html",
@@ -254,15 +256,17 @@ public class JIndexAction extends ActionSupport {
 					"o.father=?1 and o.display=true",
 					new Object[] { new Channel(1) }, orderbyRankid)
 					.getResultlist();
-			latestArticles = articleService.getScrollData(0, 15,
+			latestArticles = articleService.getScrollData(0, 45,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderby).getResultlist();
+			/*
 			mostVisitArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyVisitTotal).getResultlist();
 			mostCommentArticles = articleService.getScrollData(0, 15,
 					"o.checkState=?1", new Object[] { CheckState.pass },
 					orderbyCommentCount).getResultlist();
+			*/
 			channelInIndexs = channelService.getScrollData(0, 100,
 					"o.displayInIndex=true", null, orderbyRankid)
 					.getResultlist();
@@ -285,8 +289,8 @@ public class JIndexAction extends ActionSupport {
 			map.put("channelsDisplay", channelsDisplay);
 			map.put("channelInIndexs", channelInIndexs);
 			map.put("latestArticles", latestArticles);
-			map.put("mostVisitArticles", mostVisitArticles);
-			map.put("mostCommentArticles", mostCommentArticles);
+//			map.put("mostVisitArticles", mostVisitArticles);
+//			map.put("mostCommentArticles", mostCommentArticles);
 			map.put("channelArticleMaps", channelArticleMaps);
 			String[] ftls = { "head.ftl", "foot.ftl", "left.ftl" };
 			String[] htmlNames = { "head.html", "foot.html", "left.html" };

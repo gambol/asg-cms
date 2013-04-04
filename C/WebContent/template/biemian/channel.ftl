@@ -47,7 +47,7 @@ function pageQuery(page) {
                     <ul>
                     <#list pageView.records as article>
                      <li>
-                     <a href="article?id=${article.id?c}" title="${article.title}" target="_blank">${(article.title)!""}</a>
+                     <a href="/article_${article.id?c}.htm" title="${article.title}" target="_blank">${(article.title)!""}</a>
                      <span>[${article.sysDate?string("yyyy-MM-dd")}]</span></li>
                      </#list>
                     </ul>

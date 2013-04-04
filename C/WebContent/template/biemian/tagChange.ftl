@@ -7,7 +7,7 @@
   		<dl>
 		   <#list latestArticles as a>
 	           <dt>
-	           	[${a.sysDate?string("yyyy-MM-dd")}]<a href="article?id=${a.id?c}" 	title="${a.title}" target="_blank"><#if a.title?length gt 10>${a.title[0..10]}<#else>${a.title!""}</#if></a>  
+	           	[${a.sysDate?string("yyyy-MM-dd")}]<a href="article_${a.id?c}.htm" 	title="${a.title}" target="_blank"><#if a.title?length gt 10>${a.title[0..10]}<#else>${a.title!""}</#if></a>  
 	           </dt>
 	           
            </#list>
@@ -16,6 +16,7 @@
 </section>
 </div>
 
+<!--
 <div class="content-box">
 <header>
 	<h3>最多浏览</h3>
@@ -32,3 +33,4 @@
      </#if> 
 </section>
 </div>
+-->

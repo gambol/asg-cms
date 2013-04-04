@@ -15,6 +15,7 @@
     <listener-class>org.j2cms.web.listener.TimerJobListener</listener-class>
   </listener>
 
+
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -116,6 +117,21 @@
     <url-pattern>/manage/user/*</url-pattern>
   </filter-mapping> 
 
+
+   <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+        <init-param>
+            <param-name>logLevel</param-name>
+            <param-value>DEBUG</param-value>
+     </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>org.j2cms.web.filter.MyStrutsFilterDispatcher</filter-class>
@@ -127,6 +143,8 @@
   <filter-mapping>
     <filter-name>struts2</filter-name>
     <url-pattern>/*</url-pattern>
+       <dispatcher>REQUEST</dispatcher> 
+        <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
   
   <servlet>

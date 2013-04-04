@@ -192,13 +192,15 @@ public class ChannelAction extends EntityAction<Channel> {
 		orderbyId.put("id", "desc");
 		orderbyVisitTotal.put("visitTotal", "desc");
 		
-		latestArticles = articleService.getScrollData(0, 15, "o.checkState=?1",
+		latestArticles = articleService.getScrollData(0, 30, "o.checkState=?1",
 				new Object[] { CheckState.pass }, orderbyId).getResultlist();
+		/*
 		mostVisitArticles = articleService.getScrollData(0, 15,
 				"o.checkState=?1", new Object[] { CheckState.pass },
 				orderbyVisitTotal).getResultlist();
+		*/
 		map.put("latestArticles", latestArticles);
-		map.put("mostVisitArticles", mostVisitArticles);
+		//		map.put("mostVisitArticles", mostVisitArticles);
 
 		try {
 			channel.setVisitTotal(channel.getVisitTotal() + 1);// 点击量加1
