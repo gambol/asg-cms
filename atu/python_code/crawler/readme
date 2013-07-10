@@ -1,0 +1,5 @@
+使用步骤
+1. crawler.py 抓取数据
+2. transfer.py 将数据迁移过去
+3. 使用site_content_crawler.py抓取页面的html信息
+4. 使用store_summary.py来将summary取出，并且存入数据库
