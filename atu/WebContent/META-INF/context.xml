@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="1000" maxIdle="100" maxWait="10000" name="jdbc/NotifyServerPool" password="tophey#123$321" type="javax.sql.DataSource" url="jdbc:mysql://localhost/tophey?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" username="tophey"/>
+</Context>
