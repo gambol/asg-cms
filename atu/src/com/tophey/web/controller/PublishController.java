@@ -133,7 +133,7 @@ public class PublishController {
         }
 
         ServerInfo server = new ServerInfo();
- //       server.setTitle(publishBean.getServer_name());
+        server.setTitle(publishBean.getServer_name());
         server.setBannerUrl(publishBean.getBanner());
         server.setCategoryId(publishBean.getCategory());
 

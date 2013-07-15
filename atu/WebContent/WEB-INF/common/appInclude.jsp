@@ -1,9 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <head>
     <meta charset="utf-8" />
-    <title>atugame,阿土游戏,传奇私服,新开传奇私服,传奇私服发布网,魔兽私服,新开各种私服</title>
-    <meta name="description" content="Atugame 是一个最公平的游戏排名网站,包括了游戏排名,各种游戏私服排名, 传奇私服,传奇私服发布" />
-    <meta name="keywords" content="Atugame, 阿土游戏, 私服, 私服排名, 传奇私服, 魔兽私服, 热血传奇, 游戏排名, 私服发布" />
+    <title>naoruo,脑弱私服, 17173私服, 17173游戏发布站, 传奇私服,新开传奇私服,传奇私服发布网,魔兽私服,新开各种私服</title>
+    <meta name="description" content="17173游戏发布站是一个最公平的游戏排名网站,包括了游戏排名,各种游戏私服排名, 传奇私服,传奇私服发布" />
+    <meta name="keywords" content="naoruo, 17173游戏, 私服, 私服排名, 传奇私服, 魔兽私服, 热血传奇, 游戏排名, 私服发布, ali123" />
     <!-- Favicons --> 
     <link rel="shortcut icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
     <link rel="icon" type="image/png" HREF="/img/favicons/small-logo.png"/>

@@ -889,7 +889,7 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
 #page .subtitle {
     color: #93BB3A;
     font-family: Tahoma,Arial,sans-serif;
-    font-size: 9px;
+    font-size: 12px;
     text-transform: uppercase;
 }
 footer#bottom {
@@ -2377,7 +2377,7 @@ button.datepick-cmd {
 }
 */
 .rank-column {
-    width:60px;
+   /* width:60px;*/
     font:bold 48px 'microsoft yahei', Trebuchet,Arial,sans-serif;
     text-align:center;
     color: #F8CA1D;

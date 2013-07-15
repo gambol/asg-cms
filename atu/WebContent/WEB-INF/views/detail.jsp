@@ -17,9 +17,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>< c:out value="${serverInfo.name}"/> , 新开<c:out value="${categoryName}"/>私服, 阿土游戏,传奇私服,新开传奇私服,传奇私服发布网,魔兽私服,新开各种私服</title>
+        <title>< c:out value="${serverInfo.name}"/> , 新开<c:out value="${categoryName}"/>私服, 17173私服,  </title>
         <meta name="description" content="新开<c:out value="${categoryName}"/>私服, ${serverInfo.name}, <c:out value="${fn:substring(serverInfo.description, 0, 200)}" escapeXml="true"/>" />
-        <meta name="keywords" content="Atugame, 阿土游戏, 私服, 私服排名, 传奇私服, 魔兽私服, 热血传奇, 游戏排名, 私服发布" />
+        <meta name="keywords" content="naoruo, 脑弱游戏, 新开私服, 私服, 私服排名, 传奇私服, 魔兽私服, 热血传奇, 游戏排名, 私服发布" />
         <!-- Favicons --> 
         <link rel="shortcut icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
         <link rel="icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
@@ -77,23 +77,46 @@
                     </div>
                     <div>
                         <div class="colgroup">
-                            <div class="box box-info">${categoryName}私服 >> < c:out value="${serverInfo.name}"/> </div>
-                            <div style="padding:5px" class="colgroup">
+                        	<div class="column first" style="padding-left:15px">
+                             <h3>< c:out value="${serverInfo.name}"/></h3>
+                            </div>
+                            
+                            <div style="padding:10px" class="colgroup">
                                 <div class="width3 first"  style="float:left">
-                                <p>
-                                    <fmt:formatDate value="${serverInfo.publishTime}" pattern="yyyy年MM月dd日"/>发布<br/>
-                                    网站线路:<c:out value="${serverInfo.line}"/>  <br/>
-                                    赞:${serverSysInfo.voteIn}</p><br/>
-                                </p>
+	                           	 <table class="no-style full">
+									<tbody>
+										<tr>
+											<td>发布时间</td>
+											<td><fmt:formatDate value="${serverInfo.publishTime}" pattern="yyyy年MM月dd日"/>发布<br/></td>								
+										</tr>
+										<tr>
+											<td>网站线路</td>
+											<td><c:out value="${serverInfo.line}"/> </td>
+										</tr>
+										<tr>
+											<td>赞美数</td>
+											<td>${serverSysInfo.voteIn} </td>
+										</tr>
+									</tbody>
+								</table>
+                               
                                 </div>
-                                <div class="width2" style="float:left; text-align: center">
-                                    <a href="${serverInfo.url}" class="big-btn btn-blue">点击进入</a>
+                                <div class="width2" style="float:right; text-align: center">
+                                    <a href="${serverInfo.url}" class="big-btn btn-blue" target="_blank">点击进入</a>
                                 </div>
-                                   <div class="first"/>
-                                <div class="box box-info">私服描述:</div>
+                                
+                                   <div class="first column full"/>
+                                <h4>私服描述:</h4>
                                 <p><c:out value="${serverInfo.description}" escapeXml="true"/></p>
 
-                                <p class="box box-info"> 私服介绍</p>
+								<c:if test="${not empty serverInfo.bannerUrl }">
+								 	<h4>私服截图:</h4>
+								  	<p><img src='<c:out value="${serverInfo.bannerUrl}"/>'/></p>
+								</c:if>
+								
+                               
+								
+                                <h4> 私服介绍</h4>
                                 严格意义上的所谓sf是指一个没有得到网络游戏的制作商法定许可而私自存在幵运营的朋务器
                                 它在技术和朋务实力上都和正式的官方朋务器存在可比性.因为这些技术和朋务的存在就是合法的。sf存在的主要目的同官方朋务器是一样的,
                                 都是向玩家收费以获利。有些sf幵对外开放也以收费盈利为目的. 如部分网吧在吧内局域网架设sf.

@@ -67,7 +67,7 @@
                                             <td>${serverInfo.id}</td>
                                             <td><c:out value="${serverInfo.name}" escapeXml="true" /></td>
                                             <td><a href="${serverInfo.url}" target="_blank"> ${serverInfo.url} </a></td>
-                                            <td><a href="/publish.htm?id=${serverInfo.id}" /> 编辑 </a> &nbsp;&nbsp;
+                                            <td><a href="/user/publish.htm?id=${serverInfo.id}" /> 编辑 </a> &nbsp;&nbsp;
                                                 <c:choose>
                                                     <c:when test="${serverInfo.status == 'online'}">
                                                         <a href="#" aurl="/user/sitemanage/changeStatus.htm?id=${serverInfo.id}" class="changeStatus"> 隐藏 </a>

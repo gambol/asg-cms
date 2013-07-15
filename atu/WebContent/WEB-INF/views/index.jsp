@@ -87,7 +87,7 @@
                                         <span class="right-span">${serverInfoDetail.serverInfo.line}</span>
                                     </div>
                                     <div class="desc">
-                                        <c:out value="${fn:substring(serverInfoDetail.serverInfo.description, 0, 100)}" escapeXml="true"/>
+                                        <c:out value="${fn:substring(serverInfoDetail.serverInfo.description, 0, 150)}" escapeXml="true"/>
                                     </div>
                                 </div>
                                 <div class="like-it-column column">
@@ -136,7 +136,7 @@
                 <aside class="colgroup width2"  id="asider">
                     <div class="clean-content-box">                  
                         <section class="notes-total">
-                            <img src="/img/atu.png" width="166px" height="42px" alt="阿土游戏"/>
+                            <img src="/img/atu.png" width="166px" height="42px" alt="17173游戏发布站"/>
                             <a class="big-btn btn-yellow" href="/user/publish.htm">免费发布新站</a>
                         </section>
                     </div>
