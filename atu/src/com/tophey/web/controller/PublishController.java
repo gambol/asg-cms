@@ -97,7 +97,7 @@ public class PublishController {
         }
         
         pb.setServer_name(si.getName());
-        pb.setBanner(si.getBannerUrl());
+        //pb.setBanner(si.getBannerUrl());
         pb.setCategory(si.getCategoryId());
         pb.setNetwork(si.getLine());
 
@@ -134,7 +134,11 @@ public class PublishController {
 
         ServerInfo server = new ServerInfo();
         server.setTitle(publishBean.getServer_name());
-        server.setBannerUrl(publishBean.getBanner());
+        if (publishBean.getBanner() != null) {
+            server.setBannerUrl(publishBean.getBanner());
+        } else {
+            server.setBannerUrl("");
+        }
         server.setCategoryId(publishBean.getCategory());
 
         server.setLine(publishBean.getNetwork());

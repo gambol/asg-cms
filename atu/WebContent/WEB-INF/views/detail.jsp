@@ -17,9 +17,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>< c:out value="${serverInfo.name}"/> , 新开<c:out value="${categoryName}"/>私服, 17173私服,  </title>
+        <title>< c:out value="${serverInfo.name}"/> , 新开<c:out value="${categoryName}"/>私服, 传奇私服发布网  </title>
         <meta name="description" content="新开<c:out value="${categoryName}"/>私服, ${serverInfo.name}, <c:out value="${fn:substring(serverInfo.description, 0, 200)}" escapeXml="true"/>" />
-        <meta name="keywords" content="naoruo, 脑弱游戏, 新开私服, 私服, 私服排名, 传奇私服, 魔兽私服, 热血传奇, 游戏排名, 私服发布" />
+        <meta name="keywords" content="传奇私服 传奇私服发布网 传奇世界私服 热血传奇私服 新开传奇网站 新开传奇私服 传奇外挂 传奇外传私服 传奇私服外挂 传奇私服网 网通传奇私服 传奇私服网站 传奇发布网" />
         <!-- Favicons --> 
         <link rel="shortcut icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
         <link rel="icon" type="image/png" HREF="/img/favicons/small-logo.png"/>
@@ -31,22 +31,6 @@
         <!--  <script type="text/javascript" SRC="js/swfobject.js"></script> -->
         <!-- jQuery with plugins -->
         <script type="text/javascript" SRC="/js/jquery-1.7.2.min.js"></script>
-
-
-        <script type="text/javascript">
-
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-33734422-1']);
-            _gaq.push(['_setDomainName', 'atugame.com']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
     </head>
     <body>
         <%@include file="../common/header.jsp" %>
@@ -72,7 +56,7 @@
                         <form action="" method="get">
                             <input type="hidden" name="categoryId" value="${serverInfo.categoryId}"/>
                             <input class="search-button" type="submit" id="button" value=""  name="search"/>
-                            <input class="search-text" type="text" id="keyword" name="keyword" placeholder="按标题搜索"/>
+                            <input class="search-text" type="text" id="keyword" name="keyword" placeholder="按标题或者url搜索"/>
                         </form>
                     </div>
                     <div>
@@ -120,7 +104,7 @@
                                 严格意义上的所谓sf是指一个没有得到网络游戏的制作商法定许可而私自存在幵运营的朋务器
                                 它在技术和朋务实力上都和正式的官方朋务器存在可比性.因为这些技术和朋务的存在就是合法的。sf存在的主要目的同官方朋务器是一样的,
                                 都是向玩家收费以获利。有些sf幵对外开放也以收费盈利为目的. 如部分网吧在吧内局域网架设sf.
-                                这类sf规模较小,一般仅限于网吧内部。其目的也仅以娱乐为主.对玩家收费
+                                这类sf规模较小,一般仅限于网吧内部。其目的也仅以娱乐为主.对玩家免费
                             </div>
 
 
@@ -136,13 +120,29 @@
 
                 <!-- Right column/section -->
                 <aside class="colgroup width2"  id="asider">
-                    <div class="clean-content-box">                  
-                        <section class="notes-total">
-                            <img src="/img/atu.png" width="166px" height="42px" alt="阿土游戏"/>
+                      <div class="content-box box">                  
+                        <section class="notes-total">                            
                             <a class="big-btn btn-yellow" href="/user/publish.htm">免费发布新站</a>
                         </section>
-                    </div>
+  					</div>
                     <hr>
+                    
+                    	<div class="content-box box">      
+ 						<header style="cursor: s-resize;">
+							<h3>最新发布</h3>
+						</header>      
+						
+						<section class="newserver">
+							<dl>
+								  <c:forEach var="newServer" items="${newServers.pageList }">
+								 	 <dt> <fmt:formatDate pattern="[MM-dd]" value="${newServer.createDate}" type="both"/><a target="_blank" href="/detail_${newServer.id}.htm">
+								   		<c:out value="${fn:substring(newServer.name, 0, 10)}" escapeXml="true"/> </a></dt>
+								   <dd>
+								   	</dd>
+                           		 </c:forEach>
+							</dl>
+						</section>
+					</div>
                 </aside>
                 <!-- End of Right column/section -->
 

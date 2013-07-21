@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 
 /**
  *
- * @author xiang.fu
+ * @author zhenbao.zhou
  */
 @Controller
 @RequestMapping("/")
@@ -68,6 +68,10 @@ public class IndexController  {
         PageResult<Category> categoryResults = CategoryDao.getAllCategory();
         model.addAttribute("categorys", categoryResults);
         
+        
+        PageResult<ServerInfo> newServers = sq.getServerInfoByCategoryId(categoryId);
+        model.addAttribute("newServers", newServers);
+        
         return new ModelAndView("mainPage");
     }
     
@@ -101,6 +105,9 @@ public class IndexController  {
                 break;
             }
         }
+        
+        PageResult<ServerInfo> newServers = sq.getServerInfoByCategoryId(server.getCategoryId());
+        model.addAttribute("newServers", newServers);
         
         return new ModelAndView("detail");
     }

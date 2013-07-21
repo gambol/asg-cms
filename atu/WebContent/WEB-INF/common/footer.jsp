@@ -27,18 +27,22 @@
     <![endif]-->
     
 <footer id="bottom">
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbc33e359e11e9a9a315454112650539d' type='text/javascript'%3E%3C/script%3E"));
-</script>
+
 
     <div class="wrapper ">
     <div class="width1 first column" style="font-size:1px">&nbsp</div>
     <div class="width5 column">
-        <p>Copyright &copy; 2010-2012 <b><a HREF="http://www.naoruo.com" title="www.naoruo.com">www.naoruo.com</a></b>网站备案：粤ICP备11050245号</p>
+        <p>Copyright &copy; 2010-2013 <b><a HREF="http://www.naoruo.com" title="www.naoruo.com">www.naoruo.com</a> <b>邮箱:shuakua@gmail.com  欢迎交换友情链接。 </b> 
+        	网站备案：粤ICP备11050245号</p> 
     </div>
     </div>
+    <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbc33e359e11e9a9a315454112650539d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    
 </footer>
+
 
    
 

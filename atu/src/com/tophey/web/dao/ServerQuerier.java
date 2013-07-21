@@ -39,11 +39,11 @@ public class ServerQuerier {
     private static final String QUERY_SERVER_PAGE_COUNT_BY_CATEGORY_KEYWORD = "select count(*) from "
             + DBTool.getTableName(ServerInfo.class) + " info left join "
             + DBTool.getTableName(ServerSysInfo.class) + " sysinfo on sysinfo.id=info.id "
-            + "where info.category_id=? and info.name like ?";
+            + "where info.category_id=? and (info.name like ? or info.url like ?)";
     private static final String QUERY_SERVER_PAGE_BY_CATEGORY_KEYWORD = "select * from "
             + DBTool.getTableName(ServerInfo.class) + " info left join "
             + DBTool.getTableName(ServerSysInfo.class) + " sysinfo on sysinfo.id=info.id "
-            + "where info.category_id=? and info.name like ? order by sysinfo.score desc limit ?,?";
+            + "where info.category_id=? and (info.name like ?  or info.url like ?) order by sysinfo.score desc limit ?,?";
 
     //  根据类别，取得私服的数目
     public int getServerCountByCategory(String categoryId) {
@@ -117,6 +117,7 @@ public class ServerQuerier {
             ps = conn.prepareStatement(QUERY_SERVER_PAGE_COUNT_BY_CATEGORY_KEYWORD);
             ps.setString(1, categoryId);
             ps.setString(2, keyword);
+            ps.setString(3, keyword);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);
@@ -133,7 +134,7 @@ public class ServerQuerier {
         return 0;
     }
 
-    // 根据类别 和 标题关键字取得私服详细信息
+    // 根据类别 和 标题关键字 或者url取得私服详细信息
     // 支持分页
     public List<ServerInfoDetail> getServerInfoDetailPageByCategoryKeyword(String categoryId, int start, int size, String keyword) {
         Connection conn = null;
@@ -149,8 +150,9 @@ public class ServerQuerier {
             ps = conn.prepareStatement(QUERY_SERVER_PAGE_BY_CATEGORY_KEYWORD);
             ps.setString(1, categoryId);
             ps.setString(2, keyword);
-            ps.setInt(3, start);
-            ps.setInt(4, size);
+            ps.setString(3, keyword);
+            ps.setInt(4, start);
+            ps.setInt(5, size);
                         System.out.println(ps.toString());
             rs = ps.executeQuery();
 
@@ -187,10 +189,10 @@ public class ServerQuerier {
 
     public PageResult<ServerInfo> getServerInfoByCategoryId(int categoryId) {
         LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
-        orderBy.put("id", false);
+        orderBy.put("create_date", false);
         PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 10, 1, orderBy, " category_id = ?", new String[]{String.valueOf(categoryId)});
         return pr;
-    }
+    }   
 
     /**
      * 根據用戶id 選擇 serverInfo 按照创建时间逆序 默认只展示正常(包括隐藏的)状态的server

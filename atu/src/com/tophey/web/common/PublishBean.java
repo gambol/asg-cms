@@ -31,7 +31,6 @@ public class PublishBean {
         this.id = id;
     }
    
-    @URL
     private String banner = "http://";
     
     @Size(max = 2000)

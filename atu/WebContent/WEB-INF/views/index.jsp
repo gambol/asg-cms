@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://jsptags.com/tags/navigation/pager" prefix="pg"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -70,7 +70,7 @@
                         <form action="" method="get">
                             <input type="hidden" name="categoryId" value="${categoryId}"/>
                             <input class="search-button" type="submit" id="button" value=""  name="search"/>
-                            <input class="search-text" type="text" id="keyword" name="keyword" placeholder="按标题搜索"/>
+                            <input class="search-text" type="text" id="keyword" name="keyword" placeholder="按标题或者url搜索"/>
 
                         </form>
                     </div>
@@ -80,7 +80,10 @@
                         <pg:param name="keyword"/>
                         <c:forEach var="serverInfoDetail" items="${serverInfos.pageList}" varStatus="status">
                             <div class="box colgroup middle-div">
-                                <div class="rank-column column first">${status.count + param['pager.offset']}</div>
+                                <div class="rank-column column first">
+                                	<c:if test="${status.count + param['pager.offset'] < 10}">&nbsp;${status.count + param['pager.offset']}&nbsp;</c:if>
+                                	<c:if test="${status.count + param['pager.offset'] >= 10}">${status.count + param['pager.offset']}</c:if>
+                                </div>
                                 <div class="desc-column column width4">
                                     <div class="font-14">
                                         <span class="server-title first"><a target="_blank" href="/detail_${serverInfoDetail.serverInfo.id}.htm">${serverInfoDetail.serverInfo.name}</a></span>
@@ -134,18 +137,38 @@
 
                 <!-- Right column/section -->
                 <aside class="colgroup width2"  id="asider">
-                    <div class="clean-content-box">                  
-                        <section class="notes-total">
-                            <img src="/img/atu.png" width="166px" height="42px" alt="17173游戏发布站"/>
+                    <div class="content-box box">                  
+                        <section class="notes-total">                            
                             <a class="big-btn btn-yellow" href="/user/publish.htm">免费发布新站</a>
                         </section>
-                    </div>
-                    <hr>
+ 
+  						
+  					</div>
+					<hr>
+ 					<div class="content-box box">      
+ 						<header style="cursor: s-resize;">
+							<h3>最新发布</h3>
+						</header>      
+						
+						<section class="newserver">
+							<dl>
+								  <c:forEach var="newServer" items="${newServers.pageList }">
+								 	 <dt> <fmt:formatDate pattern="[MM-dd]" value="${newServer.createDate}" type="both"/><a target="_blank" href="/detail_${newServer.id}.htm">
+								   		<c:out value="${fn:substring(newServer.name, 0, 10)}" escapeXml="true"/> </a></dt>
+								   <dd>
+								   	</dd>
+                           		 </c:forEach>
+							</dl>
+						</section>
+					</div>
+                    
+                   
                 </aside>
                 <!-- End of Right column/section -->
 
                 <!-- End of Wrapper -->
             </div>
+       </div>
             <!-- End of Page content -->
             <a id="totop" style="display: block;">^ scroll to top</a>
             <%@include file="../common/footer.jsp" %>

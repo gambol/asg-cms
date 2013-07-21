@@ -53,7 +53,7 @@
                             remote:"验证码错误"
                         },
                         tos:{
-                            required:"要使用我们的服务，您必须同意接受 Atugame 的用户协议。"
+                            required:"要使用我们的服务，您必须同意接受的用户协议。"
                         },
                         terms: ""
                     },

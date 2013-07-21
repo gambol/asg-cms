@@ -875,17 +875,17 @@ a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-ind
     float: left;
     width: 100%;
 }
-/*
-#page a {
+
+dt a {
     border-bottom: 1px solid #A1CFD4;
     color: #329ECC;
     text-decoration: none;
 }
-#page a:hover, #page a:focus, #page a:active {
+dt a:hover, dt a:focus, dt a:active {
     background-color: #E2EFFF;
     border-bottom: 1px solid #329ECC;
 }
-*/
+
 #page .subtitle {
     color: #93BB3A;
     font-family: Tahoma,Arial,sans-serif;
@@ -1188,14 +1188,14 @@ footer#animated a:hover, footer#animated a:focus, footer#animated a:active {
 }
 .notes-total {
     text-align: center;
-    padding: 20px 19px 26px 19px;
+  /*  padding: 20px 19px 26px 19px; */
 }
 .content-box {
-    background: none repeat scroll 0 0 #EEEEEE;
+    background: none repeat scroll 0 0 #f7f8f9;
     /*border: 1px solid #999999; */
     display: inline-block;
     margin: 8px 0 0;
-    width: 99%;
+    width: 90%;
 }
 .content-box header {
     #   background: none repeat scroll 0 0 #999999;
@@ -2527,9 +2527,32 @@ div.pager SPAN.current {
 }
 
 .content-box header .right-href {
-    color: #E3C32B;
+    color: white;
     float: right;
     font-size: 12px;
     margin: 0;
     padding: 6px;
 }
+
+
+
+.content-box header .right-href a:visited{
+    color: white;
+}
+.content-box header .right-href a:hover, .content-box header .right-href a:focus, .content-box header .right-href a:active{
+    color: #E3C32B;
+}
+
+.newserver {
+	width:90%;
+
+}
+
+.newserver .right-href {
+    color: blue;
+    float: right;
+    font-size: 12px;
+    margin: 0;
+    padding: 6px;
+}
+

@@ -37,7 +37,7 @@ public class SiteManageController {
         try {
             userId = (Integer)request.getSession().getAttribute(SessionConst.USERID);
         } catch(Exception e) {
-            e.printStackTrace();
+        //    e.printStackTrace();
             return "redirect:/user/login.htm";
         }
         

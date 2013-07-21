@@ -148,6 +148,7 @@
                             <span/>
                         </p>
 
+
                         <p>
                             <form:label  path="banner">图片:</form:label><br/>
                             <form:input type="file" path="banner" cssClass="half" value=""/>   

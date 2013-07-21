@@ -54,7 +54,7 @@ public class ServerDao {
      */
     public static int changeDisplayStatus(int serverId, int userId) {
         String sql = "update server_info set status = (case status  when  'online' then "
-                + "'offline' when 'offline' then 'online' else status end) where id = ? and UserId = ?";
+                + "'offline' when 'offline' then 'online' else status end) where id = ? and user_id = ?";
         return DBTool.execute(sql, serverId, userId);
     }
     
