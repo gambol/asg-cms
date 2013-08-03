@@ -38,7 +38,7 @@
                         desc: {
                             required: true,
                             minlength: 5,
-                            maxlength: 100
+                            maxlength: 1500
                         },
                         captcha: {
                             required: true,
@@ -177,7 +177,7 @@
                         </p>
                         <p>
                             <form:label cssClass="required" path="desc">描述:</form:label><br/>
-                            <form:textarea path="desc" class="medium half"/>
+                            <form:textarea path="desc" class="large full"/>
                             <span/>
                         </p>
 

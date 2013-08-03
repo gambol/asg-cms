@@ -86,7 +86,7 @@
                                
                                 </div>
                                 <div class="width2" style="float:right; text-align: center">
-                                    <a href="${serverInfo.url}" class="big-btn btn-blue" target="_blank">点击进入</a>
+                                    <a href="#" class="big-btn btn-blue" target="_blank" onclick="return openSite('${serverInfo.url}')">点击进入</a>
                                 </div>
                                 
                                    <div class="first column full"/>
@@ -153,4 +153,12 @@
             <%@include file="../common/footer.jsp" %>
 
     </body>
+    <script>
+    function openSite(o){
+		win = window.open(o,"_blank");
+		win.opener = null;
+		return false;
+	}
+
+    </script>
 </html>

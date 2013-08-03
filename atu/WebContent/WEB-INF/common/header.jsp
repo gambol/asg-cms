@@ -37,7 +37,7 @@
                 <c:if test="${not empty username}">
                     <li id="menu-userCenter"><a HREF="/user/sitemanage.htm">个人中心</a></li>
                 </c:if>
-                <li id="menu-aboutUs"><a HREF="#">关于我们</a></li>                
+                <li id="menu-aboutUs"><a HREF="/aboutus.htm">关于我们</a></li>                
 
             </ul>
         </nav>

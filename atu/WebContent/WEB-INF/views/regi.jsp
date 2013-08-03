@@ -183,7 +183,7 @@
                                 <input id="tos" type="checkbox" name="tos" value="yes">
                                 <span id="terms-of-service-label">
                                     <strong>
-                                        我已阅读并同意接受  Atugame
+                                        我已阅读并同意接受
                                         <a id="TosLink" href="/tos.htm" target="_blank">用户协议</a>                                        。
                                     </strong>
                                 </span>

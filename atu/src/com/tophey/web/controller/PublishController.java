@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javax.validation.Valid;
 
@@ -121,7 +122,10 @@ public class PublishController {
         
         int userId = 0;
         try {
-            userId = (Integer)request.getSession().getAttribute(SessionConst.USERID);
+            HttpSession session = request.getSession();
+            userId = (Integer)session.getAttribute(SessionConst.USERID);
+            String userName = (String)session.getAttribute(SessionConst.USERNAME);
+            System.out.println("username:" + userName);
         } catch(Exception e) {
             e.printStackTrace();
             return "redirect:/user/login.htm";
@@ -160,7 +164,7 @@ public class PublishController {
         if (sid <= 0) {
             ServerDao.insert(server);            
         } else {
- //           server.setId(sid);
+            server.setId(sid);
             if (server.getUserId() != userId) {
                 logger.log(Level.WARNING, "server对应的userId 和 新的UserId对应不上. old userId:" + server.getUserId() + " new UserId:" + userId);
                 model.addAttribute("message", "session过期");
