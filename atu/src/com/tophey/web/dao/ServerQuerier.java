@@ -190,14 +190,14 @@ public class ServerQuerier {
     public PageResult<ServerInfo> getNewServerInfoByCategoryId(int categoryId) {
         LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
         orderBy.put("create_date", false);
-        PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 30, 1, orderBy, " category_id = ?", new String[]{String.valueOf(categoryId)});
+        PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 20, 1, orderBy, " category_id = ?", new String[]{String.valueOf(categoryId)});
         return pr;
     }   
 
     public PageResult<ServerInfo> getNewManServerByCategoryId(int categoryId) {
         LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
         orderBy.put("create_date", false);
-        PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 30, 1, orderBy, " category_id = ?", new String[]{String.valueOf(categoryId)});
+        PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 20, 1, orderBy, " category_id = ? and site_from = ?", new String[]{String.valueOf(categoryId), "atu"});
         return pr;
     }  
     
@@ -230,7 +230,7 @@ public class ServerQuerier {
         //    ServerInfo si = new ServerQuerier().getServerInfoById(4);
         //    System.out.println(si.getName());
 
-        PageResult pr = new ServerQuerier().getNewServerInfoByCategoryId(1);
+        PageResult pr = new ServerQuerier().getNewManServerByCategoryId(1);
         System.out.println(pr.getTotalCount());
         System.out.println(pr.getPageList().size());
 

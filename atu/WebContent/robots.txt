@@ -1,0 +1,2 @@
+sitemap:http://www.naoruo.com/sitemapxml/index.xml
+http://www.naoruo.com/sitemap/index.html

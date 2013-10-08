@@ -68,9 +68,13 @@ public class IndexController  {
         PageResult<Category> categoryResults = CategoryDao.getAllCategory();
         model.addAttribute("categorys", categoryResults);
         
-        
-        PageResult<ServerInfo> newServers = sq.getServerInfoByCategoryId(categoryId);
+        // 最新增加的站点
+        PageResult<ServerInfo> newServers = sq.getNewServerInfoByCategoryId(categoryId);
         model.addAttribute("newServers", newServers);
+        
+        // 最新人工录入的站点
+        PageResult<ServerInfo> newManServers = sq.getNewManServerByCategoryId(categoryId);
+        model.addAttribute("newManServers", newManServers);
         
         return new ModelAndView("mainPage");
     }
@@ -106,8 +110,12 @@ public class IndexController  {
             }
         }
         
-        PageResult<ServerInfo> newServers = sq.getServerInfoByCategoryId(server.getCategoryId());
+        PageResult<ServerInfo> newServers = sq.getNewServerInfoByCategoryId(server.getCategoryId());
         model.addAttribute("newServers", newServers);
+        
+        // 最新人工录入的站点
+        PageResult<ServerInfo> newManServers = sq.getNewManServerByCategoryId(server.getCategoryId());
+        model.addAttribute("newManServers", newManServers);     
         
         return new ModelAndView("detail");
     }
