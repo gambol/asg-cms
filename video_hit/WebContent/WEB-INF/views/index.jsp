@@ -50,12 +50,13 @@
 					<br/>
 				<p>
 					<a href="/youku.htm"><img src="/img/youku.png"/>&nbsp;&nbsp;刷优酷视频点击数</a>
-				</p>				
+				</p>	
+				<!-- 
  				<p>
 
 					<a href="/tudou.htm"><img src="/img/tudou.png"/>&nbsp;&nbsp;刷土豆视频点击数</a>
 				</p>
-			
+			 -->			
 				<p>
 					<a href="/sina.htm"><img src="/img/sina.png"/>&nbsp;&nbsp;刷新浪视频点击数</a>
 				</p>

@@ -26,7 +26,7 @@ public class HttpConnPool {
 	    /** 
 	     * 最大连接数 
 	     */  
-	    public final static int MAX_TOTAL_CONNECTIONS = 30;  
+	    public final static int MAX_TOTAL_CONNECTIONS = 300;  
 	    /** 
 	     * 获取连接的最大等待时间 
 	     */  
@@ -34,7 +34,7 @@ public class HttpConnPool {
 	    /** 
 	     * 每个路由最大连接数 
 	     */  
-	    public final static int MAX_ROUTE_CONNECTIONS = 10;  
+	    public final static int MAX_ROUTE_CONNECTIONS = 100;  
 	    /** 
 	     * 连接超时时间 
 	     */  

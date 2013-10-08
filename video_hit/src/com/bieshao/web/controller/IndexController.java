@@ -48,12 +48,12 @@ public class IndexController {
 		return "index";
 	}
 
-	@RequestMapping(value = "tudou", method = RequestMethod.GET)
+	@RequestMapping(value = "gggg", method = RequestMethod.GET)
 	public String tudouIndex(HttpServletRequest request, HttpServletResponse response, Model model) {
 		return getCommonFunction(request, response, model, "/tudou.htm", "土豆视频");
 	}
 
-	@RequestMapping(value = "tudou", method = RequestMethod.POST)
+	@RequestMapping(value = "gggg", method = RequestMethod.POST)
 	public String tudouPost(HttpServletRequest request, HttpServletResponse response, Model model) {
 		return postCommonFunction(request, response, model, "/tudou.htm", "TudouShua", "土豆视频");
 	}

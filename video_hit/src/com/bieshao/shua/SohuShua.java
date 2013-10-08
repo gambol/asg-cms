@@ -149,7 +149,7 @@ public class SohuShua extends Shua {
         System.out.append("hehe");
        //SohuShua s = new SohuShua("http://17173.tv.sohu.com/v/1/11668/151/MTUxNzk2OA==", 200);
     //     SohuShua s = new SohuShua("http://tv.sohu.com/20130315/n368979003.shtml", 200);
-         SohuShua s = new SohuShua("http://my.tv.sohu.com/user/detail/65748923.shtml", 200);
+         SohuShua s = new SohuShua("http://my.tv.sohu.com/us/77216752/60585597.shtml", 200);
         try {
              if (s.generateShuaUrl()) {
                  s.shua();

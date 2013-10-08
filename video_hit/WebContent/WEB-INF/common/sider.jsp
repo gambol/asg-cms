@@ -34,9 +34,11 @@
 				<dd>
 					<a href="/youku.htm" target="_blank" title="增加优酷视频点击">增加优酷视频点击</a>
 				</dd>
+				<!-- 
 				<dd>
 					<a href="/tudou.htm" target="_blank" title="增加土豆视频点击">增加土豆视频点击</a>
-				</dd>				
+				</dd>
+				 -->				
 				<dd>
 					<a href="/sina.htm" target="_blank" title="增加新浪视频点击">增加新浪视频点击</a>
 				</dd>
@@ -53,22 +55,15 @@
 		</section>
 	</div>
 	
-	<div class="content-box">
-		<header style="cursor: s-resize;">
-			<h3>其他方式</h3>
-		</header>
-		<section>
-			<dd>
-			为了方便需要大量刷视频流量的用户，特补充一个淘宝链接。10块钱20万次浏览量。<a href="http://item.taobao.com/item.htm?id=17342509603" target="_blank">点此进入</a>
-			</dd>
-		</section>
-	</div>
 	
 	<div class="content-box">
 		<header style="cursor: s-resize;">
 			<h3>友情链接</h3>
 		</header>
 		<section>
+			<dl>
+				<a href="http://www.naoruo.com" target="_blank">传奇私服发布站</a>
+			</dl>
 			<dl>
 				<a href="http://www.papasky.com" target="_blank">爸爸天空</a>
 			</dl>

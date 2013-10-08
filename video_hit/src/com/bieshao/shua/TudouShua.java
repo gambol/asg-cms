@@ -116,8 +116,8 @@ public class TudouShua extends Shua {
     }
 
     public static void main(String[] args) {
-        String u = "http://www.tudou.com/programs/view/xXbbhuGXZHk";
-        TudouShua ts = new TudouShua(u, 300);
+        String u = "http://www.tudou.com/programs/view/UUiQKvTOheo/";
+        TudouShua ts = new TudouShua(u, 60);
         try {
             ts.generateShuaUrl();
             ts.shua();

@@ -77,9 +77,8 @@ public class PoolHttpGet {
             this.httpClient = httpClient;
             this.context = new BasicHttpContext();
             this.httpget = httpget;
-//            proxy = new Proxy();
-            
             proxy = ProxyHandler.getInstance().getNimingProxy();
+            
             if (proxy != null) {
               HttpHost host = new HttpHost(proxy.getIp(), proxy.getPort());
               httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);

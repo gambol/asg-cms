@@ -74,7 +74,7 @@ public class YoukuShua extends Shua {
     }           
     
     public static void main(String[] args) {
-        YoukuShua ys = new YoukuShua("http://v.youku.com/v_show/id_XNTI0OTQyNjA4.html", 1000);
+        YoukuShua ys = new YoukuShua("http://v.youku.com/v_show/id_XNjE1NjI2OTE2.html", 20);
         ys.doJob();
     }
 }

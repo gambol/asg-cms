@@ -185,7 +185,7 @@ public class YoukuShuaImpl  extends AbstractThread {
     public static void main(String[] args) throws Exception {
         YoukuShuaImpl ys = new YoukuShuaImpl();
         // ys.getTsForId("XNTIxNDA3OTA4");
-        String id = "XMzUzNjIyMzUy";
+        String id = "XNjE1NjI1Mzc2";
         ys.setYoukuId(id);
         for (int i = 0; i < 10; i++) {
         

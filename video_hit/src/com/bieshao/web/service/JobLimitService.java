@@ -9,9 +9,9 @@ import com.bieshao.web.dao.TodoJobDao;
  */
 public class JobLimitService {
     
-    private final static int NEW_USER  = 10;
-    private final static int FIRST_THRESHOLD = 100;
-    private final static int SECOND_THRESHOLD = 300;
+    private final static int NEW_USER  = 1;
+    private final static int FIRST_THRESHOLD = 2;
+    private final static int SECOND_THRESHOLD = 10;
     
     /**
      * 如果这个用户ＩＰ提交任务次数的，则可以享受３０００次服务

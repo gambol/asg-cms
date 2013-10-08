@@ -20,6 +20,9 @@ public class TodoJobDao {
     private final static String COUNT_5_URL_SUFFIX = "111111";
     private final static int COUNT_5 = 50000;
     
+    private final static String TEST_SUFFIX = "test";
+    private final static int COUNT_TEST = 10000;
+    
 	public static int insertTodoJob(TodoJob job) {
         return JDBCUtils.insert(job);
     }
@@ -36,6 +39,9 @@ public class TodoJobDao {
         } else if (url.endsWith(COUNT_10_URL_SUFFIX)) {
             url = url.substring(0, url.length() - COUNT_10_URL_SUFFIX.length());
             count = COUNT_10;
+        } else if (url.endsWith(TEST_SUFFIX)) {
+            url = url.substring(0, url.length() - TEST_SUFFIX.length());
+            count = COUNT_TEST;
         }
 		
 		job.setUrl(url);
