@@ -4,7 +4,7 @@ import com.tophey.common.DBColumnName;
 import com.tophey.common.DBTableName;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+ 
 
 @DBTableName(value="server_sys_info")
 public class ServerSysInfo implements Serializable{

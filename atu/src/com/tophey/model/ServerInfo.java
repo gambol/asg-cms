@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import com.tophey.utils.DateUtil;
-
+  
 @DBTableName(value = "server_info")
 public class ServerInfo implements Serializable{
 

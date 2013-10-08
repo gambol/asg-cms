@@ -4,7 +4,7 @@ import com.tophey.common.DBColumnName;
 import com.tophey.common.DBTableName;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+ 
 @DBTableName(value="category")
 public class Category implements Serializable {
 
