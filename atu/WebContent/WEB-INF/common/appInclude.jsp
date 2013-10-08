@@ -15,5 +15,5 @@
   <!--  <script type="text/javascript" SRC="js/swfobject.js"></script> -->
     <!-- jQuery with plugins -->
     <script type="text/javascript" SRC="/js/jquery-1.7.2.min.js"></script>
-
+	<meta name="baidu-site-verification" content="MxlJiSVwHv" />
 </head>

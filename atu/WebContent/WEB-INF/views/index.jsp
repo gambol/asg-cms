@@ -90,7 +90,7 @@
                                         <span class="right-span">${serverInfoDetail.serverInfo.line}</span>
                                     </div>
                                     <div class="desc">
-                                        <c:out value="${fn:substring(serverInfoDetail.serverInfo.description, 0, 150)}" escapeXml="true"/>
+                                        <c:out value="${fn:substring(serverInfoDetail.serverInfo.summary, 0, 200)}" escapeXml="true"/>
                                     </div>
                                 </div>
                                 <div class="like-it-column column">
@@ -162,6 +162,23 @@
 						</section>
 					</div>
                     
+                    <hr>
+ 					<div class="content-box box">      
+ 						<header style="cursor: s-resize;">
+							<h3>最新热门推荐</h3>
+						</header>      
+						
+						<section class="newserver">
+							<dl>
+								  <c:forEach var="newServer" items="${newServers.pageList }">
+								 	 <dt> <fmt:formatDate pattern="[MM-dd]" value="${newServer.createDate}" type="both"/><a target="_blank" href="/detail_${newServer.id}.htm">
+								   		<c:out value="${fn:substring(newServer.name, 0, 10)}" escapeXml="true"/> </a></dt>
+								   <dd>
+								   	</dd>
+                           		 </c:forEach>
+							</dl>
+						</section>
+					</div>
                    
                 </aside>
                 <!-- End of Right column/section -->

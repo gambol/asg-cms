@@ -29,6 +29,10 @@ public class ServerInfo implements Serializable{
     private String line;
     @DBColumnName(value = "description")
     private String description;
+    
+    @DBColumnName(value = "summary")
+    private String summary;
+    
     @DBColumnName(value = "url")
     private String url;
     
@@ -229,6 +233,14 @@ public class ServerInfo implements Serializable{
 
     public void setPublishTime(Timestamp publishTime) {
         this.publishTime = publishTime;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public int getUserId() {

@@ -8,6 +8,28 @@
 <html>
     <%@include file="../common/appInclude.jsp" %>
     <link rel="stylesheet" href="/styles/css/publish.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/css/kindEditor-thems/default/default.css" />
+	<script charset="utf-8" src="/js/kind/kindeditor.js"></script>
+	<script charset="utf-8" src="/js/kind/zh_CN.js"></script>
+	<script>
+		var self;
+		KindEditor.ready(function(K) {
+			var editor1 = K.create('textarea[name="desc"]', {
+				width : '80%',
+				filterMode :true,
+				 htmlTags:{    //以下为不需要过滤过的字符
+		            font : ['color'],
+		            span : ['/'],  
+		            br : ['/'],
+		            p : [''],
+		            strong : []
+		        },
+				items : [
+						'bold', 'removeformat'
+						]
+			});
+		});
+	</script>
     <body>
         <%@include file="../common/header.jsp" %>
         <script>
@@ -38,7 +60,7 @@
                         desc: {
                             required: true,
                             minlength: 5,
-                            maxlength: 1500
+                            maxlength: 20
                         },
                         captcha: {
                             required: true,
@@ -177,7 +199,7 @@
                         </p>
                         <p>
                             <form:label cssClass="required" path="desc">描述:</form:label><br/>
-                            <form:textarea path="desc" class="large full"/>
+                            <form:textarea path="desc" class="large half"/>
                             <span/>
                         </p>
 

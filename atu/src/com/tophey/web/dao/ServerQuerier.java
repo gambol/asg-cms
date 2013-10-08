@@ -187,13 +187,20 @@ public class ServerQuerier {
         return DBTool.queryEntity(ServerSysInfo.class, sql, id);
     }
 
-    public PageResult<ServerInfo> getServerInfoByCategoryId(int categoryId) {
+    public PageResult<ServerInfo> getNewServerInfoByCategoryId(int categoryId) {
         LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
         orderBy.put("create_date", false);
-        PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 10, 1, orderBy, " category_id = ?", new String[]{String.valueOf(categoryId)});
+        PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 30, 1, orderBy, " category_id = ?", new String[]{String.valueOf(categoryId)});
         return pr;
     }   
 
+    public PageResult<ServerInfo> getNewManServerByCategoryId(int categoryId) {
+        LinkedHashMap<String, Boolean> orderBy = new LinkedHashMap<String, Boolean>();
+        orderBy.put("create_date", false);
+        PageResult<ServerInfo> pr = JDBCUtils.getPageData(ServerInfo.class, 30, 1, orderBy, " category_id = ?", new String[]{String.valueOf(categoryId)});
+        return pr;
+    }  
+    
     /**
      * 根據用戶id 選擇 serverInfo 按照创建时间逆序 默认只展示正常(包括隐藏的)状态的server
     *
@@ -223,7 +230,7 @@ public class ServerQuerier {
         //    ServerInfo si = new ServerQuerier().getServerInfoById(4);
         //    System.out.println(si.getName());
 
-        PageResult pr = new ServerQuerier().getServerInfoByCategoryId(1);
+        PageResult pr = new ServerQuerier().getNewServerInfoByCategoryId(1);
         System.out.println(pr.getTotalCount());
         System.out.println(pr.getPageList().size());
 

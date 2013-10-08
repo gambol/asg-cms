@@ -31,6 +31,26 @@
         <!--  <script type="text/javascript" SRC="js/swfobject.js"></script> -->
         <!-- jQuery with plugins -->
         <script type="text/javascript" SRC="/js/jquery-1.7.2.min.js"></script>
+              <script>
+            $(document).ready(function(){
+                $(".like-it-button").click(function(){
+                    var ajaxUrl = $(this).attr("aurl");
+                    var btn = this;
+                    $.get(ajaxUrl, {
+                        Action:"get"
+                    }, function (data){
+                        
+                        $(btn).after(data);
+                        if (data == "+1") {
+                            var num = $("#vote_in_num").html();
+                            var c = Number(num) + 1;
+                            $('#vote_in_num').html("<span style='background-color:#ffec00 !important'>" + c + "</span>");
+                        }
+                        });
+                    });
+    
+                });
+        </script>
     </head>
     <body>
         <%@include file="../common/header.jsp" %>
@@ -62,7 +82,12 @@
                     <div>
                         <div class="colgroup">
                         	<div class="column first" style="padding-left:15px">
-                             <h3>< c:out value="${serverInfo.name}"/></h3>
+                             <h3>                             
+        
+                             	<c:out value="${serverInfo.name}" />                      	
+                             	<a class="small-btn btn-yellow like-it-button" title="每分钟只能赞一次哦" aurl="/vote.htm?id=${serverInfo.id }">赞</a>
+                             </h3>
+
                             </div>
                             
                             <div style="padding:10px" class="colgroup">
@@ -79,28 +104,34 @@
 										</tr>
 										<tr>
 											<td>赞美数</td>
-											<td>${serverSysInfo.voteIn} </td>
+											<td> <div id="vote_in_num">${serverSysInfo.voteIn} </div> 
+											</td>
 										</tr>
 									</tbody>
 								</table>
                                
                                 </div>
                                 <div class="width2" style="float:right; text-align: center">
-                                    <a href="#" class="big-btn btn-blue" target="_blank" onclick="return openSite('${serverInfo.url}')">点击进入</a>
-                                </div>
-                                
-                                   <div class="first column full"/>
-                                <h4>私服描述:</h4>
-                                <p><c:out value="${serverInfo.description}" escapeXml="true"/></p>
+                                    <a href="#" class="big-btn btn-blue" target="_blank" onclick="return openSite('${serverInfo.url}')">点击进入</a> <br/>
 
-								<c:if test="${not empty serverInfo.bannerUrl }">
-								 	<h4>私服截图:</h4>
+                                </div>
+                               
+                                <div class="first column full"/>
+                                <h3>私服描述</h3>
+                                <hr/>
+                                <p><c:out value="${serverInfo.description}" escapeXml="false"/></p>
+								<p></p>
+								
+								<c:if test="${not empty serverInfo.bannerUrl and  serverInfo.bannerUrl != 'http://'}">
+								 	<h3>私服截图:</h3>
 								  	<p><img src='<c:out value="${serverInfo.bannerUrl}"/>'/></p>
+								  	<p></p>
 								</c:if>
 								
                                
-								
-                                <h4> 私服介绍</h4>
+								 
+                                <h3> 私服介绍</h3>
+                                 <hr/>
                                 严格意义上的所谓sf是指一个没有得到网络游戏的制作商法定许可而私自存在幵运营的朋务器
                                 它在技术和朋务实力上都和正式的官方朋务器存在可比性.因为这些技术和朋务的存在就是合法的。sf存在的主要目的同官方朋务器是一样的,
                                 都是向玩家收费以获利。有些sf幵对外开放也以收费盈利为目的. 如部分网吧在吧内局域网架设sf.

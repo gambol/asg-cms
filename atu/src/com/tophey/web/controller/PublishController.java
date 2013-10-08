@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 
 import javax.validation.Valid;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +40,8 @@ import com.tophey.utils.DateUtil;
 @SessionAttributes("publisBean")
 public class PublishController {
     final private Logger logger = Logger.getLogger(this.getClass().getName());
+    private final int SUMMARY_LENGTH = 500;
+    private final int MAX_DESC_LEGNTH = 9000;
 
     public static HashMap NETWORK_MAP = new HashMap();
     
@@ -101,8 +105,9 @@ public class PublishController {
         //pb.setBanner(si.getBannerUrl());
         pb.setCategory(si.getCategoryId());
         pb.setNetwork(si.getLine());
-
         pb.setDesc(si.getDescription());
+        
+        
         pb.setUrl(si.getUrl());
         pb.setId(si.getId());
         
@@ -151,8 +156,22 @@ public class PublishController {
         
         server.setSiteFrom("atu");
         server.setCreateDate(DateUtil.getCurrentTimestamp());
-        server.setDescription(publishBean.getDesc());
+        ;
         server.setUserId(userId);
+        
+        if (publishBean.getDesc().length() > MAX_DESC_LEGNTH) {
+            server.setDescription(publishBean.getDesc().substring(0, MAX_DESC_LEGNTH - 1));
+        }
+        server.setDescription(publishBean.getDesc());
+        
+        if (publishBean.getDesc() != null) {
+            Document doc = Jsoup.parse(publishBean.getDesc());
+            String summary = doc.text();
+            if (summary.length() > SUMMARY_LENGTH) {
+                summary = summary.substring(0, SUMMARY_LENGTH - 1);
+            }
+            server.setSummary(summary);
+        }
         
         int sid  = -1;
         try {
@@ -173,8 +192,6 @@ public class PublishController {
             
             ServerDao.update(server);
         }
-        
-        
         
         String message = "私服发布成功, 私服url:" + server.getUrl();
         // Success response handling
