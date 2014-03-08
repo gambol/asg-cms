@@ -10,7 +10,7 @@ import getopt
 import time
 import socket
 import re
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import copy
 
 reload(sys)

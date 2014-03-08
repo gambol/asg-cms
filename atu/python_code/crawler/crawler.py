@@ -28,6 +28,9 @@ conn = MySQLdb.connect(host='127.0.0.1', user='gambol', passwd="121212", unix_so
 cursor = conn.cursor()
 cursor.execute('set names "utf8"');
 
+new_site_count = 0
+old_site_count = 0
+
 commonPositionMap = {"名称|名字|私服":0,
               "线路" :0,
               "描述|介绍": 0,
@@ -108,6 +111,7 @@ def insertIntoDb(contentMap, category_id, index):
     if (contentMap == None or not contentMap.has_key('url')):
         return
 
+
     allSqlFields = ["category_id", "origin_position"];
     valueFields = [str(category_id), str(index)];
 
@@ -122,6 +126,8 @@ def insertIntoDb(contentMap, category_id, index):
     value = stringEntities(value)
     name = contentMap['名称|名字|私服']
     url = contentMap['url']
+    
+    print  "to insert into db url:" + url
 
     select_url_sql = "select url, origin_position from crawl.parser_result where url = '%s'" % url;
 #    print select_url_sql
@@ -134,10 +140,9 @@ def insertIntoDb(contentMap, category_id, index):
     else:
         origin_position = result[0][1]
         new_postion = (origin_position + index) / 2
-        sql = "update crawl.parser_result set origin_position = '%s' where url = '%s'" % (new_postion, url);
-    
-    cursor.execute(sql)
+        sql = "update crawl.parser_result set origin_position = '%s' where url = '%s'" % (new_postion, url)
         
+    cursor.execute(sql)
 
 # 遍历全页面，找出最合适的一个模式
 def getGoodPostionMap(soup):
@@ -266,4 +271,4 @@ if __name__ == "__main__":
     cursor.close();
     conn.commit();
     conn.close()
-    print "hehe"
+    print "hehe, new_site_count:" + str(new_site_count) + " old_site_count:" + str(old_site_count)

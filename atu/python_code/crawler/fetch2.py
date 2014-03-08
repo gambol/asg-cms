@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import re
 import urllib2
 import sys
@@ -27,6 +27,9 @@ def redirect(content):
     return None
 
 def meta_redirect(content):
+
+    return None;
+    # some bug in here
     soup  = BeautifulSoup(content)
 
     result=soup.find("meta",attrs={"http-equiv":"refresh"})
@@ -42,12 +45,16 @@ def get_content(url):
     try:
         request = urllib2.Request(url)
         request.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.1.14) Gecko/20080404 (FoxPlus) Firefox/2.0.0.14')
-        html = urllib2.urlopen(request).read()
+        html = urllib2.urlopen(request, timeout = 10).read()
 
         new_url = redirect(html)
-        while new_url:
-            html = urllib2.urlopen(new_url).read()
+
+        i = 0
+        while (new_url and new_url != url and i < 3):
+            print "new url:" + new_url
+            html = urllib2.urlopen(new_url, timeout=10).read()
             new_url = redirect(html)
+            i += 1
 
         if (UTFPattern.search(html) == None):
             html = html.decode("gbk").encode("utf-8")
@@ -62,9 +69,11 @@ def get_content(url):
 
 if __name__ == "__main__":
 #    d = test_pattern('')
-    d = get_content('http://03.3xxy.com/');
+#    d = get_content('http://03.3xxy.com/');
 #    d = get_content('http://001.jnrongwei.com/');
 #    d = get_content("http://www.xh78.com/")
-    
+
+#    d = get_content("http://www.2003hy.com");
+    d = get_content("http://wwe.msy777.net/");
     print d
 

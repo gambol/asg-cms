@@ -12,7 +12,7 @@ import getopt
 import time
 import socket
 import re
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import copy
 
 reload(sys)
@@ -22,10 +22,12 @@ socket.setdefaulttimeout(10)
 
 # 获得db连接
 def getConn():
-    conn = MySQLdb.connect(host='127.0.0.1', user='gambol', passwd="121212", unix_socket="/tmp/mysql.socket", charset="utf8", db="crawl")
+    conn = MySQLdb.connect(host='127.0.0.1', user='gambol', passwd="121212", unix_socket="/tmp/mysql.socket", charset="utf8", db="tophey")
 #    conn = MySQLdb.connect(host='27.120.101.160', user='gambol', passwd='121212', charset="utf8", db="crawl")
     cursor = conn.cursor()
     cursor.execute('set names "utf8"');
+    cursor.execute("set interactive_timeout=24*3600");
+#    cursor.execute("set max_allowed_packet=10*1000*1000*1000"); # 10m
     conn.autocommit(True);
     return (conn, cursor)
 

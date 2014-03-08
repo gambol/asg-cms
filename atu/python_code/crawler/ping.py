@@ -13,16 +13,12 @@ import time
 import socket
 import threadpool
 
+import util
+
 RESULT_PATTERN = re.compile(r'time=', re.M)
 
 socket.setdefaulttimeout(5)
 
-reload(sys)
-sys.setdefaultencoding( "utf-8" )
-
-conn = MySQLdb.connect(host='127.0.0.1', user='gambol', unix_socket="/home/zhenbao.zhou/.local/share/akonadi/socket-localhost/mysql.socket", charset="utf8", db="tophey")
-cursor = conn.cursor()
-cursor.execute('set names "utf8"');
 
 class Ping(threading.Thread):
     def __init__(self, url, serverId, sysId, category_id, name):
@@ -50,49 +46,80 @@ class Ping(threading.Thread):
             print sql
         else:
             sql = "update tophey.server_sys_info set ping = %d where id = %d" % (ping, self.sysId)
+            print sql
             
         cursor.execute(sql)
 
-def bulk_ping(url, serverId, sysId, category_id, name):
+def bulk_ping(r):
     ping = 10000
-    print "url:" + url
+    serverId = r[0]
+    url = r[1]
+    sysId = r[2]
+    category_id = r[3]
+    name = r[4]
+
+    print "ping url:" + url
     try:
         startTime = time.time()
 
         request = urllib2.Request(url)
         request.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.1.14) Gecko/20080404 (FoxPlus) Firefox/2.0.0.14')
-        urllib2.urlopen(request).read()
-        endTime = time.time()
-        ping = (endTime - startTime) * 1000
+        response = urllib2.urlopen(request)
+        html = response.read()
+
+        if (response.getcode() != 200 and response.getcode() != 302):
+            ping = 10000;
+            
+        else:
+            endTime = time.time()
+            ping = (endTime - startTime) * 1000
     except Exception, e:
         print "error in get url:" + url
+        ping = 10000
         # 毫秒为单位
 
     sql = ""
     if (sysId == None or sysId == "NULL"):
-        sql = "insert into tophey.server_sys_info(id, name, category_id, refresh_date, score, ping) values (%d, %s, %d, current_timestamp, 0, %d) " % (serverId, name, category_id, ping)
-        print sql
+        sql = "insert into server_sys_info(id, name, category_id, refresh_date, score, ping) values (%d, '%s', %d, current_timestamp, 0, %d); " % (serverId, name, category_id, ping)
     else:
-        sql = "update tophey.server_sys_info set ping = %d where id = %d" % (ping, sysId)
+        sql = "update server_sys_info set ping = %d where id = %d;" % (ping, sysId)
 
-    cursor.execute(sql)
+    (conn2, cursor2) = util.getConn()
+    conn2.autocommit(True)
+    print sql
+    cursor2.execute(sql)
+    cursor2.close()
+    conn2.commit()
+    conn2.close()
 
 #    ping_thread = Ping(url, serverId, sysId, category_id, name)
 #    ping_thread.start()
     
 def pingSites():
-    sql = 'select server_info.id, url, server_sys_info.id, server_info.category_id, server_info.name from server_info left join server_sys_info on server_info.id = server_sys_info.id'
+    (conn, cursor) = util.getConn()
+    print "start ping sites"
+    sql = "select si.id, url, ssi.id, si.category_id, si.name from tophey.server_info si left join tophey.server_sys_info ssi on si.id = ssi.id where is_disabled = 0 and status = 'online' "
     cursor.execute(sql)
     result = cursor.fetchall()
+    l = []
     for r in result:
-        serverId = r[0]
-        url = r[1]
-        sysId = r[2]
-        category_id = r[3]
-        name = r[4]
-        bulk_ping(url, serverId, sysId, category_id, name)
+        #bulk_crawl(list(r))
+        l.append(list(r))
+
+    pool = threadpool.ThreadPool(50)
+    requests = threadpool.makeRequests(bulk_ping, l, nouse)
+    [pool.putRequest(req) for req in requests]
+    pool.wait()
+    print "ping crawler over"
+    conn.commit()
+    conn.close()
+
+    # for r in result:
+    #     bulk_ping(r)
+
+def nouse(request, result):
+    pass
 
 if __name__ == "__main__":
     pingSites()
 
-conn.close()

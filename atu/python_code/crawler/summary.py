@@ -5,7 +5,8 @@
 # 提取某个html的摘要
 
 import re, sys
-from bs4 import BeautifulSoup as BS, NavigableString, Tag
+#from bs4 import BeautifulSoup as BS, NavigableString, Tag
+from BeautifulSoup import BeautifulSoup as BS, NavigableString, Tag
 import util
 
 UTFPattern = re.compile(r"charset=utf", re.I);
@@ -85,6 +86,7 @@ class HTMLSummary():
     def prettify(self): return self._doc.prettify()
 
     def text(self):
+        #re = self._doc.get_text()
         re = "".join(self._doc.findAll(text=True))
         re = endlFormatPattern.subn(" ", re)
         re = util.html_entities(re[0])
@@ -96,7 +98,6 @@ import sys
 def main():
     html = file(sys.argv[1]).read();
     su = HTMLSummary(html, int(sys.argv[2]))
-    print su.text()
  
 if __name__ == "__main__":
     main()

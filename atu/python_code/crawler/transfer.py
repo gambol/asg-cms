@@ -41,7 +41,6 @@ def transfer(result):
             addUrl(name, line, description, url, title, category_id, origin_position)
 
 
-
 # 将url归一化
 # 暂时不能做太多的事情
 def urlNorm(url):
@@ -68,7 +67,7 @@ def urlNorm(url):
     return unparsedURL
 
 def updateUrlScore(url, origin_position):
-    server_info_sql = "update tophey.server_info set score = %d where url = '%s'" % (MAX_POSITION - origin_position, url);
+    server_info_sql = "update tophey.server_info set  origin_position = %d, where url = '%s'" % (origin_position, url);
     cursor.execute(select_url_sql);
 
 def addUrl(name, line, description, url, title, category_id, origin_position):
@@ -76,29 +75,34 @@ def addUrl(name, line, description, url, title, category_id, origin_position):
 #    print select_url_sql
     cursor.execute(select_url_sql);
     result = cursor.fetchall();
+    # 不需要更新了
     if (len(result) > 0):
-        server_info_sql = "update tophey.server_info set name = '%s', description = '%s', title = '%s' where `url` = '%s' and category_id = %d" % (name, description, title,  url, category_id)
-        print server_info_sql
-        cursor.execute(server_info_sql)
-        server_sys_info = "update tophey.server_sys_info set score = %d where id = %d" % (MAX_POSITION - origin_position, result[0][1]);
+        # server_info_sql = "update tophey.server_info set name = '%s', description = '%s', title = '%s' where `url` = '%s' and category_id = %d" % (name, description, title,  url, category_id)
+        # print server_info_sql
+        # cursor.execute(server_info_sql)
+        server_sys_info = "update tophey.server_sys_info set  origin_position = %d where id = %d" % (origin_position, result[0][1]);
         cursor.execute(server_sys_info);
 #        print result
         return
     
     server_info_sql = "insert into tophey.server_info(name, line, description, url, title, category_id, create_date, update_date) values('%s', '%s','%s', '%s', '%s', '%s', current_timestamp, current_timestamp);" % (name, line, description, url, title, category_id)
 #    print server_info_sql
-    cursor.execute(server_info_sql)
+    try:
+        cursor.execute(server_info_sql)
+    except:
+        return
 
     cursor.execute("select last_insert_id();");
     lastId = str(int(cursor.fetchone()[0]))  
 #    print lastId
 
-    server_sys_info_sql = "insert into tophey.server_sys_info(id, name, category_id, refresh_date, score) values ('%s', '%s', %d, current_timestamp, %d);" % (lastId, name, category_id, MAX_POSITION - origin_position)
+    server_sys_info_sql = "insert into tophey.server_sys_info(id, name, category_id, origin_position, refresh_date) values ('%s', '%s', %d, %d, current_timestamp);" % (lastId, name, category_id, origin_position)
+    
  #   print server_sys_info_sql
     cursor.execute(server_sys_info_sql)
 
 def run():
-    cursor.execute('select id,name, line, description, url, title,category_id, origin_position from crawl.parser_result  where id > 4930 order by url, origin_position asc');
+    cursor.execute('select id,name, line, description, url, title,category_id, origin_position from crawl.parser_result  where id > 0  order by url, origin_position asc');
     result = cursor.fetchall()
     transfer(result)
     conn.commit();
@@ -107,7 +111,7 @@ def run():
     
 
 if __name__ == "__main__":
-    cursor.execute('select id,name, line, description, url, title,category_id, origin_position from crawl.parser_result  where id > 4930 order by url, origin_position asc');
+    cursor.execute('select id,name, line, description, url, title,category_id, origin_position from crawl.parser_result  where id > 0  order by url, origin_position asc');
     result = cursor.fetchall()
     transfer(result)
     # url = urlNorm("http://advz/");
