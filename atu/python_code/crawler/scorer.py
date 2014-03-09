@@ -60,6 +60,9 @@ def score(r):
     elif(url.find("\.com")):
         score += 5
 
+    if (url.find("user.qq") != -1 or url.find("baidu") != -1):
+        score -= 400;
+
     if (url.find("//www") != -1):
         score += 2
         

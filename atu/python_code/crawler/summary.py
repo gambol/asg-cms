@@ -47,6 +47,9 @@ class HTMLSummary():
                     self._cut_after(i)
                     to_pick = pretty_str[0: self.char_limit - self.char_cnt]
                     i.replaceWith(to_pick)
+                    print "to pick"
+                    print to_pick
+                    print "to_pick end"
                     '''
                     以实际有效(被浏览器显示)的字符数为准, 该方法并不精确:
                     比如: <span> inline text</span>, 前面的空格将被计算在内,
@@ -63,6 +66,7 @@ class HTMLSummary():
                     self._exec(i)
                 else:
                     i.extract()
+                    
                 
  
     def _cut_after(self, node):
@@ -86,11 +90,13 @@ class HTMLSummary():
     def prettify(self): return self._doc.prettify()
 
     def text(self):
-        #re = self._doc.get_text()
-        re = "".join(self._doc.findAll(text=True))
-        re = endlFormatPattern.subn(" ", re)
-        re = util.html_entities(re[0])
-        return re
+#        re = self._doc.get_text()
+        str = "".join(self._doc.findAll(text=True))
+        str = re.sub(r'</?\w+[^>]*>','',str)
+        str = endlFormatPattern.subn(" ", str)
+        str = util.html_entities(str[0])
+
+        return str
  
  
 ############# TEST #################

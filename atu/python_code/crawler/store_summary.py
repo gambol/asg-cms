@@ -8,6 +8,7 @@ from summary import HTMLSummary
 import util
 
 import sys
+import re
 
 conn,cursor = util.getConn()
 
@@ -22,22 +23,27 @@ def getHtmlFromDB(url):
 
     return html
 
-def getSummary(html, words=500):
+def getSummary(html, words=1000):
+    #summary = get_summary(html)
+
     summary =  HTMLSummary(html, words).text()
     return summary
 
 def store(url, summary):
     if (summary != None and summary != "ERROR" and len(summary.strip()) != 0 and summary != 'error'):
-        sql = "update tophey.server_info set description = '%s' where url = '%s'" % (summary.strip(), url)
-        print "url :%s ----------------------- summary :%s" %(url, summary[0,20])
+        sql = "update tophey.server_info set description = '%s', summary = '%s' where url = '%s'" % (summary.strip(),summary.strip(), url)
+        (conn2, cursor2) = util.getConn()
+        print sql
         try:
-            cursor.execute(sql)
+            cursor2.execute(sql)
+            conn2.commit()
+            conn2.close()
         except Exception, e:
             print e
         
 
 def main():
-    sql = "select url from tophey.server_info where is_disabled = 0 ;"
+    sql = "select url from tophey.server_info si join server_sys_info ssi on si.id = ssi.id where si.is_disabled = 0 order by ssi.score desc;"
     cursor.execute(sql)
     result = cursor.fetchall()
     for r in result:
@@ -46,5 +52,6 @@ def main():
         store(r[0], summary)
 
 if __name__ == "__main__":
+    
     main()
 

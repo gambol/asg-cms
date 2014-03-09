@@ -74,7 +74,8 @@ def nouse(request, result):
     pass
     
 def crawlSites():
-    sql = 'select tophey.server_info.url from tophey.server_info left join crawl.site_crawler on tophey.server_info.url = crawl.site_crawler.url where (crawl.site_crawler.html is NULL or crawl.site_crawler.refresh_date < date_sub(curdate(), INTERVAL 20 DAY))'
+    sql = ' select distinct(tophey.server_info.url) from tophey.server_info left join crawl.site_crawler on tophey.server_info.url = crawl.site_crawler.url join server_sys_info ssi on ssi.id = server_info.id where (crawl.site_crawler.html is NULL or crawl.site_crawler.refresh_date < date_sub(curdate(), INTERVAL 20 DAY)) and server_info.is_disabled = 0 and server_info.status= "online" order by ssi.score desc limit 1000';
+    
     cursor.execute(sql)
 
     data = cursor.fetchall()
