@@ -29,7 +29,7 @@ def getSummary(html, words=500):
 def store(url, summary):
     if (summary != None and summary != "ERROR" and len(summary.strip()) != 0 and summary != 'error'):
         sql = "update tophey.server_info set description = '%s' where url = '%s'" % (summary.strip(), url)
-        print sql
+        print "url :%s ----------------------- summary :%s" %(url, summary[0,20])
         try:
             cursor.execute(sql)
         except Exception, e:
@@ -37,7 +37,7 @@ def store(url, summary):
         
 
 def main():
-    sql = "select url from tophey.server_info;"
+    sql = "select url from tophey.server_info where is_disabled = 0 ;"
     cursor.execute(sql)
     result = cursor.fetchall()
     for r in result:
